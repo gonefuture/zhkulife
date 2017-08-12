@@ -12,18 +12,23 @@ function login(){
     console.log(user_id+" "+user_password);
     $.ajax({
         type: "post",
-        url: "../user/login",
+        url: "user/login",
         dataType: "json",
         data: {'userId': user_id, 'userPassword': user_password},
         success: function (data, textStatus) {
-            var back_id = eval(data).userId;
-            var back_zone=eval(data).userZone;
-            if(back_id==user_id){
+            var msg = eval(data).msg;
+            var info=eval(data).info;
+            if(msg==1){
+                console.log("dengdslfs");
                 window.location.href="user/index.html";
+            }else if(msg==3){
+                console.log("wwwwwwwwwwww");
+                window.location.href="user/modify.html";
+                alert(info+"请先进行修改！")
             }
         },
         error : function(xhr, status, errMsg) {
-            alert("账号或密码错误!");
+            alert("系统异常，请稍候再试!");
         }
     })
 }

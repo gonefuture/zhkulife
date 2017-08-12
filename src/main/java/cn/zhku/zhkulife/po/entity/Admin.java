@@ -7,7 +7,7 @@ public class Admin {
 
     private String adminRole;
 
-    private Integer adminPhone;
+    private String adminPhone;
 
     private Integer adminZone;
 
@@ -37,12 +37,12 @@ public class Admin {
         this.adminRole = adminRole == null ? null : adminRole.trim();
     }
 
-    public Integer getAdminPhone() {
+    public String getAdminPhone() {
         return adminPhone;
     }
 
-    public void setAdminPhone(Integer adminPhone) {
-        this.adminPhone = adminPhone;
+    public void setAdminPhone(String adminPhone) {
+        this.adminPhone = adminPhone == null ? null : adminPhone.trim();
     }
 
     public Integer getAdminZone() {

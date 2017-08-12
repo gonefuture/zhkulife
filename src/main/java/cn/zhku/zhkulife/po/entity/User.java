@@ -9,7 +9,7 @@ public class User {
 
     private String userRoom;
 
-    private Integer userPhone;
+    private String userPhone;
 
     private Integer userZone;
 
@@ -45,12 +45,12 @@ public class User {
         this.userRoom = userRoom == null ? null : userRoom.trim();
     }
 
-    public Integer getUserPhone() {
+    public String getUserPhone() {
         return userPhone;
     }
 
-    public void setUserPhone(Integer userPhone) {
-        this.userPhone = userPhone;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
     public Integer getUserZone() {

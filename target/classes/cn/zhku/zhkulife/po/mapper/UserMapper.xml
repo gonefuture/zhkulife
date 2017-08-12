@@ -5,7 +5,7 @@
     <id column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
     <result column="user_room" property="userRoom" jdbcType="VARCHAR" />
-    <result column="user_phone" property="userPhone" jdbcType="INTEGER" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="user_zone" property="userZone" jdbcType="INTEGER" />
     <result column="user_yibanid" property="userYibanid" jdbcType="VARCHAR" />
     <result column="user_flag" property="userFlag" jdbcType="INTEGER" />
@@ -110,7 +110,7 @@
       user_flag, login_time, total_water
       )
     values (#{userId,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, #{userRoom,jdbcType=VARCHAR}, 
-      #{userPhone,jdbcType=INTEGER}, #{userZone,jdbcType=INTEGER}, #{userYibanid,jdbcType=VARCHAR}, 
+      #{userPhone,jdbcType=VARCHAR}, #{userZone,jdbcType=INTEGER}, #{userYibanid,jdbcType=VARCHAR}, 
       #{userFlag,jdbcType=INTEGER}, #{loginTime,jdbcType=TIMESTAMP}, #{totalWater,jdbcType=INTEGER}
       )
   </insert>
@@ -156,7 +156,7 @@
         #{userRoom,jdbcType=VARCHAR},
       </if>
       <if test="userPhone != null" >
-        #{userPhone,jdbcType=INTEGER},
+        #{userPhone,jdbcType=VARCHAR},
       </if>
       <if test="userZone != null" >
         #{userZone,jdbcType=INTEGER},
@@ -194,7 +194,7 @@
         user_room = #{record.userRoom,jdbcType=VARCHAR},
       </if>
       <if test="record.userPhone != null" >
-        user_phone = #{record.userPhone,jdbcType=INTEGER},
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
       </if>
       <if test="record.userZone != null" >
         user_zone = #{record.userZone,jdbcType=INTEGER},
@@ -221,7 +221,7 @@
     set user_id = #{record.userId,jdbcType=VARCHAR},
       user_password = #{record.userPassword,jdbcType=VARCHAR},
       user_room = #{record.userRoom,jdbcType=VARCHAR},
-      user_phone = #{record.userPhone,jdbcType=INTEGER},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
       user_zone = #{record.userZone,jdbcType=INTEGER},
       user_yibanid = #{record.userYibanid,jdbcType=VARCHAR},
       user_flag = #{record.userFlag,jdbcType=INTEGER},
@@ -241,7 +241,7 @@
         user_room = #{userRoom,jdbcType=VARCHAR},
       </if>
       <if test="userPhone != null" >
-        user_phone = #{userPhone,jdbcType=INTEGER},
+        user_phone = #{userPhone,jdbcType=VARCHAR},
       </if>
       <if test="userZone != null" >
         user_zone = #{userZone,jdbcType=INTEGER},
@@ -265,7 +265,7 @@
     update user
     set user_password = #{userPassword,jdbcType=VARCHAR},
       user_room = #{userRoom,jdbcType=VARCHAR},
-      user_phone = #{userPhone,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
       user_zone = #{userZone,jdbcType=INTEGER},
       user_yibanid = #{userYibanid,jdbcType=VARCHAR},
       user_flag = #{userFlag,jdbcType=INTEGER},

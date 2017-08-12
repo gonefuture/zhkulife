@@ -324,52 +324,62 @@ public class AdminExample {
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneEqualTo(Integer value) {
+        public Criteria andAdminPhoneEqualTo(String value) {
             addCriterion("admin_phone =", value, "adminPhone");
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneNotEqualTo(Integer value) {
+        public Criteria andAdminPhoneNotEqualTo(String value) {
             addCriterion("admin_phone <>", value, "adminPhone");
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneGreaterThan(Integer value) {
+        public Criteria andAdminPhoneGreaterThan(String value) {
             addCriterion("admin_phone >", value, "adminPhone");
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneGreaterThanOrEqualTo(Integer value) {
+        public Criteria andAdminPhoneGreaterThanOrEqualTo(String value) {
             addCriterion("admin_phone >=", value, "adminPhone");
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneLessThan(Integer value) {
+        public Criteria andAdminPhoneLessThan(String value) {
             addCriterion("admin_phone <", value, "adminPhone");
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneLessThanOrEqualTo(Integer value) {
+        public Criteria andAdminPhoneLessThanOrEqualTo(String value) {
             addCriterion("admin_phone <=", value, "adminPhone");
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneIn(List<Integer> values) {
+        public Criteria andAdminPhoneLike(String value) {
+            addCriterion("admin_phone like", value, "adminPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminPhoneNotLike(String value) {
+            addCriterion("admin_phone not like", value, "adminPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdminPhoneIn(List<String> values) {
             addCriterion("admin_phone in", values, "adminPhone");
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneNotIn(List<Integer> values) {
+        public Criteria andAdminPhoneNotIn(List<String> values) {
             addCriterion("admin_phone not in", values, "adminPhone");
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneBetween(Integer value1, Integer value2) {
+        public Criteria andAdminPhoneBetween(String value1, String value2) {
             addCriterion("admin_phone between", value1, value2, "adminPhone");
             return (Criteria) this;
         }
 
-        public Criteria andAdminPhoneNotBetween(Integer value1, Integer value2) {
+        public Criteria andAdminPhoneNotBetween(String value1, String value2) {
             addCriterion("admin_phone not between", value1, value2, "adminPhone");
             return (Criteria) this;
         }

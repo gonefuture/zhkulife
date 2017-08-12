@@ -11,8 +11,8 @@
     <result column="repair_feedback" property="repairFeedback" jdbcType="INTEGER" />
     <result column="zone" property="zone" jdbcType="INTEGER" />
     <result column="repair_pic" property="repairPic" jdbcType="VARCHAR" />
-    <result column="user_phone" property="userPhone" jdbcType="INTEGER" />
-    <result column="admin_phone" property="adminPhone" jdbcType="INTEGER" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="admin_phone" property="adminPhone" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="cn.zhku.zhkulife.po.entity.Repair" extends="BaseResultMap" >
     <result column="repair_detial" property="repairDetial" jdbcType="LONGVARCHAR" />
@@ -139,7 +139,7 @@
     values (#{repairId,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{repairTime,jdbcType=TIMESTAMP}, 
       #{repairState,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{adminId,jdbcType=VARCHAR}, 
       #{repairFeedback,jdbcType=INTEGER}, #{zone,jdbcType=INTEGER}, #{repairPic,jdbcType=VARCHAR}, 
-      #{userPhone,jdbcType=INTEGER}, #{adminPhone,jdbcType=INTEGER}, #{repairDetial,jdbcType=LONGVARCHAR}
+      #{userPhone,jdbcType=VARCHAR}, #{adminPhone,jdbcType=VARCHAR}, #{repairDetial,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.zhku.zhkulife.po.entity.Repair" >
@@ -211,10 +211,10 @@
         #{repairPic,jdbcType=VARCHAR},
       </if>
       <if test="userPhone != null" >
-        #{userPhone,jdbcType=INTEGER},
+        #{userPhone,jdbcType=VARCHAR},
       </if>
       <if test="adminPhone != null" >
-        #{adminPhone,jdbcType=INTEGER},
+        #{adminPhone,jdbcType=VARCHAR},
       </if>
       <if test="repairDetial != null" >
         #{repairDetial,jdbcType=LONGVARCHAR},
@@ -258,10 +258,10 @@
         repair_pic = #{record.repairPic,jdbcType=VARCHAR},
       </if>
       <if test="record.userPhone != null" >
-        user_phone = #{record.userPhone,jdbcType=INTEGER},
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
       </if>
       <if test="record.adminPhone != null" >
-        admin_phone = #{record.adminPhone,jdbcType=INTEGER},
+        admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
       </if>
       <if test="record.repairDetial != null" >
         repair_detial = #{record.repairDetial,jdbcType=LONGVARCHAR},
@@ -282,8 +282,8 @@
       repair_feedback = #{record.repairFeedback,jdbcType=INTEGER},
       zone = #{record.zone,jdbcType=INTEGER},
       repair_pic = #{record.repairPic,jdbcType=VARCHAR},
-      user_phone = #{record.userPhone,jdbcType=INTEGER},
-      admin_phone = #{record.adminPhone,jdbcType=INTEGER},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
       repair_detial = #{record.repairDetial,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -300,8 +300,8 @@
       repair_feedback = #{record.repairFeedback,jdbcType=INTEGER},
       zone = #{record.zone,jdbcType=INTEGER},
       repair_pic = #{record.repairPic,jdbcType=VARCHAR},
-      user_phone = #{record.userPhone,jdbcType=INTEGER},
-      admin_phone = #{record.adminPhone,jdbcType=INTEGER}
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      admin_phone = #{record.adminPhone,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -334,10 +334,10 @@
         repair_pic = #{repairPic,jdbcType=VARCHAR},
       </if>
       <if test="userPhone != null" >
-        user_phone = #{userPhone,jdbcType=INTEGER},
+        user_phone = #{userPhone,jdbcType=VARCHAR},
       </if>
       <if test="adminPhone != null" >
-        admin_phone = #{adminPhone,jdbcType=INTEGER},
+        admin_phone = #{adminPhone,jdbcType=VARCHAR},
       </if>
       <if test="repairDetial != null" >
         repair_detial = #{repairDetial,jdbcType=LONGVARCHAR},
@@ -355,8 +355,8 @@
       repair_feedback = #{repairFeedback,jdbcType=INTEGER},
       zone = #{zone,jdbcType=INTEGER},
       repair_pic = #{repairPic,jdbcType=VARCHAR},
-      user_phone = #{userPhone,jdbcType=INTEGER},
-      admin_phone = #{adminPhone,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      admin_phone = #{adminPhone,jdbcType=VARCHAR},
       repair_detial = #{repairDetial,jdbcType=LONGVARCHAR}
     where repair_id = #{repairId,jdbcType=VARCHAR}
   </update>
@@ -370,8 +370,8 @@
       repair_feedback = #{repairFeedback,jdbcType=INTEGER},
       zone = #{zone,jdbcType=INTEGER},
       repair_pic = #{repairPic,jdbcType=VARCHAR},
-      user_phone = #{userPhone,jdbcType=INTEGER},
-      admin_phone = #{adminPhone,jdbcType=INTEGER}
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      admin_phone = #{adminPhone,jdbcType=VARCHAR}
     where repair_id = #{repairId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -27,7 +27,6 @@ import java.io.IOException;
  * @E-mail gonefuture@qq.com
  */
 @Controller
-@SessionAttributes("user")
 public class UserController {
     @Autowired
     UserService userService;
@@ -36,7 +35,7 @@ public class UserController {
 
     @RequestMapping("user/login")
     @ResponseBody
-    public Message login(User form,Model model) throws Exception {
+    public Message login(User form,HttpSession httpSession) throws Exception {
 
         User user =  userService.login(form);
 
@@ -45,17 +44,20 @@ public class UserController {
         }
         else if (user.getUserPassword().equals("123456")){
             user.setUserPassword(null);
-            model.addAttribute("",user);
-            return new Message("3", "密码过于简单，不能为123456", user.getUserId());
+            httpSession.setAttribute("user",user);
+           // model.addAttribute("",user);
+            return new Message("3", "登录成功，密码过于简单，不能为123456", user.getUserId());
         }
         else if ( user.getUserPhone() ==null || user.getUserPhone().equals(0) ){
             user.setUserPassword(null);
-            model.addAttribute("",user);
-            return new Message("3", "手机号不能为空", user.getUserId());
+            httpSession.setAttribute("user",user);
+            // model.addAttribute("",user);
+            return new Message("3", "登录成功，手机号不能为空", user.getUserId());
         }
         else {
             user.setUserPassword(null);
-            model.addAttribute("",user);
+            httpSession.setAttribute("user",user);
+            // model.addAttribute("",user);
             return new Message("1", "登录成功", user.getUserId());
         }
     }
@@ -87,14 +89,14 @@ public class UserController {
     @ResponseBody
     public Message updatePhone(String userId,String phone) throws Exception {
         User user = new User();
-        user.setUserId(userId); user.setUserPhone(Integer.valueOf(phone));
+        user.setUserId(userId); user.setUserPhone(phone);
         if (userService.update(user) != 1)
             return new Message("2","修改手机号码失败");
         else
             return new Message("1","修改手机号码成功");
     }
 
-    @RequestMapping("user/userIt")
+    @RequestMapping("user/getIt")
     @ResponseBody
     public  User getUserIt(HttpSession httpSession) throws Exception {
         User userCache = (User) httpSession.getAttribute("user");

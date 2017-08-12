@@ -21,9 +21,9 @@ public class Repair {
 
     private String repairPic;
 
-    private Integer userPhone;
+    private String userPhone;
 
-    private Integer adminPhone;
+    private String adminPhone;
 
     private String repairDetial;
 
@@ -99,20 +99,20 @@ public class Repair {
         this.repairPic = repairPic == null ? null : repairPic.trim();
     }
 
-    public Integer getUserPhone() {
+    public String getUserPhone() {
         return userPhone;
     }
 
-    public void setUserPhone(Integer userPhone) {
-        this.userPhone = userPhone;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
-    public Integer getAdminPhone() {
+    public String getAdminPhone() {
         return adminPhone;
     }
 
-    public void setAdminPhone(Integer adminPhone) {
-        this.adminPhone = adminPhone;
+    public void setAdminPhone(String adminPhone) {
+        this.adminPhone = adminPhone == null ? null : adminPhone.trim();
     }
 
     public String getRepairDetial() {

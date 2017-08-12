@@ -5,7 +5,7 @@
     <id column="admin_id" property="adminId" jdbcType="VARCHAR" />
     <result column="admin_password" property="adminPassword" jdbcType="VARCHAR" />
     <result column="admin_role" property="adminRole" jdbcType="VARCHAR" />
-    <result column="admin_phone" property="adminPhone" jdbcType="INTEGER" />
+    <result column="admin_phone" property="adminPhone" jdbcType="VARCHAR" />
     <result column="admin_zone" property="adminZone" jdbcType="INTEGER" />
     <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
   </resultMap>
@@ -105,7 +105,7 @@
       admin_phone, admin_zone, admin_name
       )
     values (#{adminId,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, #{adminRole,jdbcType=VARCHAR}, 
-      #{adminPhone,jdbcType=INTEGER}, #{adminZone,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}
+      #{adminPhone,jdbcType=VARCHAR}, #{adminZone,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.zhku.zhkulife.po.entity.Admin" >
@@ -141,7 +141,7 @@
         #{adminRole,jdbcType=VARCHAR},
       </if>
       <if test="adminPhone != null" >
-        #{adminPhone,jdbcType=INTEGER},
+        #{adminPhone,jdbcType=VARCHAR},
       </if>
       <if test="adminZone != null" >
         #{adminZone,jdbcType=INTEGER},
@@ -170,7 +170,7 @@
         admin_role = #{record.adminRole,jdbcType=VARCHAR},
       </if>
       <if test="record.adminPhone != null" >
-        admin_phone = #{record.adminPhone,jdbcType=INTEGER},
+        admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
       </if>
       <if test="record.adminZone != null" >
         admin_zone = #{record.adminZone,jdbcType=INTEGER},
@@ -188,7 +188,7 @@
     set admin_id = #{record.adminId,jdbcType=VARCHAR},
       admin_password = #{record.adminPassword,jdbcType=VARCHAR},
       admin_role = #{record.adminRole,jdbcType=VARCHAR},
-      admin_phone = #{record.adminPhone,jdbcType=INTEGER},
+      admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
       admin_zone = #{record.adminZone,jdbcType=INTEGER},
       admin_name = #{record.adminName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -205,7 +205,7 @@
         admin_role = #{adminRole,jdbcType=VARCHAR},
       </if>
       <if test="adminPhone != null" >
-        admin_phone = #{adminPhone,jdbcType=INTEGER},
+        admin_phone = #{adminPhone,jdbcType=VARCHAR},
       </if>
       <if test="adminZone != null" >
         admin_zone = #{adminZone,jdbcType=INTEGER},
@@ -220,7 +220,7 @@
     update admin
     set admin_password = #{adminPassword,jdbcType=VARCHAR},
       admin_role = #{adminRole,jdbcType=VARCHAR},
-      admin_phone = #{adminPhone,jdbcType=INTEGER},
+      admin_phone = #{adminPhone,jdbcType=VARCHAR},
       admin_zone = #{adminZone,jdbcType=INTEGER},
       admin_name = #{adminName,jdbcType=VARCHAR}
     where admin_id = #{adminId,jdbcType=VARCHAR}

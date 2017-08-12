@@ -80,7 +80,7 @@ public class AdminController {
 
         else {
         subject.login(token);
-            if(admin.getAdminPhone() == null || admin.getAdminPhone() == 0)
+            if(admin.getAdminPhone() == null || admin.getAdminPhone().trim().isEmpty())
                 return new Message("3","管理员未设置手机号码，请设置手机号码。（必须）");
             else
                 return new Message("1","管理员登录成功",admin.getAdminRole());
@@ -103,7 +103,7 @@ public class AdminController {
     @ResponseBody
     public Message updatePhone(String adminId,String phone) throws Exception {
         Admin admin = new Admin();
-        admin.setAdminId(adminId); admin.setAdminPhone(Integer.valueOf(phone));
+        admin.setAdminId(adminId); admin.setAdminPhone(phone);
         if (adminService.update(admin) != 1)
             return new Message("2","修改手机号码失败");
         else

@@ -23,9 +23,9 @@ public class Water {
 
     private Integer zone;
 
-    private Integer adminPhone;
+    private String adminPhone;
 
-    private Integer userPhone;
+    private String userPhone;
 
     public String getWaterId() {
         return waterId;
@@ -107,19 +107,19 @@ public class Water {
         this.zone = zone;
     }
 
-    public Integer getAdminPhone() {
+    public String getAdminPhone() {
         return adminPhone;
     }
 
-    public void setAdminPhone(Integer adminPhone) {
-        this.adminPhone = adminPhone;
+    public void setAdminPhone(String adminPhone) {
+        this.adminPhone = adminPhone == null ? null : adminPhone.trim();
     }
 
-    public Integer getUserPhone() {
+    public String getUserPhone() {
         return userPhone;
     }
 
-    public void setUserPhone(Integer userPhone) {
-        this.userPhone = userPhone;
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 }

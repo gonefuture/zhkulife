@@ -133,7 +133,7 @@ public class RepairController  {
         if (adminService.update(admin) != 1 )
             return new Message("2","修改手机号码失败");
         else {
-            admin.setAdminPhone(Integer.valueOf(phone));
+            admin.setAdminPhone(phone);
             return new Message("1", "修改手机号码成功");
         }
     }
