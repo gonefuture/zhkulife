@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <title>主页</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link rel="stylesheet" href="../css/navbar.css" />
+    </head>
+<body style="padding-top: 70px;" onload="loading();"><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
+
+<!----======================导航栏部分============================-------->
+<div class="container">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header home">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand " href="index.html?state=1">仲园后勤服务平台</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="home"><a href="index.html?state=1">主页</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单记录 <span class="caret"></span></a>
+                        <ul class="dropdown-menu" id="order">
+                            <!-- 下面两行代码是用来进行订单查找的,其中0代表查找未完成的订单(包括已受理的和正在配送的订单,这和数据库里面的订单代号不一样) -->
+                            <li class="a"><a href="showOrder.html?state=2">已接订单</a></li>
+                            <li class="c"><a href="showOrder.html?state=3">已完成的订单</a></li>
+                        </ul>
+                    </li>
+                    <li class="modify"><a href="modify.html">修改信息</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+    <!--============================== 网页主体内容 ============================-->
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div style="border-top: 1px solid black;"><br />
+            <ul class="nav nav-tabs nav-pills nav-tabs-justified container">
+                <li class="active">
+                    <a href="#tab1" data-toggle="tab">
+                        <h4>修改手机号码</h4></a>
+                </li>
+                <li>
+                    <a href="#tab2" data-toggle="tab">
+                        <h4>修改登录密码</h4></a>
+                </li>
+            </ul><br />
+            <div class="tab-content active">
+                <div id="tab1" class="tab-pane fade in active">
+                    <h5>手机号码将会被工作人员用于与你进行联系,请填写真实的手机号码</h5>
+                    <form id="modifyPhone" >
+                        <div class="input-group input-group-md ">
+                            <span class="input-group-addon glyphicon glyphicon-phone" ></span>
+                            <input type="text" class=" col-sm-8 col-xs-8 col-md-3 col-lg-3 " id="phone" name="phone"placeholder="请输入新的手机号码" >
+                        </div><br/>
+                        <input type="button"class="btn btn-default"  onclick="modifyPhone();" value="提交"/>
+                    </form>
+                </div>
+                <div id="tab2"class="tab-pane fade ">
+                    <h5>登录密码用来进行登录操作,请认真填写并记住它</h5>
+                    <form id="modifyPassword">
+                        <div class="input-group input-group-md ">
+                            <span class="input-group-addon glyphicon glyphicon-lock" ></span>
+                            <input type="password" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="password" name="password" placeholder="请输入新的密码" >
+                        </div><br/>
+                        <div class="input-group input-group-md ">
+                            <span class="input-group-addon glyphicon glyphicon-lock" ></span>
+                            <input type="password" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="password_again" name="password_again"placeholder="请再次输入新的密码" >
+                        </div><br/>
+                        <input type="button"class="btn btn-default"  onclick="updatePassword();" value="提交"/>
+                    </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="../js/jquery.min.js" ></script>
+<script type="text/javascript" src="../js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js" ></script><!-- 提供验证方法 -->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
+<script type="text/javascript" src="../js/adminOperate.js" ></script>
+<script>
+    $( "#modifyPassword" ).validate({
+        rules: {
+            password: "required",
+            password_again: {
+                equalTo: "#password"
+            }
+        }
+    });
+    $("#modifyPhone").validate({
+        rules : {
+            phone : {
+                required : true,
+                minlength : 11,
+                isMobile : true
+            }
+        },
+        messages : {
+            phone : {
+                required : "请输入手机号码",
+                minlength : "请输入正确的手机号码",
+                isMobile : "请正确填写您的手机号码"
+            }
+        },
+    });
+</script>
+
+</body>
+</html>
