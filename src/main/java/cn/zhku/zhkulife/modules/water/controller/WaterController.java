@@ -1,6 +1,5 @@
 package cn.zhku.zhkulife.modules.water.controller;
 
-import cn.yiban.open.Authorize;
 import cn.zhku.zhkulife.modules.admin.service.AdminService;
 import cn.zhku.zhkulife.modules.water.service.WaterService;
 
@@ -9,7 +8,6 @@ import cn.zhku.zhkulife.po.entity.User;
 import cn.zhku.zhkulife.po.entity.Water;
 import cn.zhku.zhkulife.po.mapper.UserMapper;
 import cn.zhku.zhkulife.utils.Beans.Message;
-import cn.zhku.zhkulife.utils.yiBanUtils.YiBanAuth;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -123,7 +121,7 @@ public class WaterController {
         }
     }
 
-    @RequestMapping("water/feedbackWater")
+    @RequestMapping("user/feedbackWater")
     @ResponseBody
     public Message feedbackWater(String waterId,String feedback) throws Exception {
         Water water = new Water();

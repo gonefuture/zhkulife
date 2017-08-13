@@ -197,7 +197,7 @@ function  showWater(state,pageNum) {
                     var waterId=list[i].waterId;
                     var operate="";
                     if(state==1){
-                        operate="<td><input type='button'class='btn btn-default'  onclick='"+"takeWater("+waterId+","+pageNum+");"+"' value='接单'/></td>";
+                        operate="<td><input type='button'class='btn btn-default'  onclick='"+"takeWater("+2+","+pageNum+");"+"' value='接单'/></td>";
                     }else if (state==2){
                         operate="<td><input type='button' class='btn btn-default' onclick='"+"finishWater("+waterId+","+pageNum+");"+"'value='确认配送'></td>";
                     }else if(state==3){
@@ -217,17 +217,17 @@ function  showWater(state,pageNum) {
 
 
 function showRepair(state,pageNum) {
+    console.log(state);
     var pageSize=10;
     var url="../repair/list";
     $.ajax({
         type:"get",
         url:url,
-        data: {'pageNum': pageNum,'waterState':state,'pageSize':pageSize},
+        data: {'pageNum': pageNum,'repairState':state,'pageSize':pageSize},
         dataType : "json",
         success : function(data, textStatus){
             var list = eval(data).list;
             var total= eval(data).total;
-            $("#main").empty();///清除原来的内容,为换页准备
             if(total==0){
                 $("#main").append("<br/><p>还没有订单喔!</p>");
             }else{
@@ -239,7 +239,7 @@ function showRepair(state,pageNum) {
                     var userId=list[i].userId;
                     var operate="";
                     if(state==1){
-                        operate="<br/><button type='button' class='btn btn-info'onclick='takeRepair("+repairId+","+pageNum+");'>接单</button>";
+                        operate="<br/><button type='button' class='btn btn-info'onclick='takeRepair("+1+","+pageNum+");'>接单</button>";
                     }else if(state==2){
                         operate="<br/><button type='button' class='btn btn-info'onclick='finishRepair("+repairId+","+pageNum+");'>接单</button>";
                     }else if(state==3){
@@ -417,3 +417,19 @@ function finishRepair(waterId) {
     });
 }
 
+/**
+ * 获取URL中的参数值
+ * @param name 参数名称
+ * @returns {null}
+ */
+function getUrlParam(name){
+    //构造一个含有目标参数的正则表达式对象
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    //匹配目标参数
+    var r = window.location.search.substr(1).match(reg);
+    //返回参数值
+    if (r!=null) {
+        return unescape(r[2]);
+    }
+    return null;
+}

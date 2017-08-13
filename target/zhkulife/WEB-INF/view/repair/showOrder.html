@@ -49,15 +49,10 @@
 
     <!--============================== 网页主体内容 ============================-->
     <div id="main">
-        <table>
-            <thead id='tableHead'>
+        <div class="container"id="repairOrderList">
 
-            </thead>
-            <tbody id='tableBody'>
-
-            </tbody>
-        </table>
-        <div id='waterOrderpageNav'>
+        </div>
+        <div id="repairOrderpageNav">
 
         </div>
     </div>
@@ -75,7 +70,7 @@
 <script type="text/javascript">
     function loading() {
         var state=getUrlParam("state");///
-        showWater(state,1);//加载订水订单第一页
+        showRepair(state,1);//加载订水订单第一页
     }
 </script>
 </body>

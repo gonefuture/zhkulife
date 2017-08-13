@@ -43,8 +43,13 @@ public class RepairService implements IService<Repair> {
     }
 
     @Override
-    public List<Repair> getList(Repair entity) throws Exception {
-        return null;
+    public List<Repair> getList(Repair repair) throws Exception {
+        RepairExample repairExample = new RepairExample();
+        repairExample.setOrderByClause("repair_time desc");
+        RepairExample.Criteria criteria = repairExample.createCriteria();
+        if (repair.getRepairState() == null)
+            criteria.andRepairStateEqualTo(repair.getRepairState());
+        return repairMapper.selectByExample(repairExample);
     }
 
     @Override
@@ -54,6 +59,8 @@ public class RepairService implements IService<Repair> {
         RepairExample.Criteria criteria = repairExample.createCriteria();
         if (repair.getUserId() != null)
             criteria.andUserIdEqualTo(repair.getUserId());
+        if (repair.getRepairState() != null)
+            criteria.andRepairStateEqualTo(repair.getRepairState());
         if (repair.getZone() != null)
             criteria.andZoneEqualTo(repair.getZone());
         if (repair.getRepairFeedback() != null)

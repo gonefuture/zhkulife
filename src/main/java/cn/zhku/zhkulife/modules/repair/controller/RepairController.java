@@ -4,7 +4,7 @@ import cn.zhku.zhkulife.modules.admin.service.AdminService;
 import cn.zhku.zhkulife.modules.repair.service.RepairService;
 import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.Repair;
-import cn.zhku.zhkulife.po.entity.Water;
+
 import cn.zhku.zhkulife.utils.Beans.Message;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -48,7 +48,22 @@ public class RepairController  {
         return new PageInfo<Repair>(repairService.findAll(repair));
     }
 
-    @RequestMapping("repair/bookRepair")
+    @RequestMapping("user/repairList")
+    @ResponseBody
+    public PageInfo<Repair>repairList( String pageNum, String pageSize, Repair repair) throws Exception {
+        Subject subject = SecurityUtils.getSubject();
+        Admin adminCache = (Admin) subject.getPrincipal();
+        repair.setAdminId(adminCache.getAdminId());
+        if (pageNum == null)
+            pageNum = "1";
+        if (pageSize == null)
+            pageSize = "10";
+        PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+
+        return new PageInfo<Repair>(repairService.getList(repair));
+    }
+
+    @RequestMapping("user/bookRepair")
     @ResponseBody
     public Message bookRepair(Repair repair,MultipartFile repairPic) throws Exception {
         repair.setRepairId(UUID.randomUUID().toString());
@@ -99,7 +114,7 @@ public class RepairController  {
             return new Message("1","报修完成");
     }
 
-    @RequestMapping("repair/feedbackRepair")
+    @RequestMapping("user/feedbackRepair")
     @ResponseBody
     public Message feedbackRepair(String repairId, String feedback) throws Exception {
         Repair repair = new Repair();
