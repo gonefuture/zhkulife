@@ -90,13 +90,13 @@ public class WaterController {
 
     @RequestMapping("water/takeWater")
     @ResponseBody
-    public Message takeWater(String waterId,String adminId) throws Exception {
-        Water water = new Water();
-        Subject subject = SecurityUtils.getSubject();
-        Admin adminCache = (Admin) subject.getPrincipal();
+    public Message takeWater(Water water) throws Exception {
 
-        water.setWaterId(waterId); water.setAdminId(adminId); water.setWaterState(2);
-        water.setAdminPhone(adminCache.getAdminPhone());
+        Subject subject = SecurityUtils.getSubject();
+        Admin admin = (Admin) subject.getSession().getAttribute("admin");
+        System.out.println(admin);
+        water.setWaterId(water.getWaterId()); water.setAdminId(admin.getAdminId()); water.setWaterState(2);
+        water.setAdminPhone(admin.getAdminPhone());
         if (waterService.update(water) != 1)
             return new Message("2","接单失败，请核实订单数据");
         else
@@ -138,7 +138,7 @@ public class WaterController {
     public Message updatePassword(String password) throws Exception {
         Admin admin = new Admin();
         Subject subject = SecurityUtils.getSubject();
-        Admin adminCache = (Admin) subject.getPrincipal();
+        admin.setAdminId(subject.getPrincipal().toString());
         admin.setAdminPassword(password);
         if (adminService.update(admin) != 1)
             return new Message("2","修改密码失败，请检查输入");
@@ -152,8 +152,8 @@ public class WaterController {
         Admin admin = new Admin();
 
         Subject subject = SecurityUtils.getSubject();
-        Admin adminCache = (Admin) subject.getPrincipal();
-        admin.setAdminId(adminCache.getAdminId());
+        admin.setAdminId(subject.getPrincipal().toString());
+        admin.setAdminPhone(phone);
         if (adminService.update(admin) != 1 )
             return new Message("2","修改手机号码失败，请检查输入");
         else {

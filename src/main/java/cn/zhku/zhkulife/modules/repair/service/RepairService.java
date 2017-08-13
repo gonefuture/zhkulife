@@ -29,7 +29,7 @@ public class RepairService implements IService<Repair> {
 
     @Override
     public int update(Repair entity) throws Exception {
-        return repairMapper.updateByPrimaryKeySelective(null);
+        return repairMapper.updateByPrimaryKeySelective(entity);
     }
 
     @Override

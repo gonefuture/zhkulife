@@ -5,6 +5,7 @@ import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.utils.Beans.Message;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,17 +74,19 @@ public class AdminController {
     public Message login(Admin form) throws Exception {
         UsernamePasswordToken token = new UsernamePasswordToken(form.getAdminId(), form.getAdminPassword());
         Subject subject = SecurityUtils.getSubject();
+        Session session = subject.getSession();
+
         token.setRememberMe(true);
         Admin admin = adminService.login(form);
         if (admin == null)
-            return new Message("2","管理员不存在或密码错误，请重新登录");
-
+            return new Message("2", "管理员不存在或密码错误，请重新登录");
         else {
-        subject.login(token);
-            if(admin.getAdminPhone() == null || admin.getAdminPhone().trim().isEmpty())
-                return new Message("3","管理员未设置手机号码，请设置手机号码。（必须）",admin.getAdminRole());
+            subject.login(token);
+            session.setAttribute( "admin", admin );
+            if (admin.getAdminPhone() == null || admin.getAdminPhone().trim().isEmpty())
+                return new Message("3", "管理员未设置手机号码，请设置手机号码。（必须）", admin.getAdminRole());
             else
-                return new Message("1","管理员登录成功",admin.getAdminRole());
+                return new Message("1", "管理员登录成功", admin.getAdminRole());
         }
     }
 

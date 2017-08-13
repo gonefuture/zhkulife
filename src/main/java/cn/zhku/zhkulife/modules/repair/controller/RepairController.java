@@ -94,9 +94,10 @@ public class RepairController  {
 
     @RequestMapping("repair/takeRepair")
     @ResponseBody
-    public Message takeRepair(String repairId,String adminId) throws Exception {
-        Repair repair = new Repair();
-        repair.setRepairId(repairId); repair.setRepairState(2);
+    public Message takeRepair(Repair repair) throws Exception {
+        Subject subject = SecurityUtils.getSubject();
+        Admin admin = (Admin) subject.getSession().getAttribute("admin");
+        repair.setRepairId(repair.getRepairId()); repair.setRepairState(2); repair.setAdminPhone(admin.getAdminPhone());
         if (repairService.update(repair) != 1)
             return new Message("2","接单失败，请核实订单数据");
         else
@@ -130,7 +131,7 @@ public class RepairController  {
     public Message updatePassword(String password) throws Exception {
         Admin admin = new Admin();
         Subject subject = SecurityUtils.getSubject();
-        Admin adminCache = (Admin) subject.getPrincipal();
+        admin.setAdminId(subject.getPrincipal().toString());
         admin.setAdminPassword(password);
         if (adminService.update(admin) != 1)
             return new Message("2","修改密码失败，请检查参数");
@@ -143,8 +144,8 @@ public class RepairController  {
     public Message updatePhone(String phone) throws Exception {
         Admin admin = new Admin();
         Subject subject = SecurityUtils.getSubject();
-        Admin adminCache = (Admin) subject.getPrincipal();
-        admin.setAdminId(adminCache.getAdminId());
+        admin.setAdminId(subject.getPrincipal().toString());
+        admin.setAdminPhone(phone);
         if (adminService.update(admin) != 1 )
             return new Message("2","修改手机号码失败");
         else {
