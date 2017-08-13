@@ -2,26 +2,35 @@
  * Created by Administrator on 2017/8/10 0010.
  */
 function login(){
-    var user_id= $("input[name='user_id']").val();
-    var user_password= $("input[name='user_password']").val();
-    console.log(user_id+" "+user_password);
+    var adminId= $("input[name='adminId']").val();
+    var adminPassword= $("input[name='adminPassword']").val();
+    console.log(adminId+" "+adminPassword);
     $.ajax({
         type: "post",
-        url: "../admin/login",
+        url: "/zhkulife/login/admin",
         dataType: "json",
-        data: {'userId': user_id, 'userPassword': user_password},
+        data: {'adminId': adminId, 'adminPassword': adminPassword},
         success: function (data, textStatus) {
             var key = eval(data).key;
-            if(key==2){
-                window.location.href="water/index.html";
-            }else if(key==3){
-                window.location.href="repair/index.html";
-            }else if(key==4||key==5){
-                window.location.href="office/index.html";
+            var info= eval(data).info;
+            var msg = eval(data).msg;
+            if(msg==2){
+                alert(info);///登录失败
+            }else {
+                if(key==2){
+                    window.location.href="water/index.html";
+                }else if(key==3){
+                    window.location.href="repair/index.html";
+                }else if(key==4){
+                    window.location.href="office/index.html?key=4";
+                }else if(key==5){
+                    window.location.href="office/index.html?key=5";
+                }
+
             }
         },
         error : function(xhr, status, errMsg) {
-            alert("账号或密码错误!");
+            alert("系统异常，请稍候再试!");
         }
     })
 }
@@ -158,7 +167,7 @@ function  showOrder(role,state,pageNum) {
  */
 function  showWater(state,pageNum) {
     var pageSize=10;
-    var url="../repair/list";
+    var url="../water/list";
     $.ajax({
         type:"get",
         url:url,
@@ -188,9 +197,9 @@ function  showWater(state,pageNum) {
                     var waterId=list[i].waterId;
                     var operate="";
                     if(state==1){
-                        operate="<td><button type='button' class='btn btn-info'onclick='"+"takeWater("+waterId+","+pageNum+");"+"'><b>接单</b></button></td>";
+                        operate="<td><input type='button'class='btn btn-default'  onclick='"+"takeWater("+waterId+","+pageNum+");"+"' value='接单'/></td>";
                     }else if (state==2){
-                        operate="<td><button type='button' class='btn btn-info'onclick='"+"finishWater("+waterId+","+pageNum+");"+"'><b>确认配送</b></button></td>";
+                        operate="<td><input type='button' class='btn btn-default' onclick='"+"finishWater("+waterId+","+pageNum+");"+"'value='确认配送'></td>";
                     }else if(state==3){
                         operate="";
                     }
@@ -209,7 +218,7 @@ function  showWater(state,pageNum) {
 
 function showRepair(state,pageNum) {
     var pageSize=10;
-    var url="../water/list";
+    var url="../repair/list";
     $.ajax({
         type:"get",
         url:url,

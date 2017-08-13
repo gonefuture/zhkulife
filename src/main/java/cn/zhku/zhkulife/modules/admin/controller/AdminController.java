@@ -81,7 +81,7 @@ public class AdminController {
         else {
         subject.login(token);
             if(admin.getAdminPhone() == null || admin.getAdminPhone().trim().isEmpty())
-                return new Message("3","管理员未设置手机号码，请设置手机号码。（必须）");
+                return new Message("3","管理员未设置手机号码，请设置手机号码。（必须）",admin.getAdminRole());
             else
                 return new Message("1","管理员登录成功",admin.getAdminRole());
         }

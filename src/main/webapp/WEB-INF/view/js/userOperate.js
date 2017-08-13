@@ -19,10 +19,10 @@ function login(){
             var msg = eval(data).msg;
             var info=eval(data).info;
             if(msg==1){
-                console.log("dengdslfs");
                 window.location.href="user/index.html";
+            }else if(msg==2){
+                alert(info);
             }else if(msg==3){
-                console.log("wwwwwwwwwwww");
                 window.location.href="user/modify.html";
                 alert(info+"请先进行修改！")
             }
@@ -61,7 +61,7 @@ function  showWater(pageNum) {
     var state=getUrlParam("state");
     $.ajax({
         type:"get",
-        url:"../water/list",
+        url:"../user/waterList",
         dataType : "json",
         data: {'pageNum': pageNum, 'waterState': state},
         success : function(data, textStatus){
@@ -196,23 +196,16 @@ function showPage(pages,pageNum,type,total){
 
 ///订水操作
 function bookWater(){
-    var userId=getUrlParam('userId');
-    var zone  =getUrlParam('zone');
     var waterNum = $('#orderWater input[name="orderNum"]:checked ').val();
     $.ajax({
         type: "get",
-        url: "../water/bookWater?userId="+userId+"&zone="+zone+"&waterNum="+waterNum,
+        url: "../user/bookWater",
         dataType: "json",
+        data: {'waterNum': waterNum},
         success : function(data) {
             var msg = eval(data).msg;
             var info = eval(data).info;
-            if(msg==1){
-                alert(info);
-            }else if(msg==2){
-                alert("订水失败,你还有未完成的订单!");
-            }else if(msg==3){
-                alert("请选择订水的桶数!")
-            }
+            alert(info);
         },
         error : function(xhr, status, errMsg) {
             alert("预定饮用水失败,请稍后再试!");

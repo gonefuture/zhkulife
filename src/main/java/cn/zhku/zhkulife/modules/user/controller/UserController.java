@@ -75,10 +75,13 @@ public class UserController {
 
     @RequestMapping("user/updatePassword")
     @ResponseBody
-    public Message updatePassword(String userId,String password) throws Exception {
+    public Message updatePassword(HttpSession httpSession,String password) throws Exception {
+        User userCache = (User) httpSession.getAttribute("user");
         User user = new User();
-        user.setUserId(userId); user.setUserPassword(password);
-        if (userService.update(user) != 1)
+        user.setUserId(userCache.getUserId()); user.setUserPassword(password);
+        if (userCache == null)
+            return new Message("2","请先登录");
+        else if (userService.update(user) != 1)
             return new Message("2","修改密码失败，请检查参数");
         else
             return new Message("1","修改密码成功");
@@ -87,9 +90,10 @@ public class UserController {
 
     @RequestMapping("user/updatePhone")
     @ResponseBody
-    public Message updatePhone(String userId,String phone) throws Exception {
+    public Message updatePhone(HttpSession httpSession,String phone) throws Exception {
+        User userCache = (User) httpSession.getAttribute("user");
         User user = new User();
-        user.setUserId(userId); user.setUserPhone(phone);
+        user.setUserId(userCache.getUserId()); user.setUserPhone(phone);
         if (userService.update(user) != 1)
             return new Message("2","修改手机号码失败");
         else

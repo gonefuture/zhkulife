@@ -44,8 +44,8 @@ public class AdminService implements IService<Admin>{
 
     @Override
     public Admin get(String id) throws Exception {
-        Admin admin = adminMapper.selectByPrimaryKey(id);
-        return admin;
+       return adminMapper.selectByPrimaryKey(id);
+
     }
 
     @Override
@@ -62,7 +62,6 @@ public class AdminService implements IService<Admin>{
 
     public Admin login(Admin form) throws Exception {
         Admin admin =this.get(form.getAdminId());
-        System.out.println(admin);
         if(admin != null && admin.getAdminPassword().equals(form.getAdminPassword()))
             return admin;
         else

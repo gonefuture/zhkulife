@@ -76,8 +76,8 @@
                 <div class="container img-rounded " id="thumbnail "><br />
                     <form role="form">
                         <div class="form-group">
-                            <label for="name">描述</label>
-                            <textarea class="form-control" rows="5"placeholder="请描述一下物品损坏情况或故障"></textarea>
+                            <label for="content">描述</label>
+                            <textarea id="content" class="form-control" rows="5"placeholder="请描述一下物品损坏情况或故障"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="inputfile">上传破损物品图片</label>
@@ -102,68 +102,5 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
 <script type="text/javascript" src="../js/userOperate.js" ></script>
-<script type="text/javascript">
-    function loading() {
-        addParameter();////url添加参数
-    }
-</script>
-<script type="text/javascript">
-    /*
-    function bookWater(){
-        var userId=$.getUrlParam('userId');
-        var zone=$.getUrlParam('zone');
-        var waterNum = $('#orderWater input[name="orderNum"]:checked ').val();
-        $.ajax({
-            type: "post",
-            url: "water/bookWater",
-            dataType: "json",
-            data: {'userId': userId, 'waterNum': waterNum,'zone':zone},
-            success : function(data, textStatus) {
-                var status = eval(data).status;
-                var info = eval(data).info;
-                if(status==1){
-                    alert("你成功预定"+waterNum+"桶水,请等待配送")
-                }else {
-                    alert(info);
-                }
-            }
-         })
-    }
-    function bookRepair(){
-        var userId=$.getUrlParam('userId');
-        var zone=$.getUrlParam('zone');
-        $.ajax({
-            type: "post",
-            url: "water/bookWater",
-            dataType: "json",
-            data: {'userId': userId, 'waterNum': waterNum,'zone':zone},
-            success : function(data, textStatus) {
-                var status = eval(data).status;
-                var info = eval(data).info;
-                if(status==1){
-                    alert("你成功预定"+waterNum+"桶水,请等待配送")
-                }else {
-                    alert(info);
-                }
-            }
-        })
-    }
-    function getUrlParam(name){
-        //构造一个含有目标参数的正则表达式对象
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-        //匹配目标参数
-        var r = window.location.search.substr(1).match(reg);
-        //返回参数值
-        if (r!=null) {
-            console.log(unescape(r[2]));
-            return unescape(r[2]);
-        }
-        return null;
-    }
-
-
-*/
-</script>
-
 </body>
 </html>

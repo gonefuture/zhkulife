@@ -76,18 +76,16 @@ public class WaterController {
     public Message bookWater(HttpSession httpSession,Water water) throws Exception {
        User user = (User) httpSession.getAttribute("user");
         water.setUserPhone(user.getUserPhone());
-
+        water.setUserId(user.getUserId());
         water.setWaterId(UUID.randomUUID().toString());
         water.setWaterState(1);
         water.setWaterTime(new Date());
         if (waterService.isHasBook(water)){
             return new Message("2","你之前有一个订单未完成");
         }
-
-        else if(water.getUserId()!= null && water.getWaterNum()!=null && waterService.add(water) != 1)
+        else if(waterService.add(water) != 1 || water.getUserId() == null || water.getWaterNum()==null )
             return new Message("2","订水失败,请确认订水信息");
         else {
-
             return new Message("1","订水成功");
         }
     }

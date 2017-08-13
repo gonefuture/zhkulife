@@ -16,13 +16,13 @@ public class Message {
     public Message() {
     }
 
-    public Message(String status,String info) {
-        this.msg = status;
+    public Message(String msg,String info) {
+        this.msg = msg;
         this.info = info;
     }
 
-    public Message(String status,String info,String key) {
-        this.msg = status;
+    public Message(String msg,String info,String key) {
+        this.msg = msg;
         this.info = info;
         this.key = key;
     }
@@ -54,7 +54,7 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
-                "status='" + msg + '\'' +
+                "msg='" + msg + '\'' +
                 ", info='" + info + '\'' +
                 ", key='" + key + '\'' +
                 '}';

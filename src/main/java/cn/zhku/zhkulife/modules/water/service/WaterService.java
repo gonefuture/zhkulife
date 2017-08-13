@@ -40,7 +40,7 @@ public class WaterService implements IService<Water>{
 
     @Override
     public Water get(String id) throws Exception {
-        return null;
+        return waterMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -48,7 +48,9 @@ public class WaterService implements IService<Water>{
         WaterExample waterExample = new WaterExample();
         waterExample.setOrderByClause("water_time desc");
         WaterExample.Criteria criteria = waterExample.createCriteria();
-            criteria.andUserIdEqualTo(water.getUserId());
+        if (water.getWaterState() != null)
+            criteria.andWaterStateEqualTo(water.getWaterState());
+        criteria.andUserIdEqualTo(water.getUserId());
         return waterMapper.selectByExample(waterExample);
     }
 
