@@ -32,6 +32,11 @@ public class PublicController {
         return "errors";
     }
 
+    @RequestMapping("index")
+    public String index() {
+        return "index";
+    }
+
     @RequestMapping("/yiban")
     public String yiban(Model model, HttpServletRequest request, HttpServletResponse response ,HttpSession httpSession) throws Exception {
         YiBanAuth yiBanAuth = new YiBanAuth();
@@ -50,9 +55,9 @@ public class PublicController {
         }
         else {
             userUpdate.setUserYibanid(userMe.getString("info"));
-            userUpdate.setUserId(user.getUserId());
+            userUpdate.setUserId("8603");
             userService.update(userUpdate);
-            return "login";
+            return "user/index.html";
         }
     }
 }

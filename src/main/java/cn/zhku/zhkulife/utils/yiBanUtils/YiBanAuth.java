@@ -16,7 +16,7 @@ import java.io.IOException;
 public class YiBanAuth {
     private static  String appid   = "300cc66769689ae2";
     private static  String seckey  = "34831d10902a19fd6476c01b7bd48bc3";
-    private static  String backurl = "http://localhost:8080/zhkulife/yiban";
+    private static  String backurl = "http://localhost/zhkulife/yiban";
 
 
     public JSONObject getUserMe(HttpServletRequest request, HttpServletResponse response) throws IOException {
