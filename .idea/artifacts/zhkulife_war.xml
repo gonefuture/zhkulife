@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="zhkulife:war">
+  <artifact type="war" build-on-make="true" name="zhkulife:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="zhkulife.war">
       <element id="artifact" artifact-name="zhkulife:war exploded" />
