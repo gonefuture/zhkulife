@@ -75,14 +75,16 @@ function  showWater(pageNum) {
                 for (var i in list) {
                     var waterId = list[i].waterId;
                     var waterNum = list[i].waterNum;
+                    var adminPhone = list[i].adminPhone;
                     var waterTime = list[i].waterTime;
                     var time = new Date(waterTime);
                     var orderTime = time.toLocaleString();
+                    orderTime=orderTime.substring(0,16);
                     var html="";
                     if(state==3){///如果订单状态为3,则添加一个评价按钮
-                        $("#waterOrderList").append("订单号:" + waterId + "<br/>数量:" + waterNum + "桶<br/>下单时间:" + orderTime + "<br/><a href='feedback.html?id="+waterId+"&type=2"+"'><button>评价</button></a>");
+                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp" + orderTime + "<br/><a href='feedback.html?id="+waterId+"&type=2"+"'><button>评价</button></a><hr/>");
                     }else{
-                        $("#waterOrderList").append("订单号:" + waterId + "<br/>数量:" + waterNum + "桶<br/>下单时间:" + orderTime + "<hr/>");
+                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp" +orderTime + "<hr/>");
                     }
 
                 }
@@ -101,9 +103,9 @@ function showRepair(pageNum) {
     var state=getUrlParam("state");
     $.ajax({
         type:"get",
-        url:"../repair/list",
+        url:"../user/repairList",
         dataType : "json",
-        data: {'pageNum': pageNum, 'waterState': state},
+        data: {'pageNum': pageNum, 'repairState': state},
         success : function(data, textStatus){
             $("#repairOrderList").empty();
             $("#repairOrderpageNav").empty();
@@ -114,9 +116,18 @@ function showRepair(pageNum) {
             }else{
                 for(var i in list){
                     var repairId=list[i].repairId;
+                    var adminPhone=list[i].adminPhone;
+                    var repairDetail=list[i].repairDetial;///此处的单词有误!但不想改!!!!
                     var operateTime=list[i].operateTime;
-                    var repairTime=list[i].repairTime;
-                    $("#repairOrderList").append("订单号:"+waterId+"<br/>订单时间:"+operateTime+"<br/>维修时间:"+repairTime+"<br/><a href='feedback.html?id="+repairId+"&type=3"+"'><button>评价</button></a>");
+                    var time = new Date(operateTime);
+                    var orderTime = time.toLocaleString();
+                    orderTime=orderTime.substring(0,16);
+                    if(state==2){
+                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+orderTime+"<br/>故障信息:"+repairDetail+"<hr/>");
+                    }else if(state==3){
+                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+orderTime+"<br/>故障信息:"+repairDetail+"<br/><a href='feedback.html?id="+repairId+"&type=3"+"'><button>评价</button></a><hr/>");
+                    }
+
                 }
                 showPage(eval(data).pages,eval(data).pageNum,3,total);
             }
@@ -208,33 +219,36 @@ function bookWater(){
             alert(info);
         },
         error : function(xhr, status, errMsg) {
-            alert("预定饮用水失败,请稍后再试!");
+            alert("系统异常,请稍后再试!");
         }
     });
 }
 
 ///报修操作z
-/*
+
 function bookRepair(){
-    var userId=getUrlParam('userId');
-    var zone  =getUrlParam('zone');
+    var repairDetail = $('#orderRepair textarea[name="repairDetail"] ').val();
+    console.log(repairDetail);
     $.ajax({
         type: "post",
-        url: "water/bookWater",
+        url: "../user/bookRepair",
         dataType: "json",
-        data: {'userId': userId, 'waterNum': waterNum,'zone':zone},
+        data: {'repairDetial': repairDetail},//此处json数据detail拼错了,但将错就错,不然要改数据库
         success : function(data, textStatus) {
-            var status = eval(data).status;
+            var msg = eval(data).msg;
             var info = eval(data).info;
-            if(status==1){
-                alert("你成功预定"+waterNum+"桶水,请等待配送")
-            }else {
+            if(msg==1){
+                alert("提交成功!")
+            }else if(msg==2){
                 alert(info);
             }
+        },
+        error : function(xhr, status, errMsg) {
+            alert("系统异常,请稍后再试!");
         }
-    })
+    });
 }
-*/
+
 ///修改密码
 function updatePassword(){
     var password= $("input[name='password']").val();
@@ -278,9 +292,6 @@ function modifyPhone(){
     });
 }
 
-function feedback() {
-    
-}
 
 
 
@@ -304,41 +315,39 @@ function getUrlParam(name){
  * @param id
  */
 function  feedback(type,id) {
+    var type=getUrlParam("type");
+    var id=getUrlParam("id");
     var url;
-    var argumentName;
-    var feedback= $("input[name='feedbackId']").val();
+    var idName;
+    var feedback= $("input[name='feedbackId']:checked").val();
     if(type==2){
-        url="../water/feedbackWater"
-        argumentName='waterId';
+        url="../user/feedbackWater"
     }else if(type==3){
-        url="../repair/feedbackRepair";
-        argumentName='repairId';
+        url="../user/feedbackRepair";
     }
     $.ajax({
         type: "get",
         url: url,
         dataType: "json",
-        data: {argumentName: id,'feedback':feedback},
+        data: {'id': id,'feedback':feedback},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
-            if(msg==1){
-                alert("谢谢你的反馈!");
-            }else if(msg==2){
-                alert("评价失败!请稍后再试!");
-            }
+            var info= eval(data).info;
+            alert(info);
         },
         error : function(xhr, status, errMsg) {
-            alert("评价失败!请稍后再试!");
+            alert("系统异常,请稍后再试!");
         }
     });
 }
 
-function feedbackLoading(type,id) {
+function feedbackLoading() {
+    var type=getUrlParam("type");
     $("#content").empty();
     if(type==2){
-        $("#content").append("<input type='radio' name='feedbackId' value='0'>&nbsp;好评<br/><br />  <input type='radio' name='feedbackId' value='1'>&nbsp;配送人员服务态度极差<br/><br /> <input type='radio' name='feedbackId' value='2'>&nbsp;桶装水水质有问题<br /><br /> <input type='radio' name='feedbackId' value='3'>&nbsp;饮用水未送达却被标记为已经送达<br /><br /> <input type='button'class='btn btn-default'  onclick='feedback("+type+id+");' value='提交反馈'/> ");
+        $("#content").append("<input type='radio' name='feedbackId' value='0'>&nbsp;好评<br/><br />  <input type='radio' name='feedbackId' value='1'>&nbsp;配送人员服务态度极差<br/><br /> <input type='radio' name='feedbackId' value='2'>&nbsp;桶装水水质有问题<br /><br /> <input type='radio' name='feedbackId' value='3'>&nbsp;饮用水未送达却被标记为已经送达<br /><br /> <input type='button'class='btn btn-default'  onclick='feedback("+");' value='提交反馈'/> ");
     }else if(type==3){
-        $("#content").append(" <input type='radio' name='feedbackId' value='0'>&nbsp;好评<br/><br /> <input type='radio' name='feedbackId' value='1'>&nbsp;工作人员服务态度极差<br/><br /> <input type='radio' name='feedbackId' value='2'>&nbsp;维修质量不好<br /><br /> <input type='radio' name='feedbackId' value='3'>&nbsp;还未进行维修未送达却被标记为已经维修完成<br /><br /> <input type='button'class='btn btn-default'  onclick='feedback("+type+id+");' value='提交反馈'/> ")
+        $("#content").append(" <input type='radio' name='feedbackId' value='0'>&nbsp;好评<br/><br /> <input type='radio' name='feedbackId' value='1'>&nbsp;工作人员服务态度极差<br/><br /> <input type='radio' name='feedbackId' value='2'>&nbsp;维修质量不好<br /><br /> <input type='radio' name='feedbackId' value='3'>&nbsp;还未进行维修未送达却被标记为已经维修完成<br /><br /> <input type='button'class='btn btn-default'  onclick='feedback("+");' value='提交反馈'/> ")
     }
 }
 

@@ -37,7 +37,7 @@ public class PublicController {
         return "index";
     }
 
-    @RequestMapping("/yiban")
+    @RequestMapping("/auth")
     public String yiban(Model model, HttpServletRequest request, HttpServletResponse response ,HttpSession httpSession) throws Exception {
         YiBanAuth yiBanAuth = new YiBanAuth();
         //得到user.me()的json对象

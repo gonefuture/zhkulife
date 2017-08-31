@@ -15,8 +15,9 @@
         <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link rel="stylesheet" href="../css/navbar.css" />
+
     </head>
-<body style="padding-top: 70px;" onload="loading();"><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
+<body style="padding-top: 70px;" ><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
 
 <!----======================导航栏部分============================-------->
 <div class="container">
@@ -72,8 +73,10 @@
                             <span class="input-group-addon glyphicon glyphicon-phone" ></span>
                             <input type="text" class=" col-sm-8 col-xs-8 col-md-3 col-lg-3 " id="phone" name="phone"placeholder="请输入新的手机号码" >
                         </div><br/>
-                        <input type="button"class="btn btn-default"  onclick="modifyPhone();" value="提交"/>
+                        <input type="submit"class="btn btn-default" value="提交"/>
                     </form>
+
+
                 </div>
                 <div id="tab2"class="tab-pane fade ">
                     <h5>登录密码用来进行登录操作,请认真填写并记住它</h5>
@@ -86,7 +89,7 @@
                             <span class="input-group-addon glyphicon glyphicon-lock" ></span>
                             <input type="password" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="password_again" name="password_again"placeholder="请再次输入新的密码" >
                         </div><br/>
-                        <input type="button"class="btn btn-default"  onclick="updatePassword();" value="提交"/>
+                        <input type="submit"class="btn btn-default" value="提交"/>
                     </form>
                     </form>
                 </div>
@@ -104,37 +107,51 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
 <script type="text/javascript" src="../js/userOperate.js" ></script>
-<script type="text/javascript">
-    function loading() {
-        addParameter();////url添加参数
-    }
-</script>
 <script>
-    $( "#modifyPassword" ).validate({
-        rules: {
-            password: "required",
-            password_again: {
-                equalTo: "#password"
+    $.validator.setDefaults({
+        submitHandler: function() {
+            var theHref=$(".active a").attr("href");
+            ///输出值,验证是否正确
+            console.log(theHref);
+            if(theHref=="#tab1"){
+                modifyPhone();
+            }else if(theHref=="#tab2"){
+                updatePassword();
             }
         }
     });
-    $("#modifyPhone").validate({
-        rules : {
-            phone : {
-                required : true,
-                minlength : 11,
-                isMobile : true
+    $().ready(function() {
+        $("#modifyPhone").validate({
+            rules: {
+                phone: {
+                    required: true,
+                    minlength: 11,
+                    isMobile: true
+                }
+            },
+            messages: {
+                phone: {
+                    required: "请输入手机号码",
+                    minlength: "请输入正确的手机号码",
+                    isMobile: "请正确填写您的手机号码"
+                }
             }
-        },
-        messages : {
-            phone : {
-                required : "请输入手机号码",
-                minlength : "请输入正确的手机号码",
-                isMobile : "请正确填写您的手机号码"
-            }
-        },
-    });
-</script>
+        });
 
+        $("#modifyPassword").validate({
+            rules: {
+                password: "required",
+                password_again: {
+                    equalTo: "#password"
+                }
+            }
+        });
+    });
+    // 手机号码验证
+    jQuery.validator.addMethod("isMobile", function(value, element) {
+        var phone = /^1[3|4|5|7|8][0-9]{9}$/;
+        return this.optional(element) || (phone.test(value));
+    }, "请正确填写您的手机号码!");
+</script>
 </body>
 </html>

@@ -16,7 +16,7 @@
         <!-- Custom styles for this template -->
         <link rel="stylesheet" href="../css/navbar.css" />
     </head>
-<body style="padding-top: 70px;" onload="loading();"><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
+<body style="padding-top: 70px;" ><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
 
 <!----======================导航栏部分============================-------->
 <div class="container">
@@ -39,7 +39,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单记录 <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="order">
                             <!-- 下面两行代码是用来进行订单查找的,其中0代表查找未完成的订单(包括已受理的和正在配送的订单,这和数据库里面的订单代号不一样) -->
-                            <li class="a"><a href="showOrder.html?state=2">已接订单</a></li>
+                            <li class="a"><a href="showOrder.html?state=2">未配送的订单</a></li>
                             <li class="c"><a href="showOrder.html?state=3">已完成的订单</a></li>
                         </ul>
                     </li>
@@ -102,33 +102,52 @@
 <script type="text/javascript" src="../js/jquery.validate.min.js" ></script><!-- 提供验证方法 -->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
-<script type="text/javascript" src="../js/adminOperate.js" ></script>
+<script type="text/javascript" src="../js/waterDiliverOperate.js" ></script>
 <script>
-    $( "#modifyPassword" ).validate({
-        rules: {
-            password: "required",
-            password_again: {
-                equalTo: "#password"
+    $.validator.setDefaults({
+        submitHandler: function() {
+            var theHref=$(".active a").attr("href");
+            ///输出值,验证是否正确
+            console.log(theHref);
+            if(theHref=="#tab1"){
+                modifyPhone();
+            }else if(theHref=="#tab2"){
+                updatePassword();
             }
         }
     });
-    $("#modifyPhone").validate({
-        rules : {
-            phone : {
-                required : true,
-                minlength : 11,
-                isMobile : true
+    $().ready(function() {
+        $("#modifyPhone").validate({
+            rules: {
+                phone: {
+                    required: true,
+                    minlength: 11,
+                    isMobile: true
+                }
+            },
+            messages: {
+                phone: {
+                    required: "请输入手机号码",
+                    minlength: "请输入正确的手机号码",
+                    isMobile: "请正确填写您的手机号码"
+                }
             }
-        },
-        messages : {
-            phone : {
-                required : "请输入手机号码",
-                minlength : "请输入正确的手机号码",
-                isMobile : "请正确填写您的手机号码"
-            }
-        },
-    });
-</script>
+        });
 
+        $("#modifyPassword").validate({
+            rules: {
+                password: "required",
+                password_again: {
+                    equalTo: "#password"
+                }
+            }
+        });
+    });
+    // 手机号码验证
+    jQuery.validator.addMethod("isMobile", function(value, element) {
+        var phone = /^1[3|4|5|7|8][0-9]{9}$/;
+        return this.optional(element) || (phone.test(value));
+    }, "请正确填写您的手机号码!");
+</script>
 </body>
 </html>

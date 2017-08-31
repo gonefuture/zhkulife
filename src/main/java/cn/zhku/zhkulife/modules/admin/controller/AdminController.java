@@ -63,11 +63,11 @@ public class AdminController {
 
     }
 
-    @RequestMapping("admin/get")
-    @ResponseBody
-    public Admin get( Admin admin) throws Exception {
-        return  adminService.get(admin.getAdminId());
-    }
+//    @RequestMapping("admin/get")
+//    @ResponseBody
+//    public Admin get( Admin admin) throws Exception {
+//        return  adminService.get(admin.getAdminId());
+//    }
 
     @RequestMapping("/login/admin")
     @ResponseBody
@@ -84,15 +84,16 @@ public class AdminController {
             subject.login(token);
             session.setAttribute( "admin", admin );
             if (admin.getAdminPhone() == null || admin.getAdminPhone().trim().isEmpty())
-                return new Message("3", "管理员未设置手机号码，请设置手机号码。（必须）", admin.getAdminRole());
+                return new Message("3", "管理员未设置手机号码，请设置手机号码。（必须）", admin.getAdminRole(),admin.getAdminZone());
             else
-                return new Message("1", "管理员登录成功", admin.getAdminRole());
+                return new Message("1", "管理员登录成功", admin.getAdminRole(),admin.getAdminZone());
         }
     }
 
     @RequestMapping("admin/updatePassword")
     @ResponseBody
     public Message updatePassword(String adminId,String password) throws Exception {
+        System.out.println("-----------------------------"+password);
         Admin admin = new Admin();
         admin.setAdminId(adminId); admin.setAdminPassword(password);
         if (adminService.update(admin) != 1)
@@ -105,6 +106,7 @@ public class AdminController {
     @RequestMapping("admin/updatePhone")
     @ResponseBody
     public Message updatePhone(String adminId,String phone) throws Exception {
+        System.out.println("-----------------------------"+phone);
         Admin admin = new Admin();
         admin.setAdminId(adminId); admin.setAdminPhone(phone);
         if (adminService.update(admin) != 1)

@@ -43,20 +43,20 @@
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
-        <property name="loginUrl" value="/login.html" />
-        <property name="unauthorizedUrl" value="/login.html" />
+        <property name="loginUrl" value="/adminlog.html" />
+        <property name="unauthorizedUrl" value="/adminlog.html" />
         <!--<property name="filterChainDefinitions">-->
-        <property name="filters">
-            <map>
-                <entry key="sperm" value-ref="permissionFilter"/>
-            </map>
-        </property>
+        <!--<property name="filters">s-->
+            <!--<map>-->
+                <!--<entry key="sperm" value-ref="permissionFilter"/>-->
+            <!--</map>-->
+        <!--</property>-->
         <property name="filterChainDefinitions">
         <value>
-                /admin/** = authc, roles[4]
+                /admin/** =authc,roles[4]
                 /water/** =authc ,roles[2]
-                /repair/** =authc , roles[3]
-                /office/** = authc, roles[4]
+                /repair/** =authc ,roles[3]
+                /office/** = authc,roles[4]
 
                 /logout = logout
             </value>

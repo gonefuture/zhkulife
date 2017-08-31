@@ -74,12 +74,10 @@ public class WaterService implements IService<Water>{
     }
 
 
-
     public boolean isHasBook(Water water) {
-        WaterExample waterExample = new WaterExample();
-        waterExample.or().andWaterStateEqualTo(1);
-        waterExample.or().andWaterStateEqualTo(2);
-        List<Water> waterList =waterMapper.selectByExample(waterExample);
+
+
+        List<Water> waterList =waterMapper.isHasBook(water.getUserId());
         if (waterList.size()>0)
             return true;
         else
