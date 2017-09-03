@@ -1,4 +1,4 @@
-package cn.zhku.amenity.utils.Beans;
+package cn.zhku.zhkulife.utils.Beans;
 
 /**
  * @author 钱伟健 gonefutre

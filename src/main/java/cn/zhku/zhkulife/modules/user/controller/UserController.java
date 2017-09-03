@@ -62,7 +62,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping("office/userList")
+    @RequestMapping("office/user/list")
     @ResponseBody
     public PageInfo<User> list(String pageNum,String pageSize,User user) throws Exception {
         if (pageNum == null)
@@ -71,6 +71,24 @@ public class UserController {
             pageSize = "10";
         PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
         return new PageInfo<User>(userService.findAll(user));
+    }
+
+    @RequestMapping("office/user/edit")
+    @ResponseBody
+    public Message updateUser(User user) throws Exception {
+        if (userService.update(user)  == 1)
+            return new Message("2","修改普通用户成功");
+        else
+            return new Message("1","修改普通用户失败");
+    }
+
+    @RequestMapping("office/user/delete")
+    @ResponseBody
+    public Message deleteUser(User user) throws Exception {
+        if (userService.delete(user)  == 1)
+            return new Message("2","删除普通用户成功");
+        else
+            return new Message("1","删除普通用户失败");
     }
 
     @RequestMapping("user/updatePassword")

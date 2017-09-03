@@ -105,6 +105,7 @@ public class RepairController  {
         Subject subject = SecurityUtils.getSubject();
         Admin admin = (Admin) subject.getSession().getAttribute("admin");
         repair.setRepairId(repair.getRepairId()); repair.setRepairState(2); repair.setAdminPhone(admin.getAdminPhone());
+        repair.setAdminId(admin.getAdminId());
         if (repairService.update(repair) != 1)
             return new Message("2","接单失败，请核实订单数据");
         else
