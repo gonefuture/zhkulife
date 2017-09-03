@@ -5,6 +5,7 @@ import cn.zhku.zhkulife.modules.repair.service.RepairService;
 import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.Repair;
 
+import cn.zhku.zhkulife.po.entity.User;
 import cn.zhku.zhkulife.utils.Beans.Message;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -50,25 +51,27 @@ public class RepairController  {
 
     @RequestMapping("user/repairList")
     @ResponseBody
-    public PageInfo<Repair>repairList( String pageNum, String pageSize, Repair repair) throws Exception {
-        Subject subject = SecurityUtils.getSubject();
-        Admin adminCache = (Admin) subject.getPrincipal();
-        repair.setAdminId(adminCache.getAdminId());
+    public PageInfo<Repair>repairList( String pageNum, String pageSize, Repair repair,HttpSession httpSession) throws Exception {
+        User user = (User) httpSession.getAttribute("user");
+        repair.setUserId(user.getUserId());
         if (pageNum == null)
             pageNum = "1";
         if (pageSize == null)
             pageSize = "10";
         PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
 
-        return new PageInfo<Repair>(repairService.getList(repair));
+        return new PageInfo<Repair>(repairService.findAll(repair));
     }
 
     @RequestMapping("user/bookRepair")
     @ResponseBody
-    public Message bookRepair(Repair repair,MultipartFile repairPic) throws Exception {
-        repair.setRepairId(UUID.randomUUID().toString());
+    public Message bookRepair(HttpSession httpSession ,Repair repair,MultipartFile repairPic) throws Exception {
+        User user = (User) httpSession.getAttribute("user");
+        repair.setUserId(user.getUserId());
+        repair.setRepairId(UUID.randomUUID().toString().replace("-","").toUpperCase());
         repair.setRepairTime(new Date());
         repair.setRepairState(1);
+        repair.setZone(user.getUserZone());
         if(repairPic !=null) {
             //储存图片的物理路径
             String pic_path = "D:\\Java\\temp\\";
@@ -83,9 +86,13 @@ public class RepairController  {
             //将新图片名称写到repair中
             repair.setRepairPic(newFileName);
         } else {
-            return new Message("1","图片上传失败");
-        }
 
+            if ( repairService.add(repair) !=1 )
+                return new Message("2","报修失败,信息填写不正确");
+            else
+                return new Message("1","没有上传图片但报修成功");
+
+        }
         if ( repairService.add(repair) !=1 )
             return new Message("2","报修失败,信息填写不正确");
         else
@@ -117,9 +124,9 @@ public class RepairController  {
 
     @RequestMapping("user/feedbackRepair")
     @ResponseBody
-    public Message feedbackRepair(String repairId, String feedback) throws Exception {
+    public Message feedbackRepair(String id, String feedback) throws Exception {
         Repair repair = new Repair();
-        repair.setRepairId(repairId); repair.setRepairFeedback(Integer.valueOf(feedback));
+        repair.setRepairId(id); repair.setRepairFeedback(Integer.valueOf(feedback));
         if(repairService.update(repair) != 1)
             return new Message("2","评价失败，请检验参数");
         else

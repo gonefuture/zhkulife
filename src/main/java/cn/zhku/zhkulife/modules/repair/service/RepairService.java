@@ -47,8 +47,10 @@ public class RepairService implements IService<Repair> {
         RepairExample repairExample = new RepairExample();
         repairExample.setOrderByClause("repair_time desc");
         RepairExample.Criteria criteria = repairExample.createCriteria();
-        if (repair.getRepairState() == null)
+        if (repair.getRepairState() != null)
             criteria.andRepairStateEqualTo(repair.getRepairState());
+        if (repair.getUserId() != null)
+            criteria.andUserIdEqualTo(repair.getUserId());
         return repairMapper.selectByExample(repairExample);
     }
 

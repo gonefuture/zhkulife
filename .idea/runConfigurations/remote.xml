@@ -1,0 +1,79 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="remote" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote" APPLICATION_SERVER_NAME="Tomcat8" ALTERNATIVE_JRE_ENABLED="false">
+    <option name="HOST" value="39.108.88.123" />
+    <option name="PORT" value="80" />
+    <option name="LOCAL" value="false" />
+    <option name="OPEN_IN_BROWSER_URL" value="http://39.108.88.123:80/" />
+    <option name="UPDATING_POLICY" value="hot-swap-classes" />
+    <deployment>
+      <artifact name="zhkulife:war">
+        <settings>
+          <option name="CONTEXT_PATH" value="/" />
+        </settings>
+      </artifact>
+      <artifact name="zhkulife:war exploded">
+        <settings>
+          <option name="CONTEXT_PATH" value="/zhkulife" />
+        </settings>
+      </artifact>
+    </deployment>
+    <server-settings>
+      <data>
+        <option name="targets">
+          <list>
+            <WatchedTargetModelImpl>
+              <option name="name" value="CONTEXT_XML" />
+              <option name="transportStagingTarget">
+                <TransportTarget>
+                  <option name="id" value="7ba977a5-8e1d-4358-a6e4-7c9f6cedc123" />
+                  <id>7ba977a5-8e1d-4358-a6e4-7c9f6cedc123</id>
+                </TransportTarget>
+              </option>
+              <option name="watchedLocalPath" value="" />
+              <watched-path />
+              <name>CONTEXT_XML</name>
+              <transport-target>
+                <TransportTarget>
+                  <option name="id" value="7ba977a5-8e1d-4358-a6e4-7c9f6cedc123" />
+                  <id>7ba977a5-8e1d-4358-a6e4-7c9f6cedc123</id>
+                </TransportTarget>
+              </transport-target>
+            </WatchedTargetModelImpl>
+            <StagingTargetModelImpl>
+              <option name="name" value="STAGING" />
+              <option name="stagingRemotePath" value="/root/tomcat/webapps" />
+              <option name="transportStagingTarget">
+                <TransportTarget>
+                  <option name="id" value="4dcd528f-d6d8-4c60-b9cb-9de49719c4ab" />
+                  <id>4dcd528f-d6d8-4c60-b9cb-9de49719c4ab</id>
+                </TransportTarget>
+              </option>
+              <staging-path>/root/tomcat/webapps</staging-path>
+              <name>STAGING</name>
+              <transport-target>
+                <TransportTarget>
+                  <option name="id" value="4dcd528f-d6d8-4c60-b9cb-9de49719c4ab" />
+                  <id>4dcd528f-d6d8-4c60-b9cb-9de49719c4ab</id>
+                </TransportTarget>
+              </transport-target>
+            </StagingTargetModelImpl>
+          </list>
+        </option>
+        <option name="transportHostId" value="f472747a-ae76-4b7c-90df-aa812adbd214" />
+        <host-id>f472747a-ae76-4b7c-90df-aa812adbd214</host-id>
+      </data>
+    </server-settings>
+    <predefined_log_file id="Tomcat" enabled="true" />
+    <predefined_log_file id="TOMCAT_LOCALHOST_LOG_ID" enabled="true" />
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value="4453" />
+      <option name="LOCAL" value="false" />
+    </RunnerSettings>
+    <method>
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="zhkulife:war" />
+        <artifact name="zhkulife:war exploded" />
+      </option>
+    </method>
+  </configuration>
+</component>

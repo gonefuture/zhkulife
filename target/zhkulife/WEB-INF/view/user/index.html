@@ -16,7 +16,7 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../css/navbar.css" />
 </head>
-<body style="padding-top: 70px;" onload="loading();">
+<body style="padding-top: 70px;" >
 <!----======================导航栏部分============================-------->
 <div class="container">
     <!-- Static navbar -->
@@ -74,16 +74,18 @@
             </div>
             <div id="tab2"class="tab-pane fade">
                 <div class="container img-rounded " id="thumbnail "><br />
-                    <form role="form">
+                    <form role="form" id="orderRepair">
                         <div class="form-group">
-                            <label for="content">描述</label>
-                            <textarea id="content" class="form-control" rows="5"placeholder="请描述一下物品损坏情况或故障"></textarea>
+                            <label for="repairDetail">描述</label>
+                            <textarea id="repairDetail" name="repairDetail" class="form-control" rows="5"placeholder="请描述一下物品损坏情况或故障"></textarea>
                         </div>
+                        <!--
                         <div class="form-group">
                             <label for="inputfile">上传破损物品图片</label>
                             <input type="file" id="inputfile">
                         </div>
-                        <input type="button"class="btn btn-default"  onclick="" value="提交订单"/>
+                        --->
+                        <input type="button"class="btn btn-default"  onclick="bookRepair();" value="提交订单"/>
                     </form>
                 </div>
             </div>

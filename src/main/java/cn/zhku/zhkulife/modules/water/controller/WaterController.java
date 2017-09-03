@@ -55,6 +55,8 @@ public class WaterController {
         return new PageInfo<Water>(waterService.findAll(water));
     }
 
+
+
     @RequestMapping("user/waterList")
     @ResponseBody
     public  PageInfo<Water> userlist(HttpSession httpSession, String pageNum,String pageSize,Water water) throws Exception {
@@ -75,9 +77,10 @@ public class WaterController {
        User user = (User) httpSession.getAttribute("user");
         water.setUserPhone(user.getUserPhone());
         water.setUserId(user.getUserId());
-        water.setWaterId(UUID.randomUUID().toString());
+        water.setWaterId(UUID.randomUUID().toString().replace("-","").toUpperCase());
         water.setWaterState(1);
         water.setWaterTime(new Date());
+        water.setZone(user.getUserZone());
         if (waterService.isHasBook(water)){
             return new Message("2","你之前有一个订单未完成");
         }
@@ -114,8 +117,9 @@ public class WaterController {
         else{
             User user = new User();
             Water finishWater = waterService.get(waterId);
+            User finishUesr = userMapper.selectByPrimaryKey(finishWater.getUserId());
             user.setUserId(finishWater.getUserId());
-            user.setTotalWater(finishWater.getWaterNum()+user.getTotalWater());
+            user.setTotalWater(finishWater.getWaterNum()+finishUesr.getTotalWater());
             userMapper.updateByPrimaryKeySelective(user);
             return new Message("1","完成订单");
         }
@@ -123,9 +127,9 @@ public class WaterController {
 
     @RequestMapping("user/feedbackWater")
     @ResponseBody
-    public Message feedbackWater(String waterId,String feedback) throws Exception {
+    public Message feedbackWater(String id,String feedback) throws Exception {
         Water water = new Water();
-        water.setWaterId(waterId); water.setWaterFeedback(Integer.valueOf(feedback));
+        water.setWaterId(id); water.setWaterFeedback(Integer.valueOf(feedback));
         if (waterService.update(water) != 1)
             return new Message("2","评价失败，请检查参数");
         else
@@ -135,6 +139,7 @@ public class WaterController {
 
     @RequestMapping("water/updatePassword")
     @ResponseBody
+
     public Message updatePassword(String password) throws Exception {
         Admin admin = new Admin();
         Subject subject = SecurityUtils.getSubject();

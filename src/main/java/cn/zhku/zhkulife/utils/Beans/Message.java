@@ -13,6 +13,16 @@ public class Message {
     //用来放各种关键的属性，如userId
     private String key;
 
+    private Integer  zone;
+
+    public Integer getZone() {
+        return zone;
+    }
+
+    public void setZone(Integer zone) {
+        this.zone = zone;
+    }
+
     public Message() {
     }
 
@@ -25,6 +35,13 @@ public class Message {
         this.msg = msg;
         this.info = info;
         this.key = key;
+    }
+
+    public Message(String msg, String info, String key, Integer zone) {
+        this.msg = msg;
+        this.info = info;
+        this.key = key;
+        this.zone = zone;
     }
 
     public String getMsg() {
@@ -57,6 +74,7 @@ public class Message {
                 "msg='" + msg + '\'' +
                 ", info='" + info + '\'' +
                 ", key='" + key + '\'' +
+                ", zone='" + zone + '\'' +
                 '}';
     }
 }

@@ -14,9 +14,9 @@ import java.io.IOException;
  * @E-mail gonefuture@qq.com
  */
 public class YiBanAuth {
-    private static  String appid   = "300cc66769689ae2";
-    private static  String seckey  = "34831d10902a19fd6476c01b7bd48bc3";
-    private static  String backurl = "http://localhost/zhkulife/yiban";
+    private static  String appid   = "1c35e67ff21e20df";
+    private static  String seckey  = "a2f0d82b3c541d662dcdfebcb4c50beb";
+    private static  String backurl = "http://localhost/zhkulife/auth";
 
 
     public JSONObject getUserMe(HttpServletRequest request, HttpServletResponse response) throws IOException {
