@@ -39,7 +39,7 @@ public class AdminService implements IService<Admin>{
 
     @Override
     public int delete(Admin entity) throws Exception {
-        return adminMapper.updateByPrimaryKey(entity);
+        return adminMapper.deleteByPrimaryKey(entity.getAdminId());
     }
 
     @Override
@@ -51,6 +51,7 @@ public class AdminService implements IService<Admin>{
     @Override
     public List<Admin> getList(Admin entity) throws Exception {
         AdminExample adminExample = new AdminExample();
+        adminExample.or().andAdminRoleEqualTo(entity.getAdminRole());
         return adminMapper.selectByExample(adminExample);
     }
 

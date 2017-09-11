@@ -1,20 +1,21 @@
 package cn.zhku.zhkulife.modules.admin.controller;
 
 import cn.zhku.zhkulife.modules.admin.service.AdminService;
+import cn.zhku.zhkulife.modules.role.service.AdminRoleService;
 import cn.zhku.zhkulife.po.entity.Admin;
+import cn.zhku.zhkulife.po.entity.AdminRole;
 import cn.zhku.zhkulife.utils.Beans.Message;
+import cn.zhku.zhkulife.utils.Beans.Query;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
-import java.util.List;
 
 /**
  * @author 钱伟健 gonefutre
@@ -22,46 +23,126 @@ import java.util.List;
  * @E-mail gonefuture@qq.com
  */
 @Controller
-
 public class AdminController {
     @Autowired
     AdminService adminService;
 
+    @Autowired
+    AdminRoleService adminRoleService;
 
-
-    @RequestMapping("admin/add")
+    @RequestMapping("admin/addRole")
     @ResponseBody
-    public Message add(Admin admin) throws Exception {
-        if (adminService.add(admin) >0)
-            return new Message("1","管理员增加成功");
+    public Message addRole(Admin form) throws Exception {
+
+        if (addAdmin(form,"4","2")) {
+            return new Message("1","添加送水师傅成功");
+        }
+        if ( addAdmin(form,"5","3"))
+            return new Message("1","添加维修师傅成功");
+        if (addAdmin(form,"6",null))
+            return new Message("1","添加管理员成功");
         else
-            return new Message("2","管理员增加失败");
+            return new Message("2","添加管理员失败,你的权限不足");
     }
 
-    @RequestMapping("admin/delete")
-    @ResponseBody
-    public Message delete(Admin admin) throws Exception {
-        if (adminService.delete(admin) >0)
-            return new Message("1","管理员删除成功");
+    public boolean addAdmin (Admin form,String adminRole,String changeRole) throws Exception {
+        Subject subject = SecurityUtils.getSubject();
+        Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
+        AdminRole adminRoleEntity = new AdminRole();
+        adminRoleEntity.setAdminId(form.getAdminId()); adminRoleEntity.setRoleId(changeRole);
+        if (changeRole != null)
+            form.setAdminRole(changeRole);
+        if ( adminCache.getAdminRole().equals(adminRole) && adminService.add(form) == 1 ){
+            adminRoleService.add(adminRoleEntity);
+            return true;
+        }
         else
-            return new Message("2","管理删除失败");
+            return false;
     }
 
-    @RequestMapping("admin/edit")
+
+
+    @RequestMapping("admin/removeRole")
     @ResponseBody
-    public Message edit(Admin admin) throws Exception {
-        if (adminService.update(admin) >0)
-            return new Message("1","管理员修改成功");
+    public Message delete(Admin form) throws Exception {
+        if (removeAdmin(form,"4","2")) {
+            return new Message("1","删除送水师傅成功");
+        }
+        if ( removeAdmin(form,"5","3"))
+            return new Message("1","删除维修师傅成功");
+        if (removeAdmin(form,"6",null))
+            return new Message("1","删除管理员成功");
         else
-            return new Message("2","管理修改失败");
+            return new Message("2","删除管理员失败,你的权限不足");
     }
 
-    @RequestMapping("admin/list")
+    public boolean removeAdmin(Admin form,String adminRole,String changeRole) throws Exception {
+        Subject subject = SecurityUtils.getSubject();
+        Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
+        AdminRole adminRoleEntity = new AdminRole();
+        adminRoleEntity.setAdminId(form.getAdminId()); adminRoleEntity.setRoleId(changeRole);
+
+        if ( adminCache.getAdminRole().equals(adminRole) &&adminService.delete(form) == 1) {
+                adminRoleService.delete(adminRoleEntity);
+                return true;
+        }
+        else
+            return false;
+    }
+
+
+    @RequestMapping("admin/modifyRole")
     @ResponseBody
-    public List<Admin> list() throws Exception {
-        return adminService.findAll(null);
-
+    public Message modifyRole(Admin form) throws Exception {
+        if (modifyAdmin(form,"4","2")) {
+            return new Message("1","修改送水师傅信息成功");
+        }
+        if ( modifyAdmin(form,"5","3"))
+            return new Message("1","修改维修师傅信息成功");
+        if (modifyAdmin(form,"6",null))
+            return new Message("1","修改管理员成功");
+        else
+            return new Message("2","修改管理员失败,你的权限不足");
     }
+
+
+    public boolean modifyAdmin(Admin form,String adminRole,String changeRole) throws Exception {
+        Subject subject = SecurityUtils.getSubject();
+        Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
+        if ( adminCache.getAdminRole().equals(adminRole) &&adminService.update(form) == 1)
+            return true;
+        else
+            return false;
+    }
+
+
+
+
+
+
+    @RequestMapping("admin/findRole")
+    @ResponseBody
+    public PageInfo<Admin> findRole(Query query) throws Exception {
+        PageHelper.startPage(query.getPageNum(),query.getPageSize());
+
+        Subject subject = SecurityUtils.getSubject();
+        Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
+        if (adminCache.getAdminRole().equals("6"))
+            return new PageInfo<Admin>(adminService.findAll(null));
+        else{
+            if (adminCache.getAdminRole().equals("4")){
+                adminCache.setAdminRole("2");
+                return new PageInfo<Admin>(adminService.getList(adminCache));
+            } else {
+                adminCache.setAdminRole("3");
+                return new PageInfo<Admin>(adminService.getList(adminCache));
+            }
+
+        }
+    }
+
+
+
 
 //    @RequestMapping("admin/get")
 //    @ResponseBody
@@ -93,7 +174,6 @@ public class AdminController {
     @RequestMapping("admin/updatePassword")
     @ResponseBody
     public Message updatePassword(String adminId,String password) throws Exception {
-        System.out.println("-----------------------------"+password);
         Admin admin = new Admin();
         admin.setAdminId(adminId); admin.setAdminPassword(password);
         if (adminService.update(admin) != 1)

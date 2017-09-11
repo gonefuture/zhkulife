@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 public class RepairService implements IService<Repair> {
-   @SuppressWarnings("SpringJavaAutowiringInspection")
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     RepairMapper repairMapper;
 
@@ -72,7 +72,7 @@ public class RepairService implements IService<Repair> {
         if (repair.getRepairFeedback() != null)
             criteria.andRepairStateEqualTo(repair.getRepairState());
 
-        return repairMapper.selectByExample(repairExample);
+        return repairMapper.selectByExampleWithBLOBs(repairExample);
     }
 
 

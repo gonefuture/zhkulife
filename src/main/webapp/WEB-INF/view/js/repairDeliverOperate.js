@@ -82,7 +82,6 @@ function showRepair(state,pageNum) {
         var adminZone=getCookie("repairZone");
         url=url+"?zone="+adminZone;
     }
-
     $.ajax({
         type:"get",
         url:url,
@@ -91,6 +90,8 @@ function showRepair(state,pageNum) {
         success : function(data, textStatus){
             var list = eval(data).list;
             var total= eval(data).total;
+            $("#repairOrderList").empty();///清除原来的内容
+            $("#repairOrderpageNav").empty();///清除原来的内容
             if(total==0){
                 $("#main").append("<br/><p>还没有订单喔!</p>");
             }else{
@@ -98,14 +99,17 @@ function showRepair(state,pageNum) {
                 for(var i in list){
                     var repairId=list[i].repairId;
                     var repairTime=list[i].repairTime;
+                    repairTime=repairTime.substring(0,16);
                     var repaidDetail = list[i].repairDetial;
                     console.log(repaidDetail);
                     var userId=list[i].userId;
                     var operate="";
                     if(state==1){
-                        operate="<br/><button type='button' class='btn btn-info'onclick='takeRepair("+1+","+pageNum+");'>接单</button>";
+                        var clickFunc= "onclick=takeRepair("+"'"+repairId+"',"+pageNum+");";
+                        operate="<br/><button type='button' class='btn btn-info'"+clickFunc+">接单</button>";
                     }else if(state==2){
-                        operate="<br/><button type='button' class='btn btn-info'onclick='finishRepair("+repairId+","+pageNum+");'>接单</button>";
+                        var clickFunc= "onclick=finishRepair("+"'"+repairId+"',"+pageNum+");";
+                        operate="<br/><button type='button' class='btn btn-info'"+clickFunc+">确认完成</button>";
                     }else if(state==3){
                         operate="";
                     }
@@ -202,12 +206,13 @@ function takeRepair(repairId,pageNum) {
  * 用于维修订单的确认操作
  * @param waterId 唯一标识一个维修订单
  */
-function finishRepair(waterId) {
+function finishRepair(repairId,pageNum) {
+    console.log(repairId);
     $.ajax({
         type: "get",
         url: "../repair/finishRepair",
         dataType: "json",
-        data: {'waterId':waterId},
+        data: {'repairId':repairId},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
             if(msg==2){

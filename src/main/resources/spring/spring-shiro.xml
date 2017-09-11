@@ -53,10 +53,10 @@
         <!--</property>-->
         <property name="filterChainDefinitions">
         <value>
-                /admin/** =authc,roles[4]
+                /admin/** =authc,roles[1]
                 /water/** =authc ,roles[2]
                 /repair/** =authc ,roles[3]
-                /office/** = authc,roles[4]
+                /office/** = authc,roles[6]
 
                 /logout = logout
             </value>
