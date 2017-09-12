@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.Date;
@@ -65,24 +66,24 @@ public class RepairController  {
 
     @RequestMapping("user/bookRepair")
     @ResponseBody
-    public Message bookRepair(HttpSession httpSession ,Repair repair,MultipartFile repairPic) throws Exception {
+    public Message bookRepair(HttpSession httpSession , HttpServletRequest request,Repair repair, MultipartFile Pic) throws Exception {
         User user = (User) httpSession.getAttribute("user");
         repair.setUserId(user.getUserId());
         repair.setRepairId(UUID.randomUUID().toString().replace("-","").toUpperCase());
         repair.setRepairTime(new Date());
         repair.setRepairState(1);
         repair.setZone(user.getUserZone());
-        if(repairPic !=null) {
+        if(Pic !=null) {
             //储存图片的物理路径
-            String pic_path = "D:\\Java\\temp\\";
-            //原始名称
-            String originalFileName = repairPic.getOriginalFilename();
+            String realPath = request.getServletContext().getRealPath("/WEB-INF/view/img/repair/");
+
+            String originalFileName = Pic.getOriginalFilename();
             //新的的图片名称
-            String newFileName = UUID.randomUUID()+originalFileName.substring(originalFileName.lastIndexOf("."));
+            String newFileName = UUID.randomUUID().toString().replace("-","").toUpperCase()+originalFileName.substring(originalFileName.lastIndexOf("."));
             //新图片文件
-            File newFile = new java.io.File(pic_path+newFileName);
+            File newFile = new java.io.File(realPath+newFileName);
             //将内存中的数据写入磁盘
-            repairPic.transferTo(newFile);
+            Pic.transferTo(newFile);
             //将新图片名称写到repair中
             repair.setRepairPic(newFileName);
         } else {

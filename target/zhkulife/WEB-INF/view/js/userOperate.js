@@ -59,6 +59,16 @@ function addParameter() {
  */
 function  showWater(pageNum) {
     var state=getUrlParam("state");
+    if(state==1){
+        $("#state").empty();
+        $("#state").append("已预订的订单");
+    }else if(state==2){
+        $("#state").empty();
+        $("#state").append("正在配送的订单");
+    }else if(state==3){
+        $("#state").empty();
+        $("#state").append("已完成的订单");
+    }
     $.ajax({
         type:"get",
         url:"../user/waterList",
@@ -77,14 +87,14 @@ function  showWater(pageNum) {
                     var waterNum = list[i].waterNum;
                     var adminPhone = list[i].adminPhone;
                     var waterTime = list[i].waterTime;
-                    var time = new Date(waterTime);
-                    var orderTime = time.toLocaleString();
-                    orderTime=orderTime.substring(0,16);
+                    waterTime=waterTime.substring(0,16);
                     var html="";
                     if(state==3){///如果订单状态为3,则添加一个评价按钮
-                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp" + orderTime + "<br/><a href='feedback.html?id="+waterId+"&type=2"+"'><button>评价</button></a><hr/>");
-                    }else{
-                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp" +orderTime + "<hr/>");
+                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp" + waterTime + "<br/><a href='feedback.html?id="+waterId+"&type=2"+"'><button>评价</button></a><hr/>");
+                    }else if(state==2){
+                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp" +waterTime + "<hr/>");
+                    }else if(state==1){
+                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>下单时间:&nbsp&nbsp" +waterTime + "<hr/>");
                     }
 
                 }
@@ -101,6 +111,16 @@ function  showWater(pageNum) {
 
 function showRepair(pageNum) {
     var state=getUrlParam("state");
+    if(state==1){
+        $("#state").empty();
+        $("#state").append("已预订的订单");
+    }else if(state==2){
+        $("#state").empty();
+        $("#state").append("正在处理的订单");
+    }else if(state==3){
+        $("#state").empty();
+        $("#state").append("已完成的订单");
+    }
     $.ajax({
         type:"get",
         url:"../user/repairList",
@@ -119,15 +139,16 @@ function showRepair(pageNum) {
                     var adminPhone=list[i].adminPhone;
                     var repairDetail=list[i].repairDetial;///此处的单词有误!但不想改!!!!
                     var operateTime=list[i].operateTime;
-                    var time = new Date(operateTime);
-                    var orderTime = time.toLocaleString();
-                    orderTime=orderTime.substring(0,16);
-                    if(state==2){
-                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+orderTime+"<br/>故障信息:"+repairDetail+"<hr/>");
+                    var repairPic = list[i].repairPic;
+                    var picSrc="/zhkulife/img/repair/"+repairPic;
+                    operateTime=operateTime.substring(0,16);
+                    if(state==1){
+                        $("#repairOrderList").append("订单号:"+repairId+"<br/>订单时间:"+operateTime+"<br/>故障信息:"+repairDetail+"<br/>图片详情:<br/><img src="+picSrc+" width='200' height='120'"+"><br/>"+"<hr/>");
+                    }else if(state==2){
+                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+operateTime+"<br/>故障信息:"+repairDetail+"<br/>图片详情:<br/><img src="+picSrc+" width='200' height='120'"+"><br/>"+"<hr/>");
                     }else if(state==3){
-                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+orderTime+"<br/>故障信息:"+repairDetail+"<br/><a href='feedback.html?id="+repairId+"&type=3"+"'><button>评价</button></a><hr/>");
+                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+operateTime+"<br/>故障信息:"+repairDetail+"<br/>图片详情:<br/><img src="+picSrc+" width='200' height='120'"+"><br/>"+"<br/><a href='feedback.html?id="+repairId+"&type=3"+"'><button>评价</button></a><hr/>");
                     }
-
                 }
                 showPage(eval(data).pages,eval(data).pageNum,3,total);
             }
@@ -225,7 +246,7 @@ function bookWater(){
 }
 
 ///报修操作z
-
+/*
 function bookRepair(){
     var repairDetail = $('#orderRepair textarea[name="repairDetail"] ').val();
     console.log(repairDetail);
@@ -248,6 +269,52 @@ function bookRepair(){
         }
     });
 }
+
+
+function bookRepair(){
+    var fd = new FormData(document.querySelector("form"));
+    console.log(fd);
+    $.ajax({
+        type: "post",
+        url: "../user/bookRepair",
+        data: fd,
+        processData: false,  // 不处理数据
+        contentType: false ,  // 不设置内容类型
+        success : function(data, textStatus) {
+            var msg = eval(data).msg;
+            var info = eval(data).info;
+            alert(info);
+        },
+        error : function(xhr, status, errMsg) {
+            alert("系统异常,请稍后再试!");
+        }
+    });
+}
+ */
+
+function bookRepair(){
+    // 上传设置
+    var options = {
+        // 规定把请求发送到那个URL
+        url: "../user/bookRepair",
+        // 请求方式
+        type: "post",
+        // 服务器响应的数据类型
+        dataType: "json",
+        // 请求成功时执行的回调函数
+        success: function(data, status, xhr) {
+            var msg = eval(data).msg;
+            var info = eval(data).info;
+            alert(info);
+        },
+        error : function(xhr, status, errMsg) {
+            alert("系统异常,请稍后再试!");
+        }
+    };
+    $("#fileinfo").ajaxSubmit(options);
+}
+
+
 
 ///修改密码
 function updatePassword(){

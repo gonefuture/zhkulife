@@ -16,7 +16,7 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../css/navbar.css" />
 </head>
-<body style="padding-top: 70px;" >
+<body style="padding-top: 70px;"  onload="onloading();">
 <!----======================导航栏部分============================-------->
 <div class="container">
     <!-- Static navbar -->
@@ -95,7 +95,11 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
 <script type="text/javascript" src="../js/userOperate.js" ></script>
-<script type="text/javascript" src="../js/jquery.form.min.js" ></script>
-<!--<script src="https://cdn.jsdelivr.net/gh/jquery-form/form@4.2.2/dist/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>-->
+<script type="text/javascript" src="../js/wateradm.js" ></script>
+<script type="text/javascript"  >
+    function onloading() {
+        loadWorker();
+    }
+</script>
 </body>
 </html>

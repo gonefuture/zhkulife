@@ -101,6 +101,8 @@ function showRepair(state,pageNum) {
                     var repairTime=list[i].repairTime;
                     repairTime=repairTime.substring(0,16);
                     var repaidDetail = list[i].repairDetial;
+                    var repairPic = list[i].repairPic;
+                    var picSrc="../img/repair/"+repairPic;
                     console.log(repaidDetail);
                     var userId=list[i].userId;
                     var operate="";
@@ -113,7 +115,7 @@ function showRepair(state,pageNum) {
                     }else if(state==3){
                         operate="";
                     }
-                    $('#repairOrderList').append("订单号:"+repairId+"<br/>下单时间:"+repairTime+"<br/>维修地点:"+userId+"<br/>订单详情:"+repaidDetail+operate+"<hr/>");
+                    $('#repairOrderList').append("订单号:"+repairId+"<br/>下单时间:"+repairTime+"<br/>维修地点:"+userId+"<br/>订单详情:"+repaidDetail+"<br/>图片详情:<br/><img src="+picSrc+" width='200' height='120'"+"><br/>"+operate+"<hr/>");
                 }
                 showPage(eval(data).pages,eval(data).pageNum,total,state);///底部页码栏,3 表示为维修单
             }

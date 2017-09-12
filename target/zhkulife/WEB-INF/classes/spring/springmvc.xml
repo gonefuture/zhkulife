@@ -59,9 +59,9 @@
 	<!--文件上传功能-->
 	<bean id="multipartResolver"
 		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!--上传文件大小上限，单位为字节（1.2MB）-->
+		<!--上传文件大小上限，单位为字节（10MB）-->
 		<property name="maxUploadSize">
-			<value>1485760</value>
+			<value>10485760</value>
 		</property>
 		<!--请求的编码格式-->
 		<property name="defaultEncoding">

@@ -59,6 +59,16 @@ function addParameter() {
  */
 function  showWater(pageNum) {
     var state=getUrlParam("state");
+    if(state==1){
+        $("#state").empty();
+        $("#state").append("已预订的订单");
+    }else if(state==2){
+        $("#state").empty();
+        $("#state").append("正在配送的订单");
+    }else if(state==3){
+        $("#state").empty();
+        $("#state").append("已完成的订单");
+    }
     $.ajax({
         type:"get",
         url:"../user/waterList",
@@ -81,8 +91,10 @@ function  showWater(pageNum) {
                     var html="";
                     if(state==3){///如果订单状态为3,则添加一个评价按钮
                         $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp" + waterTime + "<br/><a href='feedback.html?id="+waterId+"&type=2"+"'><button>评价</button></a><hr/>");
-                    }else{
+                    }else if(state==2){
                         $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp" +waterTime + "<hr/>");
+                    }else if(state==1){
+                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp" + waterNum + "桶<br/>下单时间:&nbsp&nbsp" +waterTime + "<hr/>");
                     }
 
                 }
@@ -99,6 +111,16 @@ function  showWater(pageNum) {
 
 function showRepair(pageNum) {
     var state=getUrlParam("state");
+    if(state==1){
+        $("#state").empty();
+        $("#state").append("已预订的订单");
+    }else if(state==2){
+        $("#state").empty();
+        $("#state").append("正在处理的订单");
+    }else if(state==3){
+        $("#state").empty();
+        $("#state").append("已完成的订单");
+    }
     $.ajax({
         type:"get",
         url:"../user/repairList",
@@ -117,13 +139,15 @@ function showRepair(pageNum) {
                     var adminPhone=list[i].adminPhone;
                     var repairDetail=list[i].repairDetial;///此处的单词有误!但不想改!!!!
                     var operateTime=list[i].operateTime;
+                    var repairPic = list[i].repairPic;
+                    var picSrc="/zhkulife/img/repair/"+repairPic;
                     operateTime=operateTime.substring(0,16);
                     if(state==1){
-                        $("#repairOrderList").append("订单号:"+repairId+"<br/>订单时间:"+orderTime+"<br/>故障信息:"+repairDetail+"<hr/>");
+                        $("#repairOrderList").append("订单号:"+repairId+"<br/>订单时间:"+operateTime+"<br/>故障信息:"+repairDetail+"<br/>图片详情:<br/><img src="+picSrc+" width='200' height='120'"+"><br/>"+"<hr/>");
                     }else if(state==2){
-                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+operateTime+"<br/>故障信息:"+repairDetail+"<hr/>");
+                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+operateTime+"<br/>故障信息:"+repairDetail+"<br/>图片详情:<br/><img src="+picSrc+" width='200' height='120'"+"><br/>"+"<hr/>");
                     }else if(state==3){
-                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+operateTime+"<br/>故障信息:"+repairDetail+"<br/><a href='feedback.html?id="+repairId+"&type=3"+"'><button>评价</button></a><hr/>");
+                        $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone+"<br/>订单时间:"+operateTime+"<br/>故障信息:"+repairDetail+"<br/>图片详情:<br/><img src="+picSrc+" width='200' height='120'"+"><br/>"+"<br/><a href='feedback.html?id="+repairId+"&type=3"+"'><button>评价</button></a><hr/>");
                     }
                 }
                 showPage(eval(data).pages,eval(data).pageNum,3,total);

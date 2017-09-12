@@ -31,9 +31,13 @@ function login(){
                     setCookie("repairZone",zone,3);
                     window.location.href="repair/index.html";
                 }else if(key==4){
-                    window.location.href="office/index.html?key=4";
+                    ////设置cookie,保存当前桶装水办公人员的ID,三天过期
+                    setCookie("waterAdm",adminId,3);
+                    window.location.href="wateradm/index.html";
                 }else if(key==5){
-                    window.location.href="office/index.html?key=5";
+                    ////设置cookie,保存当前维修办公人员的ID,三天过期
+                    setCookie("repairAdm",adminId,3);
+                    window.location.href="repairadm/index.html";
                 }
 
             }
