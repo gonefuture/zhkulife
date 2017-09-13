@@ -1,8 +1,9 @@
 package cn.zhku.zhkulife.po.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Repair {
+public class Repair implements Serializable {
     private String repairId;
 
     private Date operateTime;
@@ -26,6 +27,8 @@ public class Repair {
     private String adminPhone;
 
     private String repairDetial;
+
+    private static final long serialVersionUID = 1L;
 
     public String getRepairId() {
         return repairId;
@@ -121,5 +124,28 @@ public class Repair {
 
     public void setRepairDetial(String repairDetial) {
         this.repairDetial = repairDetial == null ? null : repairDetial.trim();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", repairId=").append(repairId);
+        sb.append(", operateTime=").append(operateTime);
+        sb.append(", repairTime=").append(repairTime);
+        sb.append(", repairState=").append(repairState);
+        sb.append(", userId=").append(userId);
+        sb.append(", adminId=").append(adminId);
+        sb.append(", repairFeedback=").append(repairFeedback);
+        sb.append(", zone=").append(zone);
+        sb.append(", repairPic=").append(repairPic);
+        sb.append(", userPhone=").append(userPhone);
+        sb.append(", adminPhone=").append(adminPhone);
+        sb.append(", repairDetial=").append(repairDetial);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

@@ -48,7 +48,7 @@ public class UserController {
            // model.addAttribute("",user);
             return new Message("3", "登录成功，密码过于简单，不能为123456", user.getUserId());
         }
-        else if ( user.getUserPhone() ==null || user.getUserPhone().equals(0) ){
+        else if ( user.getUserPhone() ==null || user.getUserPhone().equals("0")){
             user.setUserPassword(null);
             httpSession.setAttribute("user",user);
             // model.addAttribute("",user);
@@ -97,7 +97,7 @@ public class UserController {
         User userCache = (User) httpSession.getAttribute("user");
         User user = new User();
         user.setUserId(userCache.getUserId()); user.setUserPassword(password);
-        if (userCache == null)
+        if (userCache == null )
             return new Message("2","请先登录");
         else if (userService.update(user) != 1)
             return new Message("2","修改密码失败，请检查参数");

@@ -1,5 +1,6 @@
 package cn.zhku.zhkulife.modules.water.service;
 
+import cn.zhku.zhkulife.po.dao.WaterDao;
 import cn.zhku.zhkulife.po.entity.Water;
 import cn.zhku.zhkulife.po.entity.WaterExample;
 import cn.zhku.zhkulife.po.mapper.WaterMapper;
@@ -21,6 +22,10 @@ public class WaterService implements IService<Water>{
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private WaterMapper waterMapper;
+
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    @Autowired
+    private WaterDao waterDao;
 
 
     @Override
@@ -77,7 +82,7 @@ public class WaterService implements IService<Water>{
     public boolean isHasBook(Water water) {
 
 
-        List<Water> waterList =waterMapper.isHasBook(water.getUserId());
+        List<Water> waterList =waterDao.isHasBook(water.getUserId());
         if (waterList.size()>0)
             return true;
         else

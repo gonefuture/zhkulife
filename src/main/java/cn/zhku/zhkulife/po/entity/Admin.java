@@ -1,6 +1,8 @@
 package cn.zhku.zhkulife.po.entity;
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable {
     private String adminId;
 
     private String adminPassword;
@@ -12,6 +14,8 @@ public class Admin {
     private Integer adminZone;
 
     private String adminName;
+
+    private static final long serialVersionUID = 1L;
 
     public String getAdminId() {
         return adminId;
@@ -63,13 +67,18 @@ public class Admin {
 
     @Override
     public String toString() {
-        return "Admin{" +
-                "adminId='" + adminId + '\'' +
-                ", adminPassword='" + adminPassword + '\'' +
-                ", adminRole='" + adminRole + '\'' +
-                ", adminPhone='" + adminPhone + '\'' +
-                ", adminZone=" + adminZone +
-                ", adminName='" + adminName + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", adminId=").append(adminId);
+        sb.append(", adminPassword=").append(adminPassword);
+        sb.append(", adminRole=").append(adminRole);
+        sb.append(", adminPhone=").append(adminPhone);
+        sb.append(", adminZone=").append(adminZone);
+        sb.append(", adminName=").append(adminName);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

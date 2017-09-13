@@ -1,8 +1,9 @@
 package cn.zhku.zhkulife.po.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Water {
+public class Water implements Serializable {
     private String waterId;
 
     private Integer waterNum;
@@ -26,6 +27,8 @@ public class Water {
     private String adminPhone;
 
     private String userPhone;
+
+    private static final long serialVersionUID = 1L;
 
     public String getWaterId() {
         return waterId;
@@ -121,5 +124,28 @@ public class Water {
 
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone == null ? null : userPhone.trim();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", waterId=").append(waterId);
+        sb.append(", waterNum=").append(waterNum);
+        sb.append(", operateTime=").append(operateTime);
+        sb.append(", waterTime=").append(waterTime);
+        sb.append(", waterState=").append(waterState);
+        sb.append(", userId=").append(userId);
+        sb.append(", adminId=").append(adminId);
+        sb.append(", waterFeedback=").append(waterFeedback);
+        sb.append(", waterCount=").append(waterCount);
+        sb.append(", zone=").append(zone);
+        sb.append(", adminPhone=").append(adminPhone);
+        sb.append(", userPhone=").append(userPhone);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

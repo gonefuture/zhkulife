@@ -3,13 +3,20 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	
-	<!-- 全局setting配置，根据需要添加 -->
+
+	<!-- 开启延迟加载 -->
 	<settings>
-		<!--开启二级缓存-->
+		<!-- lazyLoadingEnabled:延迟加载启动，默认是false -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<!-- aggressiveLazyLoading：积极的懒加载，false的话按需加载，默认是true -->
+		<setting name="aggressiveLazyLoading" value="false"/>
+
+		<!-- 开启二级缓存，默认是false -->
 		<setting name="cacheEnabled" value="true"/>
 	</settings>
-	
+
+
+
         <!-- 配置别名 -->
         <typeAliases>
             <!-- 批量扫描别名 -->
@@ -19,13 +26,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 
 
-	<!-- 配置mapper
-	由于使用spring和mybatis的整合包进行mapper扫描，这里不需要配置了。
-	必须遵循：mapper.xml和mapper.java文件同名且在一个目录 
-	 -->
-	<!--<mappers>-->
-		<!--&lt;!&ndash;<mapper class="tk.mybatis.mapper.common.Mapper"/>&ndash;&gt;-->
-	<!--</mappers>-->
 
 	<!-- 配置分页插件 -->
 	<plugins>
@@ -49,12 +49,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			<property name="returnPageInfo" value="check"/>
 		</plugin>
 
-		<!--<plugin interceptor="tk.mybatis.mapper.mapperhelper.MapperHelper">-->
-			<!--&lt;!&ndash;主键自增回写方法,默认值MYSQL,详细说明请看文档&ndash;&gt;-->
-			<!--<property name="IDENTITY" value="MYSQL"/>-->
-			<!--&lt;!&ndash;通用Mapper接口，多个通用接口用逗号隔开&ndash;&gt;-->
-			<!--<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
-		<!--</plugin>-->
+
     </plugins>
 
 
