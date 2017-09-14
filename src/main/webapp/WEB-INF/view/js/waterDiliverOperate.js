@@ -119,7 +119,7 @@ function  showWater(state,pageNum) {
 
                     }else if (state==2){
                         var clickFunc="onclick=finishWater("+"'"+waterId+"',"+pageNum+");";
-                        operate="<td><input type='button' class='btn btn-default'"+clickFunc+"value='配送'></td>";
+                        operate="<td><input type='button' class='btn btn-default'"+clickFunc+  "value='配送'></td>";
                     }else if(state==3){
                         operate="";
                     }

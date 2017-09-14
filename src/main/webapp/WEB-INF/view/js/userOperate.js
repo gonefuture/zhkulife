@@ -9,6 +9,14 @@
 function login(){
     var user_id= $("input[name='user_id']").val();
     var user_password= $("input[name='user_password']").val();
+    if(user_id==null||user_id==""){
+        alert("请先输入账号!");
+        return;
+    }
+    if(user_password==null||user_password==""){
+        alert("请先输入密码!");
+        return;
+    }
     console.log(user_id+" "+user_password);
     $.ajax({
         type: "post",
@@ -229,6 +237,10 @@ function showPage(pages,pageNum,type,total){
 ///订水操作
 function bookWater(){
     var waterNum = $('#orderWater input[name="orderNum"]:checked ').val();
+    if(waterNum==null||waterNum==0){
+        alert("请先选择订水的桶数!");
+        return;
+    }
     $.ajax({
         type: "get",
         url: "../user/bookWater",

@@ -124,18 +124,19 @@ public class AdminController {
     @ResponseBody
     public PageInfo<Admin> findRole(Query query) throws Exception {
         PageHelper.startPage(query.getPageNum(),query.getPageSize());
-
         Subject subject = SecurityUtils.getSubject();
         Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
-        if (adminCache.getAdminRole().equals("6"))
+        Admin adminQo = new Admin ();
+        adminQo.setAdminRole(adminCache.getAdminRole());
+        if (adminQo.getAdminRole().equals("6"))
             return new PageInfo<Admin>(adminService.findAll(null));
         else{
-            if (adminCache.getAdminRole().equals("4")){
-                adminCache.setAdminRole("2");
-                return new PageInfo<Admin>(adminService.getList(adminCache));
-            } else {
-                adminCache.setAdminRole("3");
-                return new PageInfo<Admin>(adminService.getList(adminCache));
+            if (adminQo.getAdminRole().equals("4")){
+                adminQo.setAdminRole("2");
+                return new PageInfo<Admin>(adminService.getList(adminQo));
+            } else{
+                adminQo.setAdminRole("3");
+                return new PageInfo<Admin>(adminService.getList(adminQo));
             }
 
         }

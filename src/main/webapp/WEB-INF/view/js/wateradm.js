@@ -16,9 +16,9 @@ function loadWorker() {
             if(total==0){
                 $("#tableBody").append("<tr>暂时还没有工作人员哦!</tr>");
             }else{
-                var ids=new Array()
+                var ids=new Array();
                 for(var i in list) {
-                    var adminName = list[i].adminName;
+                var adminName = list[i].adminName;
                     var adminZone = list[i].adminZone;
                     var adminId = list[i].adminId;
                     if(adminZone==1){
@@ -27,13 +27,12 @@ function loadWorker() {
                         adminZone="白云校区";
                     }
                     ids[i]=adminId;
-                    console.log("啦啦啦啦"+ids[i]);
+                    console.log("获取的ID: "+ids[i]);
                     $("#tableBody").append("<tr> <th>"+adminName+"</th><th>"+adminZone+"</th><th id="+adminId+2+">加载中...</th><th id="+adminId+3+">加载中...</th></tr> ");
                 }
                 ////加载当前工作人员正在配送的桶数
                 for(var i in ids){
                     var locat="#"+ids[i]+2;
-                    console.log("工作人员id: "+ids[i]);
                     loadNumOfWater(ids[i],2,locat);
 
                 }
@@ -177,6 +176,7 @@ function todelete() {
     var adminId = $('.todelete').attr("id");
     var func = "deleteStaff(" + adminId + ")";
     console.log(func);
+    ////给模态框中的确定按钮添加---点击触发函数
     $('#ensure').attr("onclick", func);
 }
 
@@ -227,7 +227,8 @@ function loadStafflist() {
                         adminZone="白云校区";
                     }
                     var delButton="<button class='todelete btn btn-primary ' data-toggle='modal'onclick='todelete();' data-target='#myModal'id='"+adminId+"'> 删除 </button>";
-                    var modifyButton="<button class='btn btn-primary' id='"+adminId+"'> 修改 </button>";
+
+                    var modifyButton="<a href='staffModify.html'><button class='btn btn-primary' id='"+adminId+"'> 修改 </button></a>";
                     $("#tableBody").append("<tr> <th>"+adminName+"</th><th>"+adminZone+"</th><th>"+delButton+modifyButton+"</th></tr> ");
                 }
 

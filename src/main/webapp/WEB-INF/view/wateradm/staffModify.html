@@ -5,34 +5,64 @@
     <title>Title</title>
 </head>
 <body>
-<form role="form" id="detail">
-    <p>在要进行修改的地方进行修改,然后点击提交</p>
-    <div class="form-group">
-        <label for="adminZone">选择校区</label>
-        <select class="form-control" id="adminZone"name="adminZone" required>
-            <option value="1">海珠校区</option>
-            <option value="2">白云校区</option>
-        </select>
-        <div class="input-group input-group-md ">
-            <label for="adminId">账号不可修改 </label>
-            <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="adminId" name="adminId" placeholder="请输入账号"disabled="ture" >
-        </div><br/>
-        <div class="input-group input-group-md ">
-            <label for="adminName">请输入该工作人员的姓名: </label>
-            <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="adminName" name="adminName" placeholder="请输入姓名" >
-        </div><br/>
-        <div class="input-group input-group-md ">
-            <label for="adminPassword">输入密码: </label>
-            <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="adminPassword" name="adminPassword" placeholder="请输入密码" >
-        </div><br/>
-        <div class="input-group input-group-md ">
-            <label for="adminPhone">请输入该工作人员的手机: </label>
-            <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="adminPhone" name="adminPhone" placeholder="请输入手机号码" >
-        </div><br/>
-        <input type="submit"class="btn btn-default"  value="提交"/>
-    </div>
-</form>
-
+<div class="container">
+    <!---------------- 导航栏-----------------开始 ----------------->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header home">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand " href="index.html">仲园后勤服务平台</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="home"><a href="index.html">主页</a></li>
+                    <li class="modify"><a href="add.html">人员增加</a></li>
+                    <li class="modify"><a href="stafflist.html.html">人员管理</a></li>
+                    <li class="modify"><a href="modify.html">修改信息</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+    <!---------------- 导航栏-----------------结束 ----------------->
+    <!-------------表单信息区域---------------开始------------------>
+    <form role="form" id="detail">
+        <p>在要进行修改的地方进行修改,然后点击提交</p>
+        <div class="form-group">
+            <label for="adminZone">选择校区</label>
+            <select class="form-control" id="adminZone"name="adminZone" required>
+                <option value="1">海珠校区</option>
+                <option value="2">白云校区</option>
+            </select><br/>
+            <label id="adminZone-error" class="error" for="adminZone" style="color: red"></label><br/><br/>
+            <div class="input-group input-group-md ">
+                <label for="adminId">账号不可修改 </label>
+                <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="adminId" name="adminId" placeholder="请输入账号"disabled="ture" >
+            </div><br/>
+            <div class="input-group input-group-md ">
+                <label for="adminName">请输入该工作人员的姓名: </label>
+                <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="adminName" name="adminName" placeholder="请输入姓名" >
+            </div><br/>
+            <label id="adminName-error" class="error" for="adminName" style="color: red"></label><br/><br/>
+            <div class="input-group input-group-md ">
+                <label for="adminPassword">输入密码: </label>
+                <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="adminPassword" name="adminPassword" placeholder="请输入密码" >
+            </div><br/>
+            <label id="adminPassword-error" class="error" for="adminPassword" style="color: red"></label><br/><br/>
+            <div class="input-group input-group-md ">
+                <label for="adminPhone">请输入该工作人员的手机: </label>
+                <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="adminPhone" name="adminPhone" placeholder="请输入手机号码" >
+            </div><br/>
+            <label id="adminPhone-error" class="error" for="adminPhone" style="color: red"></label><br/><br/>
+            <input type="submit"class="btn btn-default"  value="提交"/>
+        </div>
+    </form>
+    <!-------------表单信息区域---------------结束------------------>
+</div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
