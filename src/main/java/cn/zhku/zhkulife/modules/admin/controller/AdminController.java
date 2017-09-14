@@ -172,11 +172,29 @@ public class AdminController {
         }
     }
 
+    /**
+     * 修改用户密码
+     * 管理员进行密码修改,角色6管理员可以对角色4和5的密码进行修改
+     * 当adminId属性为空的时候,则默认为角色6对自己的密码进行修改
+     * 当adminId属性不为空的时候,则认为是角色6对角色4或者5的密码进行修改
+     * @param form  必须要参数adminPassword, adminId可选
+     * @return Message信息类
+     * @throws Exception
+     */
     @RequestMapping("admin/updatePassword")
     @ResponseBody
-    public Message updatePassword(String adminId,String password) throws Exception {
-        Admin admin = new Admin();
-        admin.setAdminId(adminId); admin.setAdminPassword(password);
+    public Message updatePassword(Admin form) throws Exception {
+        Admin admin = new Admin(); //创建一个接受参数的对象，这样用户只能修改密码，而不能修改其他东西。
+        if(form.getAdminId() == null) {     //如果请求中没有提交adminid，从session中获取
+            Admin adminCache  = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin"); //获取session中的admin
+            admin.setAdminId(adminCache.getAdminId());
+            admin.setAdminPassword(adminCache.getAdminPassword());
+        } else {
+            //如果请求中提交了adminid
+            admin.setAdminId(form.getAdminId());
+            admin.setAdminPassword(form.getAdminPassword());
+        }
+
         if (adminService.update(admin) != 1)
             return new Message("2","修改密码失败，请检查参数");
         else
@@ -184,12 +202,25 @@ public class AdminController {
 
     }
 
+    /**修改手机
+     * 管理员进行手机修改,角色6管理员可以对角色4和5的手机进行修改
+     * 当adminId属性为空的时候,则默认为角色6对自己的手机进行修改
+     * 当adminId属性不为空的时候,则认为是角色6对角色4或者5的手机进行修改
+     * @param form 必须要参数adminPhone, adminId可选
+     * @return  Message信息类
+     * @throws Exception
+     */
     @RequestMapping("admin/updatePhone")
     @ResponseBody
-    public Message updatePhone(String adminId,String phone) throws Exception {
-        System.out.println("-----------------------------"+phone);
+    public Message updatePhone(Admin form) throws Exception {
         Admin admin = new Admin();
-        admin.setAdminId(adminId); admin.setAdminPhone(phone);
+        if (form.getAdminId() == null){
+            Admin adminCache  = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin"); //获取session中的admin
+            admin.setAdminId(adminCache.getAdminId()); admin.setAdminPhone(adminCache.getAdminPhone());
+        } else {
+            admin.setAdminId(form.getAdminId());
+            admin.setAdminPassword(form.getAdminPhone());
+        }
         if (adminService.update(admin) != 1)
             return new Message("2","修改手机号码失败");
         else

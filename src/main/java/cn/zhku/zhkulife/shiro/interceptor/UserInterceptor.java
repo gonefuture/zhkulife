@@ -1,6 +1,7 @@
 package cn.zhku.zhkulife.shiro.interceptor;
 
 import cn.zhku.zhkulife.po.entity.User;
+import cn.zhku.zhkulife.utils.Beans.Message;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,8 +31,10 @@ public class UserInterceptor implements HandlerInterceptor {
         if(!flag) {
             User user = (User) httpServletRequest.getSession().getAttribute("user");
             if(user == null) {
-                httpServletRequest.setAttribute("msg","请先登录再访问网站");
-                httpServletRequest.getRequestDispatcher("/errors").forward(httpServletRequest,httpServletResponse);
+                ////默认600代表连接超时码,返回给页面进行判断
+                httpServletResponse.getWriter().print(new Message("600","登录超时,请重新登录"));
+//                httpServletRequest.setAttribute("msg","请先登录再访问网站");
+//                httpServletRequest.getRequestDispatcher("/errors").forward(httpServletRequest,httpServletResponse);
             } else {
                 flag =true;
             }

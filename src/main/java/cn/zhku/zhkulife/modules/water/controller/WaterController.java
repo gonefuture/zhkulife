@@ -91,6 +91,24 @@ public class WaterController {
         }
     }
 
+    /**
+     * 普通用户完成订水订单
+     * @param waterId   水的订单号
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("user/finishWater")
+    @ResponseBody
+    public Message finishUserWater(String waterId) throws Exception {
+        Water water = new Water();
+        water.setWaterId(waterId); water.setWaterState(3);
+        if (waterService.update(water) != 1)
+            return new Message("2","订单未完成");
+        else
+            return new Message("1","完成订单，我已收到水");
+    }
+
+
     @RequestMapping("water/takeWater")
     @ResponseBody
     public Message takeWater(Water water) throws Exception {
