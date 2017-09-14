@@ -10,86 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f2e2646-d228-4dee-a60e-25503def5f8b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/dao/WaterDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/shiro/listener/UserSessionListener.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/Admin.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/AdminExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/AdminRole.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/AdminRoleExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/Authority.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/AuthorityExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/Repair.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/RepairExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/Role.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/RoleAuthority.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/RoleAuthorityExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/RoleExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/User.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/UserExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/Water.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/entity/WaterExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/AdminMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/AdminMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/AdminRoleMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/AdminRoleMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/AuthorityMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/AuthorityMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/RepairMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/RepairMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/RoleAuthorityMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/RoleAuthorityMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/RoleMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/RoleMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/UserMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/UserMapper.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/WaterMapper.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/mapper/WaterMapper.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/user/controller/UserController.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/user/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/water/service/WaterService.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/water/service/WaterService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Admin.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Admin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/AdminRole.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/AdminRole.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Authority.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Authority.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Repair.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Repair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Role.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Role.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/RoleAuthority.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/RoleAuthority.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/User.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Water.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Water.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/user/controller/UserController.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/user/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/water/service/WaterService.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/water/service/WaterService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Admin.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Admin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/AdminRole.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/AdminRole.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Authority.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Authority.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Repair.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Repair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Role.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Role.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/RoleAuthority.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/RoleAuthority.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/User.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Water.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Water.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/remote.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/remote.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/user/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/user/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/service/WaterService.java" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/service/WaterService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/ehcache.xml" afterPath="$PROJECT_DIR$/src/main/resources/ehcache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/generatorConfig.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/generatorConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/sqlMapConfig.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/sqlMapConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" afterPath="$PROJECT_DIR$/src/main/resources/spring/spring-dao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/wateradm/add.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/wateradm/add.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/db.properties" afterPath="$PROJECT_DIR$/target/classes/db.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/generatorConfig.xml" afterPath="$PROJECT_DIR$/target/classes/generatorConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mybatis/generatorConfig.xml" afterPath="$PROJECT_DIR$/target/classes/mybatis/generatorConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/mybatis/sqlMapConfig.xml" afterPath="$PROJECT_DIR$/target/classes/mybatis/sqlMapConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/spring/spring-dao.xml" afterPath="$PROJECT_DIR$/target/classes/spring/spring-dao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/db.properties" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/db.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/generatorConfig.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/generatorConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/mybatis/generatorConfig.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/mybatis/generatorConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/mybatis/sqlMapConfig.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/mybatis/sqlMapConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/spring/spring-dao.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/spring/spring-dao.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/user/showOrder.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/user/showOrder.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/admin/controller/AdminController.java" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/admin/controller/AdminController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/ehcache.xml" afterPath="$PROJECT_DIR$/target/classes/ehcache.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/ehcache.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/ehcache.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -126,17 +50,27 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-shiro.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ehcache.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ehcache.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/ehcache.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="276">
-              <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+              <caret line="12" column="10" lean-forward="false" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WaterService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/service/WaterService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="364">
+              <caret line="68" column="38" lean-forward="true" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -145,18 +79,18 @@
       <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/user/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-93">
-              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="1564">
+              <caret line="87" column="5" lean-forward="true" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdminController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdminController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/admin/controller/AdminController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="158" column="0" lean-forward="true" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
+            <state relative-caret-position="800">
+              <caret line="138" column="65" lean-forward="false" selection-start-line="138" selection-start-column="65" selection-end-line="138" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -167,7 +101,7 @@
       <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
+            <state relative-caret-position="1633">
               <caret line="71" column="25" lean-forward="false" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
               <folding />
             </state>
@@ -177,8 +111,8 @@
       <file leaf-file-name="UserService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/user/service/UserService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+            <state relative-caret-position="460">
+              <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -187,18 +121,8 @@
       <file leaf-file-name="UserInterceptor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="35" column="27" lean-forward="true" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminRealm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/shiro/AdminRealm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-138">
-              <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="690">
+              <caret line="35" column="27" lean-forward="false" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -218,7 +142,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/shiro/listener/UserSessionListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="483">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -298,7 +222,6 @@
         <option value="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/controller/WaterController.java" />
         <option value="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/utils/Beans/Message.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/waterDiliverOperate.js" />
-        <option value="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/admin/controller/AdminController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/wateradm/index.html" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/adminOperate.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/repairDeliverOperate.js" />
@@ -331,6 +254,7 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/shiro/listener/UserSessionListener.java" />
         <option value="$PROJECT_DIR$/src/main/resources/ehcache.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/admin/controller/AdminController.java" />
       </list>
     </option>
   </component>
@@ -399,6 +323,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -470,7 +397,18 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="zhkulife" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
-              <item name="water" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zhkulife" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zhkulife" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="zhkulife" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zhkulife" type="b2602c69:ProjectViewProjectNode" />
@@ -481,7 +419,6 @@
               <item name="zhkulife" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
               <item name="water" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="zhkulife" type="b2602c69:ProjectViewProjectNode" />
@@ -564,10 +501,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1279,7 +1213,8 @@
       <workItem from="1505133942593" duration="4031000" />
       <workItem from="1505175620654" duration="26376000" />
       <workItem from="1505300139969" duration="8313000" />
-      <workItem from="1505310491437" duration="4761000" />
+      <workItem from="1505310491437" duration="4939000" />
+      <workItem from="1505355469490" duration="1096000" />
     </task>
     <task id="LOCAL-00001" summary="update mybatis entity and mapper.">
       <created>1502546135251</created>
@@ -1323,11 +1258,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505134237351</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add some thing about session.">
+      <created>1505315562703</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1505315562703</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="386510000" />
+    <option name="totallyTimeSpent" value="387784000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1340,6 +1282,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24434389" sideWeight="0.4254292" order="10" side_tool="true" content_ui="tabs" />
@@ -1355,16 +1298,15 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39932126" sideWeight="0.49785408" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3552781" sideWeight="0.49570817" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11123723" sideWeight="0.57457083" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19592299" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11123723" sideWeight="0.57457083" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13816534" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32842582" sideWeight="0.5" order="21" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23819743" sideWeight="0.48808172" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2414163" sideWeight="0.48808172" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29077253" sideWeight="0.5113379" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1375,6 +1317,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3552781" sideWeight="0.49570817" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="682" y="138" width="786" height="341" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0520362" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1458,7 +1401,8 @@
     <MESSAGE value="fix many bugs." />
     <MESSAGE value="add some web." />
     <MESSAGE value="Merge branch 'master' of https://github.com/gonefuture/zhkulife&#10;&#10;# Conflicts:&#10;#&#9;zhkulife.iml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/gonefuture/zhkulife&#10;&#10;# Conflicts:&#10;#&#9;zhkulife.iml" />
+    <MESSAGE value="add some thing about session." />
+    <option name="LAST_COMMIT_MESSAGE" value="add some thing about session." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1475,7 +1419,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1495">
           <caret line="67" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1511,7 +1454,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="2" column="31983" lean-forward="false" selection-start-line="2" selection-start-column="31976" selection-end-line="2" selection-end-column="31983" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1668,19 +1610,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/po/dao.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/service/WaterService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1518">
-          <caret line="75" column="53" lean-forward="false" selection-start-line="75" selection-start-column="53" selection-end-line="75" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1706,7 +1639,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1714,7 +1646,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1730,7 +1661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-337">
           <caret line="33" column="65" lean-forward="false" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1738,7 +1668,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
           <caret line="21" column="19" lean-forward="false" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1746,7 +1675,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="207">
           <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1754,48 +1682,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
           <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/shiro/AdminRealm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-138">
+        <state relative-caret-position="207">
           <caret line="21" column="13" lean-forward="false" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/admin/controller/AdminController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="158" column="0" lean-forward="true" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
+        <state relative-caret-position="1633">
           <caret line="71" column="25" lean-forward="false" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/user/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-93">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/user/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        <state relative-caret-position="460">
+          <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1811,15 +1720,15 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/shiro/listener/UserSessionListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="35" column="27" lean-forward="true" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
+        <state relative-caret-position="690">
+          <caret line="35" column="27" lean-forward="false" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1827,7 +1736,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/spring/spring-shiro.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1835,8 +1744,34 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/ehcache.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
-          <caret line="12" column="10" lean-forward="true" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+          <caret line="12" column="10" lean-forward="false" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/service/WaterService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="68" column="38" lean-forward="true" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/user/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="87" column="5" lean-forward="true" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/admin/controller/AdminController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="800">
+          <caret line="138" column="65" lean-forward="false" selection-start-line="138" selection-start-column="65" selection-end-line="138" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
