@@ -94,7 +94,6 @@ public class WaterController {
     @RequestMapping("water/takeWater")
     @ResponseBody
     public Message takeWater(Water water) throws Exception {
-
         Subject subject = SecurityUtils.getSubject();
         Admin admin = (Admin) subject.getSession().getAttribute("admin");
         System.out.println(admin);
@@ -107,23 +106,37 @@ public class WaterController {
     }
 
 
-    @RequestMapping("water/finishWater")
+    @RequestMapping("water/delivery")
     @ResponseBody
-    public Message finishWater(String waterId) throws Exception {
+    public Message deliveryWater(String waterId) throws Exception {
         Water water = new Water();
         water.setWaterId(waterId); water.setWaterState(3);
         if (waterService.update(water) != 1)
-            return new Message("2","完成订单失败，请核实订单数据");
-        else{
-            User user = new User();
-            Water finishWater = waterService.get(waterId);
-            User finishUesr = userMapper.selectByPrimaryKey(finishWater.getUserId());
-            user.setUserId(finishWater.getUserId());
-            user.setTotalWater(finishWater.getWaterNum()+finishUesr.getTotalWater());
-            userMapper.updateByPrimaryKeySelective(user);
-            return new Message("1","完成订单");
-        }
+            return new Message("2","订单未完成");
+        else
+            return new Message("1","确认配送成功");
     }
+
+
+    /**
+     * 普通用户完成订水订单
+     * @param waterId   水的订单号
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("user/finishWater")
+    @ResponseBody
+    public Message finishUserWater(String waterId) throws Exception {
+        Water water = new Water();
+        water.setWaterId(waterId); water.setWaterState(4);
+        if (waterService.update(water) != 1)
+            return new Message("2","订单未完成");
+        else
+            return new Message("1","确认成功");
+    }
+
+
+
 
     @RequestMapping("user/feedbackWater")
     @ResponseBody

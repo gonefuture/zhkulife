@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
     <title>主页</title>
-    <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +11,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet"/>
+    <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../css/navbar.css" />
     <link rel="stylesheet"href="../css/showOrder.css"/>
@@ -38,11 +37,12 @@
                 <ul class="nav navbar-nav">
                     <li class="home"><a href="index.html">主页</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的订单 <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单记录 <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="order">
                             <!-- 下面两行代码是用来进行订单查找的,其中0代表查找未完成的订单(包括已受理的和正在配送的订单,这和数据库里面的订单代号不一样) -->
-                            <li class="a"><a href="showwater.html">订水订单</a></li>
-                            <li class="b"><a href="showrepair.html">维修订单</a></li>
+                            <li class="a"><a href="showwater.html?state=1">已预定订单</a></li>
+                            <li class="b"><a href="showwater.html?state=2">正在配送订单</a></li>
+                            <li class="c"><a href="showwater.html?state=3">已完成的订单</a></li>
                         </ul>
                     </li>
                     <li class="modify"><a href="modify.html">修改信息</a></li>
@@ -52,19 +52,35 @@
     </nav>
 
     <!--============================== 网页主体内容 ============================-->
+        <!---显示当前加载订单的状态--->
 
-    <div id="main"><br />
-          <div class="container img-rounded" id="thumbnail">
-              <p><b>你将对本订单进行服务反馈,反馈信息将会送达学校后勤处,请按照下列选项如实进行反馈</b></p><br/>
-              <div id="content">
+    <div id="main"><br /><br/>
+          <div class="container"id="waterOrderList">
 
-              </div>
+          </div>
+          <div id="waterOrderpageNav">
+
           </div>
     </div>
 </div>
 <!-- end显示订单 -->
 <br/>
-
+<!-----------------确认饮用水已经送达时弹出该模态框--------------开始-------------------------->
+<div class="am-modal am-modal-confirm" tabindex="-1" id="pressDetermineTheDeliveryWater">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">仲园订水报修平台</div>
+        <div class="am-modal-bd">
+            <!---orderId用于展示当前用户选中进行订单ID--->
+            确定订单:<span class="orderId" value="id"></span>
+            已完成配送?
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+        </div>
+    </div>
+</div>
+<!-----------------确认饮用水已经送达时弹出该模态框--------------结束-------------------------->
 
 <!-----------------确认提交订水反馈时弹出该模态框--------------开始-------------------------->
 <div class="am-modal am-modal-confirm" tabindex="-1" id="toWaterFeedback">
@@ -72,7 +88,7 @@
         <div class="am-modal-hd">仲园订水报修平台</div>
         <div class="am-modal-bd">
             <!---orderId用于展示当前用户选中进行投诉的订单ID--->
-            确定对订单:<span id="waterOrderId"></span>
+            确定对订单:<span class="waterOrderId" value="id"></span>
             进行反馈？
         </div>
         <div class="am-modal-footer">
@@ -83,22 +99,6 @@
 </div>
 <!-----------------确认提交订水反馈时弹出该模态框--------------结束-------------------------->
 
-<!-----------------确认提交维修反馈时弹出该模态框--------------开始-------------------------->
-<div class="am-modal am-modal-confirm" tabindex="-1" id="toRepairFeedback">
-    <div class="am-modal-dialog">
-        <div class="am-modal-hd">仲园订水报修平台</div>
-        <div class="am-modal-bd">
-            <!---orderId用于展示当前用户选中进行投诉的订单ID--->
-            确定对订单:<span id="repairOrderId"></span>
-            进行反馈？
-        </div>
-        <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
-        </div>
-    </div>
-</div>
-<!-----------------确认提交维修反馈时弹出该模态框--------------结束-------------------------->
 
 
 
@@ -115,7 +115,7 @@
         </div>
     </div>
 </div>
-
+<!-----用于显示服务器返回到到客户端的信息----->
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -129,7 +129,7 @@
 <script type="text/javascript" src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" ></script>
 <script type="text/javascript">
     function loading() {
-       feedbackLoading();////加载页面中的文本
+        showWater(1);//加载订水订单第一页
     }
 </script>
 </body>
