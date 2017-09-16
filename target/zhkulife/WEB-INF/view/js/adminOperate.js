@@ -1,5 +1,6 @@
 /**
  * Created by Administrator on 2017/8/10 0010.
+ * 不同角色的管理员的统一登录方法
  */
 function login(){
     var adminId= $("input[name='adminId']").val();

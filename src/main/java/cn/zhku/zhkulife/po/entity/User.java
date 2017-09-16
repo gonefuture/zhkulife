@@ -14,7 +14,7 @@ public class User implements Serializable {
 
     private Integer userZone;
 
-    private String userYibanid;
+    private String yibanInfo;
 
     private Integer userFlag;
 
@@ -64,12 +64,12 @@ public class User implements Serializable {
         this.userZone = userZone;
     }
 
-    public String getUserYibanid() {
-        return userYibanid;
+    public String getYibanInfo() {
+        return yibanInfo;
     }
 
-    public void setUserYibanid(String userYibanid) {
-        this.userYibanid = userYibanid == null ? null : userYibanid.trim();
+    public void setYibanInfo(String yibanInfo) {
+        this.yibanInfo = yibanInfo == null ? null : yibanInfo.trim();
     }
 
     public Integer getUserFlag() {
@@ -107,7 +107,7 @@ public class User implements Serializable {
         sb.append(", userRoom=").append(userRoom);
         sb.append(", userPhone=").append(userPhone);
         sb.append(", userZone=").append(userZone);
-        sb.append(", userYibanid=").append(userYibanid);
+        sb.append(", yibanInfo=").append(yibanInfo);
         sb.append(", userFlag=").append(userFlag);
         sb.append(", loginTime=").append(loginTime);
         sb.append(", totalWater=").append(totalWater);

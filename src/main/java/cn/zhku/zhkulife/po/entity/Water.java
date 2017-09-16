@@ -28,6 +28,8 @@ public class Water implements Serializable {
 
     private String userPhone;
 
+    private String yibanInfo;
+
     private static final long serialVersionUID = 1L;
 
     public String getWaterId() {
@@ -126,6 +128,14 @@ public class Water implements Serializable {
         this.userPhone = userPhone == null ? null : userPhone.trim();
     }
 
+    public String getYibanInfo() {
+        return yibanInfo;
+    }
+
+    public void setYibanInfo(String yibanInfo) {
+        this.yibanInfo = yibanInfo == null ? null : yibanInfo.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -144,6 +154,7 @@ public class Water implements Serializable {
         sb.append(", zone=").append(zone);
         sb.append(", adminPhone=").append(adminPhone);
         sb.append(", userPhone=").append(userPhone);
+        sb.append(", yibanInfo=").append(yibanInfo);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

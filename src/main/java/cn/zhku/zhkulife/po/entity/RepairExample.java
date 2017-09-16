@@ -824,6 +824,76 @@ public class RepairExample {
             addCriterion("admin_phone not between", value1, value2, "adminPhone");
             return (Criteria) this;
         }
+
+        public Criteria andYibanInfoIsNull() {
+            addCriterion("yiban_info is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoIsNotNull() {
+            addCriterion("yiban_info is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoEqualTo(String value) {
+            addCriterion("yiban_info =", value, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoNotEqualTo(String value) {
+            addCriterion("yiban_info <>", value, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoGreaterThan(String value) {
+            addCriterion("yiban_info >", value, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("yiban_info >=", value, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoLessThan(String value) {
+            addCriterion("yiban_info <", value, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoLessThanOrEqualTo(String value) {
+            addCriterion("yiban_info <=", value, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoLike(String value) {
+            addCriterion("yiban_info like", value, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoNotLike(String value) {
+            addCriterion("yiban_info not like", value, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoIn(List<String> values) {
+            addCriterion("yiban_info in", values, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoNotIn(List<String> values) {
+            addCriterion("yiban_info not in", values, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoBetween(String value1, String value2) {
+            addCriterion("yiban_info between", value1, value2, "yibanInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andYibanInfoNotBetween(String value1, String value2) {
+            addCriterion("yiban_info not between", value1, value2, "yibanInfo");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

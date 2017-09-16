@@ -113,11 +113,36 @@ public class RepairController  {
             return new Message("1","接单成功，请尽快维修");
     }
 
-    @RequestMapping("repair/finishRepair")
+
+    /**
+     *      维修人员完成维修订单
+     * @param repairId  维修订单编号
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("repair/delivery")
+    @ResponseBody
+    public Message deliveryRepair(String repairId) throws Exception {
+        Repair repair = new Repair();
+        repair.setRepairId(repairId); repair.setRepairState(3);   //实体类填充两个参数， repairId, repairState
+        if(repairService.update(repair) != 1)
+            return new Message("2","报修未完成,信息填写不正确");
+        else
+            return new Message("1","报修完成");
+    }
+
+
+    /**
+     *      学生完成维修订单
+     * @param repairId  维修订单编号
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("user/finishRepair")
     @ResponseBody
     public Message finishRepair(String repairId) throws Exception {
         Repair repair = new Repair();
-        repair.setRepairId(repairId); repair.setRepairState(3);
+        repair.setRepairId(repairId); repair.setRepairState(4);   //实体类填充两个参数， repairId, repairState
         if(repairService.update(repair) != 1)
             return new Message("2","报修未完成,信息填写不正确");
         else

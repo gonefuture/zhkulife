@@ -26,6 +26,8 @@ public class Repair implements Serializable {
 
     private String adminPhone;
 
+    private String yibanInfo;
+
     private String repairDetial;
 
     private static final long serialVersionUID = 1L;
@@ -118,6 +120,14 @@ public class Repair implements Serializable {
         this.adminPhone = adminPhone == null ? null : adminPhone.trim();
     }
 
+    public String getYibanInfo() {
+        return yibanInfo;
+    }
+
+    public void setYibanInfo(String yibanInfo) {
+        this.yibanInfo = yibanInfo == null ? null : yibanInfo.trim();
+    }
+
     public String getRepairDetial() {
         return repairDetial;
     }
@@ -143,6 +153,7 @@ public class Repair implements Serializable {
         sb.append(", repairPic=").append(repairPic);
         sb.append(", userPhone=").append(userPhone);
         sb.append(", adminPhone=").append(adminPhone);
+        sb.append(", yibanInfo=").append(yibanInfo);
         sb.append(", repairDetial=").append(repairDetial);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

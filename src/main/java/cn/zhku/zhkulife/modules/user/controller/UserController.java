@@ -52,19 +52,16 @@ public class UserController {
         else if (user.getUserPassword().equals("123456")){
             user.setUserPassword(null);
             httpSession.setAttribute("user",user);
-            System.out.println(YiBanAuth.getUserMe(httpServletRequest,httpServletResponse));
             return new Message("3", "登录成功，密码过于简单，不能为123456", user.getUserId());
         }
         else if ( user.getUserPhone() ==null || user.getUserPhone().equals("0")){
             user.setUserPassword(null);
             httpSession.setAttribute("user",user);
-            System.out.println(YiBanAuth.getUserMe(httpServletRequest,httpServletResponse));
             return new Message("3", "登录成功，手机号不能为空", user.getUserId());
         }
         else {
             user.setUserPassword(null);
             httpSession.setAttribute("user",user);
-            System.out.println(YiBanAuth.getUserMe(httpServletRequest,httpServletResponse));
             return new Message("1", "登录成功", user.getUserId());
         }
     }
@@ -129,7 +126,7 @@ public class UserController {
             return new Message("1","修改手机号码成功");
     }
 
-    @RequestMapping("user/getIt")
+    @RequestMapping("user/get")
     @ResponseBody
     public  User getUserIt(HttpSession httpSession) throws Exception {
         User userCache = (User) httpSession.getAttribute("user");

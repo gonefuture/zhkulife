@@ -16,9 +16,9 @@ import java.io.IOException;
  * @E-mail gonefuture@qq.com
  */
 public class YiBanAuth {
-    private static  String appid   = "1c35e67ff21e20df";
-    private static  String seckey  = "b08bae1626ce3f364072c0bdfe91eb4a";
-    private static  String backurl = "http://localhost/amenity/auth";
+    private static  String appid   = "3002f750eae1c39f";
+    private static  String seckey  = "036fdae6b34db42336dc280360561106";
+    private static  String backurl = "http://gonefuture.xin/zhkulife/auth";
 
 
     public  static JSONObject getUserMe(HttpServletRequest request, HttpServletResponse response) throws IOException {

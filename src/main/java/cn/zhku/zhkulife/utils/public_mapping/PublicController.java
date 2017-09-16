@@ -37,27 +37,34 @@ public class PublicController {
         return "index";
     }
 
+
+    /**
+     * 易班认证，授权后，将学生信息放入session
+     * @param model
+     * @param request
+     * @param response
+     * @param httpSession
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/auth")
     public String yiban(Model model, HttpServletRequest request, HttpServletResponse response ,HttpSession httpSession) throws Exception {
-        YiBanAuth yiBanAuth = new YiBanAuth();
         //得到user.me()的json对象
-        JSONObject userMe = yiBanAuth.getUserMe(request,response);
+        JSONObject userMe = YiBanAuth.getUserMe(request,response);
         User user = (User) httpSession.getAttribute("user");
 
         System.out.println(user);
         System.out.println(userMe);
 
-        User userUpdate = new User();
 
         if (userMe == null && !userMe.getString("status").equals("success")&& user == null) {
-            model.addAttribute("msg","易班授权失败");
+            model.addAttribute("msg","易班授权失败,请检查你的账号或联系开发人员");
             return "errors";
         }
         else {
-            userUpdate.setUserYibanid(userMe.getString("info"));
-            userUpdate.setUserId("8603");
-            userService.update(userUpdate);
-            return "user/index.html";
+            httpSession.setAttribute("yibanInfo",userMe.getString("info"));
+           // userService.update(userUpdate);
+            return "redirect:userlog.html";
         }
     }
 }

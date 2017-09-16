@@ -16,9 +16,9 @@ function loadWorker() {
             if(total==0){
                 $("#tableBody").append("<tr>暂时还没有工作人员哦!</tr>");
             }else{
-                var ids=new Array()
+                var ids=new Array();
                 for(var i in list) {
-                    var adminName = list[i].adminName;
+                var adminName = list[i].adminName;
                     var adminZone = list[i].adminZone;
                     var adminId = list[i].adminId;
                     if(adminZone==1){
@@ -27,13 +27,12 @@ function loadWorker() {
                         adminZone="白云校区";
                     }
                     ids[i]=adminId;
-                    console.log("啦啦啦啦"+ids[i]);
+                    console.log("获取的ID: "+ids[i]);
                     $("#tableBody").append("<tr> <th>"+adminName+"</th><th>"+adminZone+"</th><th id="+adminId+2+">加载中...</th><th id="+adminId+3+">加载中...</th></tr> ");
                 }
                 ////加载当前工作人员正在配送的桶数
                 for(var i in ids){
                     var locat="#"+ids[i]+2;
-                    console.log("工作人员id: "+ids[i]);
                     loadNumOfWater(ids[i],2,locat);
 
                 }
@@ -83,9 +82,9 @@ function updatePassword(){
     var password= $("input[name='password']").val();
     $.ajax({
         type: "get",
-        url: "../repair/updatePassword",
+        url: "../admin/updatePassword",
         dataType: "json",
-        data: {'password': password},
+        data: {'adminPassword': password},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
             if(msg==1){
@@ -105,9 +104,9 @@ function updatePhone(){
     var phone= $("input[name='phone']").val();
     $.ajax({
         type: "get",
-        url: "../repair/updatePhone",
+        url: "../admin/updatePhone",
         dataType: "json",
-        data: {'phone': phone},
+        data: {'adminPhone': phone},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
             if(msg==1){
@@ -127,7 +126,8 @@ function updatePhone(){
  */
 ///adminId,adminPassword,adminRole,adminPhone,adminZone,adminName
 function addStaff(){
-    var adminZone= $("input[name='zone']").val();
+    var adminZone= $("select[name='adminZone']").val();
+    console.log("adminZone:"+adminZone);
     var adminId= $("input[name='adminId']").val();
     var adminName= $("input[name='adminName']").val();
     var adminPassword= $("input[name='adminPassword']").val();
@@ -149,6 +149,10 @@ function addStaff(){
     });
 }
 
+
+/**
+ * 管理员修改送水人员的信息
+ */
 function staffManage() {
     var adminZone= $("input[name='zone']").val();
     var adminName= $("input[name='adminName']").val();
@@ -171,21 +175,13 @@ function staffManage() {
     });
 }
 
-///监听事件,当用户点击删除按钮时触发
-function todelete() {
-    console.log("触发监听事件!用户此时点击删除按钮");
-    var adminId = $('.todelete').attr("id");
-    var func = "deleteStaff(" + adminId + ")";
-    console.log(func);
-    $('#ensure').attr("onclick", func);
-}
 
 
 /**
  * 删除工作人员
  */
 function deleteStaff(adminId) {
-    console.log("开始调用删除工作人员操作");
+    console.log("开始调用删除工作人员操作,该工作人员id为:"+adminId);
     $.ajax({
         type: "get",
         url: "../admin/removeRole",
@@ -196,16 +192,17 @@ function deleteStaff(adminId) {
             console.log(msg);///查看后台返回的信息
             var info = eval(data).info;
             alert(info);
+            /////重新刷新页面
+            loadStafflist();
         },
         error : function(xhr, status, errMsg) {
             alert("系统异常,请稍后再试!");
         }
     });
 }
-
-
-
-
+/***
+ * 在"人员管理"页面加载工作人员列表
+ */
 function loadStafflist() {
     $.ajax({
         type: "get",
@@ -217,6 +214,8 @@ function loadStafflist() {
             if(total==0){
                 $("#tableBody").append("<tr>暂时还没有工作人员哦!</tr>");
             }else{
+                ////清空内容区域,接下来进行填充数据
+                $("#tableBody").empty();
                 for(var i in list) {
                     var adminName = list[i].adminName;
                     var adminZone = list[i].adminZone;
@@ -226,8 +225,8 @@ function loadStafflist() {
                     }else if(adminZone==2){
                         adminZone="白云校区";
                     }
-                    var delButton="<button class='todelete btn btn-primary ' data-toggle='modal'onclick='todelete();' data-target='#myModal'id='"+adminId+"'> 删除 </button>";
-                    var modifyButton="<button class='btn btn-primary' id='"+adminId+"'> 修改 </button>";
+                    var delButton= "<button type='button' class='am-btn am-btn-warning' onclick='pressDelete("+adminId+");'>删除</button>";
+                    var modifyButton="<a href='staffModify.html'><button class='btn btn-primary' id='"+adminId+"'> 修改 </button></a>";
                     $("#tableBody").append("<tr> <th>"+adminName+"</th><th>"+adminZone+"</th><th>"+delButton+modifyButton+"</th></tr> ");
                 }
 
@@ -238,6 +237,37 @@ function loadStafflist() {
         }
     });
 }
+
+/**
+ *"用户点击"人员管理"页面中的删除button时调用该函数
+ * @param id 工作人员的id
+ */
+function pressDelete(id) {
+    console.log("用户点击的id:" + id);
+    var flag=isOrNot();
+    console.log("flag的值:"+flag);
+   if(flag==1){///返回为1的时候确定删除
+       deleteStaff(id);
+   }
+}
+
+function isOrNot() {
+    $('#my-confirm').modal({
+        relatedTarget: this,
+        onConfirm: function (options,id) {
+            var flag=1;
+            return flag;
+        },
+        onCancel: function () {
+            flag=2;
+            return flag;
+        }
+    });
+    // console.log("jdjsfsd"+flag);
+    // return flag;
+}
+
+
 
 
 /**
