@@ -14,6 +14,7 @@
     <result column="zone" property="zone" jdbcType="INTEGER" />
     <result column="admin_phone" property="adminPhone" jdbcType="VARCHAR" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="yiban_info" property="yibanInfo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -75,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     water_id, water_num, operate_time, water_time, water_state, user_id, admin_id, water_feedback, 
-    water_count, zone, admin_phone, user_phone
+    water_count, zone, admin_phone, user_phone, yiban_info
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.zhku.zhkulife.po.entity.WaterExample" >
     select
@@ -111,13 +112,13 @@
     insert into water (water_id, water_num, operate_time, 
       water_time, water_state, user_id, 
       admin_id, water_feedback, water_count, 
-      zone, admin_phone, user_phone
-      )
+      zone, admin_phone, user_phone, 
+      yiban_info)
     values (#{waterId,jdbcType=VARCHAR}, #{waterNum,jdbcType=INTEGER}, #{operateTime,jdbcType=TIMESTAMP}, 
       #{waterTime,jdbcType=TIMESTAMP}, #{waterState,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
       #{adminId,jdbcType=VARCHAR}, #{waterFeedback,jdbcType=INTEGER}, #{waterCount,jdbcType=INTEGER}, 
-      #{zone,jdbcType=INTEGER}, #{adminPhone,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}
-      )
+      #{zone,jdbcType=INTEGER}, #{adminPhone,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, 
+      #{yibanInfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.zhku.zhkulife.po.entity.Water" >
     insert into water
@@ -158,6 +159,9 @@
       <if test="userPhone != null" >
         user_phone,
       </if>
+      <if test="yibanInfo != null" >
+        yiban_info,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="waterId != null" >
@@ -195,6 +199,9 @@
       </if>
       <if test="userPhone != null" >
         #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="yibanInfo != null" >
+        #{yibanInfo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -243,6 +250,9 @@
       <if test="record.userPhone != null" >
         user_phone = #{record.userPhone,jdbcType=VARCHAR},
       </if>
+      <if test="record.yibanInfo != null" >
+        yiban_info = #{record.yibanInfo,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -261,7 +271,8 @@
       water_count = #{record.waterCount,jdbcType=INTEGER},
       zone = #{record.zone,jdbcType=INTEGER},
       admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
-      user_phone = #{record.userPhone,jdbcType=VARCHAR}
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      yiban_info = #{record.yibanInfo,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -302,6 +313,9 @@
       <if test="userPhone != null" >
         user_phone = #{userPhone,jdbcType=VARCHAR},
       </if>
+      <if test="yibanInfo != null" >
+        yiban_info = #{yibanInfo,jdbcType=VARCHAR},
+      </if>
     </set>
     where water_id = #{waterId,jdbcType=VARCHAR}
   </update>
@@ -317,7 +331,8 @@
       water_count = #{waterCount,jdbcType=INTEGER},
       zone = #{zone,jdbcType=INTEGER},
       admin_phone = #{adminPhone,jdbcType=VARCHAR},
-      user_phone = #{userPhone,jdbcType=VARCHAR}
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      yiban_info = #{yibanInfo,jdbcType=VARCHAR}
     where water_id = #{waterId,jdbcType=VARCHAR}
   </update>
 </mapper>

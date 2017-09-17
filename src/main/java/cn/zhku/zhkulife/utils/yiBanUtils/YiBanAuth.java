@@ -2,6 +2,7 @@ package cn.zhku.zhkulife.utils.yiBanUtils;
 
 import cn.yiban.open.Authorize;
 import cn.yiban.open.common.User;
+import cn.zhku.zhkulife.utils.Beans.UserMe;
 import cn.zhku.zhkulife.utils.Beans.YiBanUser;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -21,7 +22,7 @@ public class YiBanAuth {
     private static  String backurl = "http://gonefuture.xin/zhkulife/auth";
 
 
-    public  static JSONObject getUserMe(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public  static UserMe getUserMe(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String code = request.getParameter("code");
         System.out.println(code);
@@ -29,7 +30,7 @@ public class YiBanAuth {
 
         if (code == null || code.isEmpty()) {
             String url = au.forwardurl(backurl, "test", Authorize.DISPLAY_TAG_T.WEB);
-            response.sendRedirect(url);
+            //response.sendRedirect(url);
             return null;
         }
         else {
@@ -38,8 +39,10 @@ public class YiBanAuth {
             System.out.println(token);
 
             User user = new User(token.getString("access_token"));
-            JSONObject userJson = JSONObject.parseObject(user.realme());
-            return userJson;
+            JSONObject userRealMe = JSONObject.parseObject(user.me());
+            System.out.println("-----------------------------"+userRealMe+"----------"+userRealMe.toString());
+            JSONObject userJson = userRealMe.getJSONObject("info");
+            return (UserMe) JSON.toJavaObject(userJson,UserMe.class);
         }
 
     }

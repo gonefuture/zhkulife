@@ -2,7 +2,9 @@ package cn.zhku.zhkulife.modules.user.service;
 
 import cn.zhku.zhkulife.po.entity.User;
 import cn.zhku.zhkulife.po.entity.UserExample;
+import cn.zhku.zhkulife.po.entity.Water;
 import cn.zhku.zhkulife.po.mapper.UserMapper;
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.interfaceUtils.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,14 +58,16 @@ public class UserService implements IService<User>{
         return null;
     }
 
+
+
     @Override
-    public List<User> findAll(User entity) throws Exception {
+    public List<User> findAll(User enty) throws Exception {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
-        if (entity.getUserZone() != null)
-            criteria.andUserZoneEqualTo(entity.getUserZone());
-        if (entity.getTotalWater() != null)
-            criteria.andTotalWaterGreaterThanOrEqualTo(entity.getTotalWater());
+        if (enty.getUserZone() != null)
+            criteria.andUserZoneEqualTo(enty.getUserZone());
+        if (enty.getTotalWater() != null)
+            criteria.andTotalWaterGreaterThanOrEqualTo(enty.getTotalWater());
         return userMapper.selectByExample(null);
     }
 }

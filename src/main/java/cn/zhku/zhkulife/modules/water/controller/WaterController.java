@@ -1,13 +1,16 @@
 package cn.zhku.zhkulife.modules.water.controller;
 
 import cn.zhku.zhkulife.modules.admin.service.AdminService;
+import cn.zhku.zhkulife.modules.user.service.UserService;
 import cn.zhku.zhkulife.modules.water.service.WaterService;
 
 import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.User;
 import cn.zhku.zhkulife.po.entity.Water;
 import cn.zhku.zhkulife.po.mapper.UserMapper;
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.Beans.Message;
+import cn.zhku.zhkulife.utils.Beans.UserMe;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -36,51 +39,63 @@ public class WaterController {
     @Autowired
     private WaterService waterService;
 
-    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @Autowired
     private AdminService adminService;
 
 
+    /**     管理员查找订单多条件查询
+     *
+     * @param commonQo  参数：pageNum页码，pageSize 记录数量 ，since 开始时间  end 结束时间
+     * @param water 除时间类外的Water类属性
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("water/list")
     @ResponseBody
-    public  PageInfo<Water> list(String pageNum,String pageSize,Water water) throws Exception {
-        if (pageNum == null)
-            pageNum = "1";
-        if (pageSize == null)
-            pageSize = "10";
-        PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
-        return new PageInfo<Water>(waterService.findAll(water));
+    public  PageInfo<Water> list(CommonQo commonQo , Water water) throws Exception {
+        System.out.println(commonQo);
+        PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"water_time desc");
+        return new PageInfo<Water>(waterService.findAll(commonQo,water));
     }
 
 
 
     @RequestMapping("user/waterList")
     @ResponseBody
-    public  PageInfo<Water> userlist(HttpSession httpSession, String pageNum,String pageSize,Water water) throws Exception {
-        if (pageNum == null)
-            pageNum = "1";
-        if (pageSize == null)
-            pageSize = "10";
+    public  PageInfo<Water> userlist(HttpSession httpSession, CommonQo commonQo,Water water) throws Exception {
         User user = (User) httpSession.getAttribute("user");
         water.setUserId(user.getUserId());
-        PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+        PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"water_time desc");
         return new PageInfo<Water>(waterService.getList(water));
     }
 
-
+    /**         学生订水
+     *
+     * @param httpSession 会话
+     * @param water   必须参数：water
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("user/bookWater")
     @ResponseBody
     public Message bookWater(HttpSession httpSession,Water water) throws Exception {
-       User user = (User) httpSession.getAttribute("user");
-        water.setUserPhone(user.getUserPhone());
-        water.setUserId(user.getUserId());
+       User sessionUser = (User) httpSession.getAttribute("user");
+       User DBUser =userService.get(sessionUser.getUserId());
+        if ("0".equals(DBUser.getUserPhone())) {    //在订水前获取获取其手机号
+           return new Message("2","你的手机号未设置");
+        }else if ("123456".equals(DBUser.getUserPassword())){
+            return new Message("2","你的密码过于简单，不能为123456，前立刻更改密码");
+        }
+        water.setYibanInfo(httpSession.getAttribute("yibanInfo").toString());
+        water.setUserPhone(sessionUser.getUserPhone());
+        water.setUserId(sessionUser.getUserId());
         water.setWaterId(UUID.randomUUID().toString().replace("-","").toUpperCase());
         water.setWaterState(1);
         water.setWaterTime(new Date());
-        water.setZone(user.getUserZone());
+        water.setZone(sessionUser.getUserZone());
         if (waterService.isHasBook(water)){
             return new Message("2","你之前有一个订单未完成");
         }
@@ -108,18 +123,22 @@ public class WaterController {
             return new Message("1","确认成功");
     }
 
-
+    /**
+     *  送水人员接单
+     * @param waterId 水订单号
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("water/takeWater")
     @ResponseBody
-    public Message takeWater(Water water) throws Exception {
-
+    public Message takeWater(String waterId) throws Exception {
+        Water water = new Water();
         Subject subject = SecurityUtils.getSubject();
         Admin admin = (Admin) subject.getSession().getAttribute("admin");
-        System.out.println(admin);
-        water.setWaterId(water.getWaterId()); water.setAdminId(admin.getAdminId()); water.setWaterState(2);
+        water.setWaterId(waterId); water.setAdminId(admin.getAdminId()); water.setWaterState(2);
         water.setAdminPhone(admin.getAdminPhone());
-        if (waterService.update(water) != 1)
-            return new Message("2","接单失败，请核实订单数据");
+        if (waterService.get(waterId).getWaterState()!= 1 || waterService.update(water) != 1) // 若订单状态不为1，则立刻返回错误码。
+            return new Message("2","接单失败，你的订单可能已经被别人借了");
         else
             return new Message("1","接单成功，请尽快配送");
     }

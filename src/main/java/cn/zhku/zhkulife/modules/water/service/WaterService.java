@@ -4,6 +4,7 @@ import cn.zhku.zhkulife.po.dao.WaterDao;
 import cn.zhku.zhkulife.po.entity.Water;
 import cn.zhku.zhkulife.po.entity.WaterExample;
 import cn.zhku.zhkulife.po.mapper.WaterMapper;
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.interfaceUtils.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,10 +49,15 @@ public class WaterService implements IService<Water>{
         return waterMapper.selectByPrimaryKey(id);
     }
 
+    /**     通过userId和waterState查找 订单
+     *
+     * @param water   参数：userId waterState
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<Water> getList(Water water) throws Exception {
         WaterExample waterExample = new WaterExample();
-        waterExample.setOrderByClause("water_time desc");
         WaterExample.Criteria criteria = waterExample.createCriteria();
         if (water.getWaterState() != null)
             criteria.andWaterStateEqualTo(water.getWaterState());
@@ -60,9 +66,19 @@ public class WaterService implements IService<Water>{
     }
 
     @Override
-    public List<Water> findAll(Water water) throws Exception {
+    public List<Water> findAll(Water enty) throws Exception {
+        return null;
+    }
+
+    /**     多条件查询
+     *
+     * @param commonQo  通用查询类
+     * @param water
+     * @return
+     * @throws Exception
+     */
+    public List<Water> findAll(CommonQo commonQo, Water water) throws Exception {
         WaterExample waterExample = new WaterExample();
-        waterExample.setOrderByClause("water_time desc");
         WaterExample.Criteria criteria = waterExample.createCriteria();
         if(water.getUserId() != null)
             criteria.andUserIdEqualTo(water.getUserId());
@@ -74,6 +90,10 @@ public class WaterService implements IService<Water>{
             criteria.andWaterFeedbackEqualTo(water.getWaterFeedback());
         if(water.getZone() != null)
             criteria.andZoneEqualTo(water.getZone());
+        if (commonQo.getSince()!= null )
+            criteria.andOperateTimeGreaterThanOrEqualTo(commonQo.getSince());
+        if (commonQo.getEnd() != null)
+            criteria.andOperateTimeLessThan(commonQo.getEnd());
 
         return waterMapper.selectByExample(waterExample);
     }
@@ -83,9 +103,6 @@ public class WaterService implements IService<Water>{
 
 
         List<Water> waterList =waterDao.isHasBook(water.getUserId());
-        if (waterList.size()>0)
-            return true;
-        else
-            return false;
+        return waterList.size() > 0;
     }
 }

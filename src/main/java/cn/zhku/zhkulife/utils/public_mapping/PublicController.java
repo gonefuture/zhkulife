@@ -3,6 +3,7 @@ package cn.zhku.zhkulife.utils.public_mapping;
 import cn.zhku.zhkulife.modules.user.service.UserService;
 import cn.zhku.zhkulife.po.entity.User;
 import cn.zhku.zhkulife.utils.Beans.Message;
+import cn.zhku.zhkulife.utils.Beans.UserMe;
 import cn.zhku.zhkulife.utils.yiBanUtils.YiBanAuth;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,19 +51,16 @@ public class PublicController {
     @RequestMapping("/auth")
     public String yiban(Model model, HttpServletRequest request, HttpServletResponse response ,HttpSession httpSession) throws Exception {
         //得到user.me()的json对象
-        JSONObject userMe = YiBanAuth.getUserMe(request,response);
-        User user = (User) httpSession.getAttribute("user");
-
-        System.out.println(user);
+        UserMe userMe = YiBanAuth.getUserMe(request,response);
+        System.out.println("-------------------------------------这是易班账号信息-------------------------------");
         System.out.println(userMe);
 
-
-        if (userMe == null && !userMe.getString("status").equals("success")&& user == null) {
+        if (userMe == null) {
             model.addAttribute("msg","易班授权失败,请检查你的账号或联系开发人员");
             return "errors";
         }
         else {
-            httpSession.setAttribute("yibanInfo",userMe.getString("info"));
+            httpSession.setAttribute("yibanInfo",userMe);
            // userService.update(userUpdate);
             return "redirect:userlog.html";
         }

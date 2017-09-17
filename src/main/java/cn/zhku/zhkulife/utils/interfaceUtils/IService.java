@@ -1,5 +1,8 @@
 package cn.zhku.zhkulife.utils.interfaceUtils;
 
+import cn.zhku.zhkulife.po.entity.Water;
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
+
 import java.util.List;
 
 /**
@@ -59,14 +62,25 @@ public interface IService<T> {
      */
     public List<T> getList(T entity) throws Exception;
 
+
+//    /**
+//     * 通过查询条件获取某个实体对象（相对应的表）列表操作
+//
+//     * @param commonQo 通用查询类
+//     * @return 实体类列表
+//     * @throws Exception
+//     *             抛出参数错误、SQL操作等异常
+//     */
+//    public List<T> findAll(CommonQo commonQo, T entity) throws Exception;
+
+
+
     /**
      * 通过查询条件获取某个实体对象（相对应的表）列表操作
-     *
-     * @param entity
-     *            继承BaseEntity子类实体
+     * @param enty  实体类属性参数
      * @return 影响行数
      * @throws Exception
      *             抛出参数错误、SQL操作等异常
      */
-    public List<T> findAll(T entity) throws Exception;
+    public List<T> findAll(T enty) throws Exception;
 }
