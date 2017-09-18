@@ -27,9 +27,7 @@
             <div class="navbar-header home">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span>菜单</span>
                 </button>
                 <a class="navbar-brand " href="index.html">仲园后勤服务平台</a>
             </div>
@@ -37,12 +35,11 @@
                 <ul class="nav navbar-nav">
                     <li class="home"><a href="index.html">主页</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单记录 <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的订单 <span class="caret"></span></a>
                         <ul class="dropdown-menu" id="order">
                             <!-- 下面两行代码是用来进行订单查找的,其中0代表查找未完成的订单(包括已受理的和正在配送的订单,这和数据库里面的订单代号不一样) -->
-                            <li class="a"><a href="showwater.html?state=1">已预定订单</a></li>
-                            <li class="b"><a href="showwater.html?state=2">正在配送订单</a></li>
-                            <li class="c"><a href="showwater.html?state=3">已完成的订单</a></li>
+                            <li class="a"><a href="showwater.html">订水订单</a></li>
+                            <li class="b"><a href="showrepair.html">维修订单</a></li>
                         </ul>
                     </li>
                     <li class="modify"><a href="modify.html">修改信息</a></li>
@@ -75,7 +72,7 @@
         <div class="am-modal-hd">仲园订水报修平台</div>
         <div class="am-modal-bd">
             <!---orderId用于展示当前用户选中进行订单ID--->
-            确定订单:<span class="orderId" value="id"></span>
+            确定订单:<span id="completeRepairOrderid" value="id"></span>
             已完成？
         </div>
         <div class="am-modal-footer">
@@ -93,7 +90,7 @@
         <div class="am-modal-hd">仲园订水报修平台</div>
         <div class="am-modal-bd">
             <!---orderId用于展示当前用户选中进行投诉的订单ID--->
-            确定对订单:<span class="orderId" value="id"></span>
+            确定对订单:<span id="feedbackRepairOrderId"></span>
             进行反馈？
         </div>
         <div class="am-modal-footer">

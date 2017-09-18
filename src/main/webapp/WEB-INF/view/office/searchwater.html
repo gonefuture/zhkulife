@@ -1,10 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>主页</title>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/amazeui.min.css" />
 </head>
-<body>
-$END$
+<body style="padding-top: 70px;" onload="loading();">
+<!----======================导航栏部分============================-------->
+<div class="container">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header home">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span>菜单</span>
+                </button>
+                <a class="navbar-brand " href="index.html">仲园后勤服务管理</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="home"><a href="index.html">首页</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">订单查找 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="searchwater.html">订水订单</a></li>
+                            <li ><a href="searchrepair.html">维修订单</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">学生管理 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addstu.html">增加学生用户</a></li>
+                            <li ><a href="searchstu.html">查找学生用户</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">工作人员管理 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addworker.html">增加工作人员</a></li>
+                            <li ><a href="searchworker.html">查找工作人员</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="modifyself.html">修改信息</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+    <!--============================== 网页主体内容 ==========开始==================-->
+    <div id="main"><br />
+        <!----------------折叠框-----查找订水--------------开始-------------->
+        <div id="forSearchWater">
+            <div class="am-panel-group" id="accordion">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">
+                            输入条件
+                        </h4>
+                    </div>
+                    <div id="do-not-say-1" class="am-panel-collapse am-collapse">
+                        <div class="am-panel-bd">
+                            <!-------------表单输入--------------开始------------>
+                            <form id="bookLeave" >
+                                <div class="container img-rounded" id="thumbnail">
+                                    <p><b>根据已有信息进行查找</b></p>
+                                    <label for="userId">学生用户账号:</label>
+                                    <input type="text" name="userId" id="userId"  />
+                                    <label for="worker">工作人员账号:</label>
+                                    <input type="text" name="worker" id="worker"  />
+                                    <p>请选择时间范围:</p>
+                                    <div class="am-alert am-alert-danger" id="my-alert" style="display: none">
+                                        <p>开始日期应小于结束日期！</p>
+                                    </div>
+                                    <div class="am-g">
+                                        <div class="am-u-sm-6">
+                                            <button type="button" class="am-btn am-btn-default am-margin-right" id="my-start">开始日期</button><span id="my-startDate"></span>
+                                        </div>
+                                        <div class="am-u-sm-6">
+                                            <button type="button" class="am-btn am-btn-default am-margin-right" id="my-end">结束日期</button><span id="my-endDate"></span>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <input type="button"class="btn btn-default"  onclick="bookLeave();" value="查找"/>
+                                </div>
+                            </form>
+                            <!-------------表单输入--------------结束------------>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------折叠框-----查找订水--------------结束-------------->
+
+        <!---------------------订单显示区域-------------开始------------->
+        <p>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或或或或或或或</p>
+        <!---------------------订单显示区域-------------结束------------->
+
+        </div>
+    <!--============================== 网页主体内容 ==========结束==================-->
+
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="../js/jquery.min.js" ></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script type="text/javascript" src="../js/bootstrap.min.js" ></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
+<script type="text/javascript" src="../js/amazeui.min.js" ></script>
+<!---验证日期输入是否准确---->
+<script>
+    $(function() {
+        var today=new Date();
+        var year=today.getFullYear();
+        ////该方法返回的月份数是0-11,
+        var month=today.getMonth()+1;
+        var startDate = new Date(year,month,15);
+        var endDate = new Date(year,month,17);
+        var $alert = $('#my-alert');
+        $('#my-start').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (event.date.valueOf() > endDate.valueOf()) {
+                $alert.find('p').text('开始日期应小于结束日期！').end().show();
+            } else {
+                $alert.hide();
+                startDate = new Date(event.date);
+                $('#my-startDate').text($('#my-start').data('date'));
+            }
+            $(this).datepicker('close');
+        });
+
+        $('#my-end').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (event.date.valueOf() < startDate.valueOf()) {
+                $alert.find('p').text('结束日期应大于开始日期！').end().show();
+            } else {
+                $alert.hide();
+                endDate = new Date(event.date);
+                $('#my-endDate').text($('#my-end').data('date'));
+            }
+            $(this).datepicker('close');
+        });
+    });
+</script>
 </body>
 </html>

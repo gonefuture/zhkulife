@@ -2,11 +2,14 @@ package cn.zhku.zhkulife.modules.repair.controller;
 
 import cn.zhku.zhkulife.modules.admin.service.AdminService;
 import cn.zhku.zhkulife.modules.repair.service.RepairService;
+import cn.zhku.zhkulife.modules.user.service.UserService;
 import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.Repair;
 
 import cn.zhku.zhkulife.po.entity.User;
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.Beans.Message;
+import cn.zhku.zhkulife.utils.Beans.UserMe;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
@@ -36,43 +39,69 @@ public class RepairController  {
     private RepairService repairService;
 
     @Autowired
-    AdminService adminService;
+    private AdminService adminService;
 
+    @Autowired
+    UserService userService;
+
+    /**
+     *      维修订单多条件查询
+     * @param commonQo  参数： pageNum 页码,pageSize 单页记录数 ，since 开始时间， end 结束时间
+     * @param repair 除时间参数外的参数
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("repair/list")
     @ResponseBody
-    public PageInfo<Repair>list(String pageNum, String pageSize, Repair repair) throws Exception {
-        if (pageNum == null)
-            pageNum = "1";
-        if (pageSize == null)
-            pageSize = "10";
-        PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+    public PageInfo<Repair>list(CommonQo commonQo ,Repair repair) throws Exception {
 
-        return new PageInfo<Repair>(repairService.findAll(repair));
+        PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"repair_time desc");  //按照下单时间倒序排序
+        return new PageInfo<Repair>(repairService.findAll(commonQo, repair));
     }
 
+    /**        学生用户查找维修订单，只能查找自身的订单，通过订单状态码查询
+     *
+     * @param commonQo 参数： pageNum 页码,pageSize 单页记录数 ，since 开始时间， end 结束时间
+     * @param repair       参数：repairState 订单状态码
+     * @param httpSession
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("user/repairList")
     @ResponseBody
-    public PageInfo<Repair>repairList( String pageNum, String pageSize, Repair repair,HttpSession httpSession) throws Exception {
+    public PageInfo<Repair>repairList( CommonQo commonQo , Repair repair,HttpSession httpSession) throws Exception {
         User user = (User) httpSession.getAttribute("user");
         repair.setUserId(user.getUserId());
-        if (pageNum == null)
-            pageNum = "1";
-        if (pageSize == null)
-            pageSize = "10";
-        PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+        PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"repair_time desc");
 
-        return new PageInfo<Repair>(repairService.findAll(repair));
+        return new PageInfo<Repair>(repairService.getList(repair));
     }
 
+    /**         学生报修
+     *
+     * @param httpSession  缓存
+     * @param request 请求
+     * @param repair 参数：图片 Pic ， 维修时间详情 repair_detail
+     * @param Pic
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("user/bookRepair")
     @ResponseBody
     public Message bookRepair(HttpSession httpSession , HttpServletRequest request,Repair repair, MultipartFile Pic) throws Exception {
-        User user = (User) httpSession.getAttribute("user");
-        repair.setUserId(user.getUserId());
+        User sessionUser = (User) httpSession.getAttribute("user");
+        User DBUser =userService.get(sessionUser.getUserId());
+        if ("0".equals(DBUser.getUserPhone())) {    //在订水前获取获取其手机号
+            return new Message("2","你的手机号未设置");
+        }else if ("123456".equals(DBUser.getUserPassword())){
+            return new Message("2","你的密码过于简单，不能为123456，前立刻更改密码");
+        }
+        repair.setYibanInfo(httpSession.getAttribute("yibanInfo").toString());
+        repair.setUserId(sessionUser.getUserId());
         repair.setRepairId(UUID.randomUUID().toString().replace("-","").toUpperCase());
         repair.setRepairTime(new Date());
         repair.setRepairState(1);
-        repair.setZone(user.getUserZone());
+        repair.setZone(sessionUser.getUserZone());
         if(Pic !=null) {
             //储存图片的物理路径
             String realPath = request.getServletContext().getRealPath("/WEB-INF/view/img/repair/");
@@ -81,7 +110,7 @@ public class RepairController  {
             //新的的图片名称
             String newFileName = UUID.randomUUID().toString().replace("-","").toUpperCase()+originalFileName.substring(originalFileName.lastIndexOf("."));
             //新图片文件
-            File newFile = new java.io.File(realPath+newFileName);
+            File newFile = new File(realPath+newFileName);
             //将内存中的数据写入磁盘
             Pic.transferTo(newFile);
             //将新图片名称写到repair中
@@ -100,14 +129,21 @@ public class RepairController  {
             return new Message("1","报修成功");
     }
 
+    /**
+     *  维修人员接单
+     * @param repairId 维修订单号
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("repair/takeRepair")
     @ResponseBody
-    public Message takeRepair(Repair repair) throws Exception {
+    public Message takeRepair(String repairId) throws Exception {
+        Repair repair = new Repair();  // 直接接受一个参数可以防止恶意篡改订单
         Subject subject = SecurityUtils.getSubject();
         Admin admin = (Admin) subject.getSession().getAttribute("admin");
-        repair.setRepairId(repair.getRepairId()); repair.setRepairState(2); repair.setAdminPhone(admin.getAdminPhone());
+        repair.setRepairId(repairId); repair.setRepairState(2); repair.setAdminPhone(admin.getAdminPhone());
         repair.setAdminId(admin.getAdminId());
-        if (repairService.update(repair) != 1)
+        if (repairService.get(repairId).getRepairState() != 1 || repairService.update(repair) != 1) // 若订单状态不为1，则立刻返回错误码。
             return new Message("2","接单失败，请核实订单数据");
         else
             return new Message("1","接单成功，请尽快维修");

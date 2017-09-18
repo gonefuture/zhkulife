@@ -39,6 +39,10 @@ function login(){
                     ////设置cookie,保存当前维修办公人员的ID,三天过期
                     setCookie("repairAdm",adminId,3);
                     window.location.href="repairadm/index.html";
+                }else if(key==6){
+                    //////设置cookie,保存当前工作人员的ID,三天过期
+                    setCookie("officeAdm",adminId,3);
+                    window.location.href="office/index.html";
                 }
 
             }

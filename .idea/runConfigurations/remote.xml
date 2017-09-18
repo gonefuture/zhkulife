@@ -1,16 +1,19 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="remote" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote" APPLICATION_SERVER_NAME="Tomcat8" ALTERNATIVE_JRE_ENABLED="false">
-    <option name="HOST" value="39.108.88.129" />
+    <option name="HOST" value="39.108.88.123" />
     <option name="PORT" value="80" />
     <option name="LOCAL" value="false" />
-    <option name="OPEN_IN_BROWSER_URL" value="http://39.108.88.129:80/zhkulife" />
-    <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
-    <option name="HOT_SWAP_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
-    <option name="UPDATING_POLICY" value="redeploy-artifacts" />
+    <option name="OPEN_IN_BROWSER_URL" value="http://39.108.88.123:80/" />
+    <option name="UPDATING_POLICY" value="hot-swap-classes" />
     <deployment>
       <artifact name="zhkulife:war">
         <settings>
           <option name="CONTEXT_PATH" value="/" />
+        </settings>
+      </artifact>
+      <artifact name="zhkulife:war exploded">
+        <settings>
+          <option name="CONTEXT_PATH" value="/zhkulife" />
         </settings>
       </artifact>
     </deployment>
@@ -69,6 +72,7 @@
     <method>
       <option name="BuildArtifacts" enabled="true">
         <artifact name="zhkulife:war" />
+        <artifact name="zhkulife:war exploded" />
       </option>
     </method>
   </configuration>

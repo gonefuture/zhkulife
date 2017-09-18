@@ -126,6 +126,32 @@ public class UserController {
             return new Message("1","修改手机号码成功");
     }
 
+
+    /**     修改的密码和手机
+     *
+     * @param httpSession  当前会话
+     * @param phone   手机号
+     * @param password  密码
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("user/updateData")
+    @ResponseBody
+    public Message updateData(HttpSession httpSession,String phone,String password) throws Exception {
+        User userCache = (User) httpSession.getAttribute("user");
+        User user = new User();
+        user.setUserId(userCache.getUserId()); user.setUserPhone(phone);user.setUserPassword(password);
+        if (userService.update(user) != 1)
+            return new Message("2","修改手机号码和密码失败");
+        else
+            return new Message("1","修改手机号码和密码成功");
+    }
+
+
+
+
+
+
     @RequestMapping("user/get")
     @ResponseBody
     public  User getUserIt(HttpSession httpSession) throws Exception {

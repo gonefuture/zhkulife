@@ -114,6 +114,8 @@ function showRepair(state,pageNum) {
                         operate="<br/><button type='button' class='btn btn-info'"+clickFunc+">确认完成</button>";
                     }else if(state==3){
                         operate="";
+                    }else if(state==4){
+                        operate="";
                     }
                     $('#repairOrderList').append("订单号:"+repairId+"<br/>下单时间:"+repairTime+"<br/>维修地点:"+userId+"<br/>订单详情:"+repaidDetail+"<br/>图片详情:<br/><img src="+picSrc+" width='200' height='120'"+"><br/>"+operate+"<hr/>");
                 }

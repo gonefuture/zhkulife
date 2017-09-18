@@ -73,11 +73,4 @@
   </session-config>
 
 
-  <session-config>
-    <!--<session-timeout>14400</session-timeout>-->
-      <session-timeout>1200</session-timeout>
-  </session-config>
-
-
-
 </web-app>

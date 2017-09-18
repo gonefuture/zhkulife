@@ -13,6 +13,7 @@
     <result column="repair_pic" property="repairPic" jdbcType="VARCHAR" />
     <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
     <result column="admin_phone" property="adminPhone" jdbcType="VARCHAR" />
+    <result column="yiban_info" property="yibanInfo" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="cn.zhku.zhkulife.po.entity.Repair" extends="BaseResultMap" >
     <result column="repair_detial" property="repairDetial" jdbcType="LONGVARCHAR" />
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List" >
     repair_id, operate_time, repair_time, repair_state, user_id, admin_id, repair_feedback, 
-    zone, repair_pic, user_phone, admin_phone
+    zone, repair_pic, user_phone, admin_phone, yiban_info
   </sql>
   <sql id="Blob_Column_List" >
     repair_detial
@@ -134,13 +135,13 @@
     insert into repair (repair_id, operate_time, repair_time, 
       repair_state, user_id, admin_id, 
       repair_feedback, zone, repair_pic, 
-      user_phone, admin_phone, repair_detial
-      )
+      user_phone, admin_phone, yiban_info, 
+      repair_detial)
     values (#{repairId,jdbcType=VARCHAR}, #{operateTime,jdbcType=TIMESTAMP}, #{repairTime,jdbcType=TIMESTAMP}, 
       #{repairState,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{adminId,jdbcType=VARCHAR}, 
       #{repairFeedback,jdbcType=INTEGER}, #{zone,jdbcType=INTEGER}, #{repairPic,jdbcType=VARCHAR}, 
-      #{userPhone,jdbcType=VARCHAR}, #{adminPhone,jdbcType=VARCHAR}, #{repairDetial,jdbcType=LONGVARCHAR}
-      )
+      #{userPhone,jdbcType=VARCHAR}, #{adminPhone,jdbcType=VARCHAR}, #{yibanInfo,jdbcType=VARCHAR}, 
+      #{repairDetial,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.zhku.zhkulife.po.entity.Repair" >
     insert into repair
@@ -177,6 +178,9 @@
       </if>
       <if test="adminPhone != null" >
         admin_phone,
+      </if>
+      <if test="yibanInfo != null" >
+        yiban_info,
       </if>
       <if test="repairDetial != null" >
         repair_detial,
@@ -215,6 +219,9 @@
       </if>
       <if test="adminPhone != null" >
         #{adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="yibanInfo != null" >
+        #{yibanInfo,jdbcType=VARCHAR},
       </if>
       <if test="repairDetial != null" >
         #{repairDetial,jdbcType=LONGVARCHAR},
@@ -263,6 +270,9 @@
       <if test="record.adminPhone != null" >
         admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
       </if>
+      <if test="record.yibanInfo != null" >
+        yiban_info = #{record.yibanInfo,jdbcType=VARCHAR},
+      </if>
       <if test="record.repairDetial != null" >
         repair_detial = #{record.repairDetial,jdbcType=LONGVARCHAR},
       </if>
@@ -284,6 +294,7 @@
       repair_pic = #{record.repairPic,jdbcType=VARCHAR},
       user_phone = #{record.userPhone,jdbcType=VARCHAR},
       admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
+      yiban_info = #{record.yibanInfo,jdbcType=VARCHAR},
       repair_detial = #{record.repairDetial,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -301,7 +312,8 @@
       zone = #{record.zone,jdbcType=INTEGER},
       repair_pic = #{record.repairPic,jdbcType=VARCHAR},
       user_phone = #{record.userPhone,jdbcType=VARCHAR},
-      admin_phone = #{record.adminPhone,jdbcType=VARCHAR}
+      admin_phone = #{record.adminPhone,jdbcType=VARCHAR},
+      yiban_info = #{record.yibanInfo,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -339,6 +351,9 @@
       <if test="adminPhone != null" >
         admin_phone = #{adminPhone,jdbcType=VARCHAR},
       </if>
+      <if test="yibanInfo != null" >
+        yiban_info = #{yibanInfo,jdbcType=VARCHAR},
+      </if>
       <if test="repairDetial != null" >
         repair_detial = #{repairDetial,jdbcType=LONGVARCHAR},
       </if>
@@ -357,6 +372,7 @@
       repair_pic = #{repairPic,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=VARCHAR},
       admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      yiban_info = #{yibanInfo,jdbcType=VARCHAR},
       repair_detial = #{repairDetial,jdbcType=LONGVARCHAR}
     where repair_id = #{repairId,jdbcType=VARCHAR}
   </update>
@@ -371,7 +387,8 @@
       zone = #{zone,jdbcType=INTEGER},
       repair_pic = #{repairPic,jdbcType=VARCHAR},
       user_phone = #{userPhone,jdbcType=VARCHAR},
-      admin_phone = #{adminPhone,jdbcType=VARCHAR}
+      admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      yiban_info = #{yibanInfo,jdbcType=VARCHAR}
     where repair_id = #{repairId,jdbcType=VARCHAR}
   </update>
 </mapper>

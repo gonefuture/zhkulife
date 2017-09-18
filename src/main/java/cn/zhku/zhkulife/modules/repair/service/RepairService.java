@@ -2,12 +2,14 @@ package cn.zhku.zhkulife.modules.repair.service;
 
 import cn.zhku.zhkulife.po.entity.Repair;
 import cn.zhku.zhkulife.po.entity.RepairExample;
+import cn.zhku.zhkulife.po.entity.Water;
 import cn.zhku.zhkulife.po.mapper.RepairMapper;
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
+//import cn.zhku.zhkulife.utils.DateUtil;
 import cn.zhku.zhkulife.utils.interfaceUtils.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,22 +44,36 @@ public class RepairService implements IService<Repair> {
         return repairMapper.selectByPrimaryKey(id);
     }
 
+    /**     user查找订单
+     *
+     * @param repair
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<Repair> getList(Repair repair) throws Exception {
         RepairExample repairExample = new RepairExample();
-        repairExample.setOrderByClause("repair_time desc");
         RepairExample.Criteria criteria = repairExample.createCriteria();
         if (repair.getRepairState() != null)
             criteria.andRepairStateEqualTo(repair.getRepairState());
-        if (repair.getUserId() != null)
-            criteria.andUserIdEqualTo(repair.getUserId());
+        criteria.andUserIdEqualTo(repair.getUserId());
         return repairMapper.selectByExample(repairExample);
     }
 
     @Override
-    public List<Repair> findAll(Repair repair) throws Exception {
+    public List<Repair> findAll(Repair enty) throws Exception {
+        return null;
+    }
+
+    /**     多条件查询维修订单
+     *
+     * @param commonQo
+     * @param repair
+     * @return
+     * @throws Exception
+     */
+    public List<Repair> findAll(CommonQo commonQo, Repair repair) throws Exception {
         RepairExample repairExample = new RepairExample();
-        repairExample.setOrderByClause("repair_time desc");
         RepairExample.Criteria criteria = repairExample.createCriteria();
         if (repair.getUserId() != null)
             criteria.andUserIdEqualTo(repair.getUserId());
@@ -71,6 +87,10 @@ public class RepairService implements IService<Repair> {
             criteria.andAdminIdEqualTo(repair.getAdminId());
         if (repair.getRepairFeedback() != null)
             criteria.andRepairStateEqualTo(repair.getRepairState());
+        if (commonQo.getSince() != null)
+            criteria.andOperateTimeGreaterThanOrEqualTo(commonQo.getSince());  //按时间查询
+        if (commonQo.getEnd() != null)
+            criteria.andOperateTimeLessThanOrEqualTo(commonQo.getEnd());
 
         return repairMapper.selectByExampleWithBLOBs(repairExample);
     }

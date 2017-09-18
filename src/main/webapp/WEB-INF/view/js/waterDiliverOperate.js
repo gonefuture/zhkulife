@@ -101,6 +101,8 @@ function  showWater(state,pageNum) {
                     $("#tableHead").append("<tr> <th>桶数</th><th>下单时间</th><th>配送地点</th><th>操作</th></tr> ");
                 }else if(state==3){
                     $("#tableHead").append("<tr> <th>桶数</th><th>下单时间</th><th>配送地点</th> ");
+                }else if(state==4){
+                    $("#tableHead").append("<tr> <th>桶数</th><th>下单时间</th><th>配送地点</th> ");
                 }
                 var totalWater=0;
                 for(var i in list){
@@ -121,6 +123,8 @@ function  showWater(state,pageNum) {
                         var clickFunc="onclick=finishWater("+"'"+waterId+"',"+pageNum+");";
                         operate="<td><input type='button' class='btn btn-default'"+clickFunc+  "value='配送'></td>";
                     }else if(state==3){
+                        operate="";
+                    }else if(state==4){
                         operate="";
                     }
                     $("#tableBody").append("<tr><td>"+waterNum+"</td> <td>"+waterTime+"</td><td>"+userId+"</td>"+operate+"</tr>");
@@ -219,19 +223,19 @@ function takeWater(waterId,pageNum) {
 
 
 /***
- * 用于订水订单确认操作
+ * 用于订水订单确认去配送
  * @param waterId 唯一标识一个订水订单
  */
-function finishWater(waterId,pageNum) {
+function deliveryWater(waterId,pageNum) {
     $.ajax({
         type: "get",
-        url: "../water/finishWater",
+        url: "../water/delivery",
         dataType: "json",
         data: {'waterId':waterId},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
             if(msg==2){
-                alert("确认订单失败!");
+                alert("确认失败!");
             }else if(msg==1){////确认订单成功,对页面的订单列表进行刷新
                 showWater(2,pageNum);//2表示订单状态为2
             }
