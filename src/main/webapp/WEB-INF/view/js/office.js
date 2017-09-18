@@ -23,7 +23,8 @@ function modifyPassword() {
  * 参数值为1表示系统自拟,参数值为2表示从页面输入获取
  */
 function waterOfComplain(datefrom) {
-    
+    var today =new Date();
+
 }
 
 /**
