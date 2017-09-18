@@ -100,9 +100,15 @@ public class WaterService implements IService<Water>{
 
 
     public boolean isHasBook(Water water) {
-
-
         List<Water> waterList =waterDao.isHasBook(water.getUserId());
         return waterList.size() > 0;
+    }
+
+    public List<Water> waterRepined() {
+        WaterExample waterExample = new WaterExample();
+        WaterExample.Criteria criteria = waterExample.createCriteria();
+        criteria.andWaterFeedbackNotEqualTo(5);
+        criteria.andWaterFeedbackIsNotNull();
+        return waterMapper.selectByExample(waterExample);
     }
 }

@@ -1,11 +1,10 @@
 package cn.zhku.zhkulife.utils.public_mapping;
 
 import cn.zhku.zhkulife.modules.user.service.UserService;
-import cn.zhku.zhkulife.po.entity.User;
-import cn.zhku.zhkulife.utils.Beans.Message;
+
 import cn.zhku.zhkulife.utils.Beans.UserMe;
 import cn.zhku.zhkulife.utils.yiBanUtils.YiBanAuth;
-import com.alibaba.fastjson.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+
 
 /**
  * @author 钱伟健 gonefutre

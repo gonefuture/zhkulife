@@ -5,7 +5,6 @@ import cn.zhku.zhkulife.po.entity.RepairExample;
 import cn.zhku.zhkulife.po.entity.Water;
 import cn.zhku.zhkulife.po.mapper.RepairMapper;
 import cn.zhku.zhkulife.utils.Beans.CommonQo;
-import cn.zhku.zhkulife.utils.DateUtil;
 import cn.zhku.zhkulife.utils.interfaceUtils.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,4 +95,11 @@ public class RepairService implements IService<Repair> {
     }
 
 
+    public List<Repair> repined() {
+        RepairExample repairExample = new RepairExample();
+        RepairExample.Criteria criteria = repairExample.createCriteria();
+        criteria.andRepairFeedbackNotEqualTo(5);
+        criteria.andRepairFeedbackIsNotNull();
+        return  repairMapper.selectByExampleWithBLOBs(repairExample);
+    }
 }

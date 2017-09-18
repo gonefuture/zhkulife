@@ -42,15 +42,15 @@ public class UserController {
         if (user == null){
             return new Message("2","登录失败，用户不存在或密码错误,或者你的舍友已经改了密码，请询问他们确认");
         }
-        else if (user.getUserPassword().equals("123456")){
-            afterLogin(user,httpSession);
-            httpSession.setAttribute("user",user);
-            return new Message("3", "登录成功，密码过于简单，不能为123456", user.getUserId());
-        }
-        else if ( user.getUserPhone() ==null || user.getUserPhone().equals("0")){
-            afterLogin(user,httpSession);
-            return new Message("3", "登录成功，手机号不能为空", user.getUserId());
-        }
+//        else if (user.getUserPassword().equals("123456")){
+//            afterLogin(user,httpSession);
+//            httpSession.setAttribute("user",user);
+//            return new Message("3", "登录成功，密码过于简单，不能为123456", user.getUserId());
+//        }
+//        else if ( user.getUserPhone() ==null || user.getUserPhone().equals("0")){
+//            afterLogin(user,httpSession);
+//            return new Message("3", "登录成功，手机号不能为空", user.getUserId());
+//        }
         else {
             httpSession.setAttribute("user",user);
             return new Message("1", "登录成功", user.getUserId());
@@ -102,9 +102,8 @@ public class UserController {
         User userCache = (User) httpSession.getAttribute("user");
         User user = new User();
         user.setUserId(userCache.getUserId()); user.setUserPassword(password);
-        if (userCache == null )
-            return new Message("2","请先登录");
-        else if (userService.update(user) != 1)
+
+        if (userService.update(user) != 1)
             return new Message("2","修改密码失败，请检查参数");
         else
             return new Message("1","修改密码成功");
@@ -121,8 +120,36 @@ public class UserController {
             return new Message("2","修改手机号码失败");
         else
             return new Message("1","修改手机号码成功");
+
     }
 
+    /**     修改的密码和手机
+     *
+     * @param httpSession  当前会话
+     * @param phone   手机号
+     * @param password  密码
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("user/updateData")
+    @ResponseBody
+    public Message updateData(HttpSession httpSession,String phone,String password) throws Exception {
+        User userCache = (User) httpSession.getAttribute("user");
+        User user = new User();
+        user.setUserId(userCache.getUserId()); user.setUserPhone(phone);user.setUserPassword(password);
+        if (userService.update(user) != 1)
+            return new Message("2","修改手机号码和密码失败");
+        else
+            return new Message("1","修改手机号码和密码成功");
+    }
+
+
+    /**         获取用户信息
+     *
+     * @param httpSession   当前会话
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("user/get")
     @ResponseBody
     public  User getUserIt(HttpSession httpSession) throws Exception {
