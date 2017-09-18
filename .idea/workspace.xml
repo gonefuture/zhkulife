@@ -9,99 +9,8 @@
     <bookmark url="file://$PROJECT_DIR$/src/main/resources/spring/springmvc.xml" line="30" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f2e2646-d228-4dee-a60e-25503def5f8b" name="Default" comment="Merge branch 'master' of https://github.com/gonefuture/zhkulife&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/cn/zhku/zhkulife/modules/admin/controller/AdminController.java&#10;#&#9;src/main/java/cn/zhku/zhkulife/modules/water/controller/WaterController.java&#10;#&#9;src/main/java/cn/zhku/zhkulife/po/mapper/WaterMapper.java&#10;#&#9;src/main/resources/ehcache.xml&#10;#&#9;src/main/webapp/WEB-INF/view/js/userOperate.js&#10;#&#9;src/main/webapp/WEB-INF/view/userlog.html&#10;#&#9;target/classes/cn/zhku/zhkulife/modules/admin/controller/AdminController.class&#10;#&#9;target/classes/cn/zhku/zhkulife/modules/water/controller/WaterController.class&#10;#&#9;target/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.class&#10;#&#9;target/classes/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.class&#10;#&#9;target/classes/ehcache.xml&#10;#&#9;target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/admin/controller/AdminController.class&#10;#&#9;target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/water/controller/WaterController.class&#10;#&#9;target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.class&#10;#&#9;target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.class&#10;#&#9;target/zhkulife/WEB-INF/classes/ehcache.xml&#10;#&#9;target/zhkulife/WEB-INF/view/js/userOperate.js&#10;#&#9;target/zhkulife/WEB-INF/view/user/showOrder.html">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/repair/controller/RepairController.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/repair/controller/RepairController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/repair/service/RepairService.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/repair/service/RepairService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/user/controller/UserController.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/user/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/water/controller/WaterController.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/water/controller/WaterController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/water/service/WaterService.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/modules/water/service/WaterService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Repair.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Repair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/RepairExample$Criteria.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/RepairExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/RepairExample$Criterion.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/RepairExample$Criterion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/RepairExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/RepairExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/User.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/UserExample$Criteria.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/UserExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/UserExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/UserExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Water.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/Water.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/WaterExample$Criteria.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/WaterExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/WaterExample$Criterion.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/WaterExample$Criterion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/WaterExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/entity/WaterExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.class" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/repair/controller/RepairController.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/repair/controller/RepairController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/repair/service/RepairService.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/repair/service/RepairService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/user/controller/UserController.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/user/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/water/controller/WaterController.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/water/controller/WaterController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/water/service/WaterService.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/water/service/WaterService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Repair.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Repair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/RepairExample$Criteria.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/RepairExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/RepairExample$Criterion.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/RepairExample$Criterion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/RepairExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/RepairExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/User.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/User.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/UserExample$Criteria.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/UserExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/UserExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/UserExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Water.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/Water.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/WaterExample$Criteria.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/WaterExample$Criteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/WaterExample$Criterion.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/WaterExample$Criterion.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/WaterExample$GeneratedCriteria.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/entity/WaterExample$GeneratedCriteria.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.class" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/remote.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/remote.xml" />
+    <list default="true" id="1f2e2646-d228-4dee-a60e-25503def5f8b" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/repair/controller/RepairController.java" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/repair/controller/RepairController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/repair/service/RepairService.java" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/repair/service/RepairService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/user/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/user/controller/UserController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/controller/WaterController.java" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/controller/WaterController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/service/WaterService.java" afterPath="$PROJECT_DIR$/src/main/java/cn/zhku/zhkulife/modules/water/service/WaterService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/db.properties" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/css/amazeui.min.css" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/css/amazeui.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/adminOperate.js" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/adminOperate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/office.js" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/office.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/repairDeliverOperate.js" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/repairDeliverOperate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/userOperate.js" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/userOperate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/waterDiliverOperate.js" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/waterDiliverOperate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/addstu.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/addstu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/addworker.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/addworker.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/modifyself.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/modifyself.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/modifystu.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/modifystu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/modifyworker.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/modifyworker.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/searchrepair.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/searchrepair.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/searchstu.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/searchstu.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/searchwater.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/searchwater.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/searchworker.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/office/searchworker.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/repair/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/repair/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/repair/modify.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/repair/modify.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/repair/showOrder.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/repair/showOrder.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/feedback.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/feedback.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/modify.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/modify.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/showrepair.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/showrepair.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/showwater.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/user/showwater.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/water/index.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/water/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/water/modify.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/water/modify.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/water/showOrder.html" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/view/water/showOrder.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/mapper/RepairMapper.xml" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/mapper/RepairMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/mapper/UserMapper.xml" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/mapper/UserMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.xml" afterPath="$PROJECT_DIR$/target/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/db.properties" afterPath="$PROJECT_DIR$/target/classes/db.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/RepairMapper.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/RepairMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/UserMapper.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/UserMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/db.properties" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/classes/db.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/js/adminOperate.js" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/js/adminOperate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/js/userOperate.js" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/js/userOperate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/office/index.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/office/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/repair/index.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/repair/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/repair/modify.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/repair/modify.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/repair/showOrder.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/repair/showOrder.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/user/feedback.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/user/feedback.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/user/index.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/user/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/user/modify.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/user/modify.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/userlog.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/userlog.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/water/index.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/water/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/water/modify.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/water/modify.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/water/showOrder.html" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/view/water/showOrder.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/zhkulife/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/target/zhkulife/WEB-INF/web.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -158,8 +67,8 @@
       <file leaf-file-name="userOperate.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/userOperate.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="98" column="35" lean-forward="true" selection-start-line="98" selection-start-column="35" selection-end-line="98" selection-end-column="35" />
+            <state relative-caret-position="667">
+              <caret line="116" column="56" lean-forward="true" selection-start-line="116" selection-start-column="56" selection-end-line="116" selection-end-column="56" />
               <folding>
                 <marker date="1505562820282" expanded="true" signature="29338:29344" ph="&amp;nbsp;" />
                 <marker date="1505562820282" expanded="true" signature="29429:29435" ph="&amp;nbsp;" />
@@ -1498,7 +1407,7 @@
       <workItem from="1505539635081" duration="15105000" />
       <workItem from="1505570226411" duration="2141000" />
       <workItem from="1505632277971" duration="20538000" />
-      <workItem from="1505708719155" duration="3005000" />
+      <workItem from="1505708719155" duration="3097000" />
     </task>
     <task id="LOCAL-00001" summary="update mybatis entity and mapper.">
       <created>1502546135251</created>
@@ -1570,11 +1479,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505737220800</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Merge branch 'master' of https://github.com/gonefuture/zhkulife&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/main/java/cn/zhku/zhkulife/modules/admin/controller/AdminController.java&#10;#&#9;src/main/java/cn/zhku/zhkulife/modules/water/controller/WaterController.java&#10;#&#9;src/main/java/cn/zhku/zhkulife/po/mapper/WaterMapper.java&#10;#&#9;src/main/resources/ehcache.xml&#10;#&#9;src/main/webapp/WEB-INF/view/js/userOperate.js&#10;#&#9;src/main/webapp/WEB-INF/view/userlog.html&#10;#&#9;target/classes/cn/zhku/zhkulife/modules/admin/controller/AdminController.class&#10;#&#9;target/classes/cn/zhku/zhkulife/modules/water/controller/WaterController.class&#10;#&#9;target/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.class&#10;#&#9;target/classes/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.class&#10;#&#9;target/classes/ehcache.xml&#10;#&#9;target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/admin/controller/AdminController.class&#10;#&#9;target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/modules/water/controller/WaterController.class&#10;#&#9;target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/po/mapper/WaterMapper.class&#10;#&#9;target/zhkulife/WEB-INF/classes/cn/zhku/zhkulife/shiro/interceptor/UserInterceptor.class&#10;#&#9;target/zhkulife/WEB-INF/classes/ehcache.xml&#10;#&#9;target/zhkulife/WEB-INF/view/js/userOperate.js&#10;#&#9;target/zhkulife/WEB-INF/view/user/showOrder.html">
+      <created>1505737504844</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1505737504844</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="452535000" />
+    <option name="totallyTimeSpent" value="452627000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1590,7 +1506,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24434389" sideWeight="0.4254292" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2434881" sideWeight="0.4254292" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34052214" sideWeight="0.49785408" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0611588" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
@@ -2126,8 +2042,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/view/js/userOperate.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="98" column="35" lean-forward="true" selection-start-line="98" selection-start-column="35" selection-end-line="98" selection-end-column="35" />
+        <state relative-caret-position="667">
+          <caret line="116" column="56" lean-forward="true" selection-start-line="116" selection-start-column="56" selection-end-line="116" selection-end-column="56" />
           <folding>
             <marker date="1505562820282" expanded="true" signature="29338:29344" ph="&amp;nbsp;" />
             <marker date="1505562820282" expanded="true" signature="29429:29435" ph="&amp;nbsp;" />
