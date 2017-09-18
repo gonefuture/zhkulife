@@ -1,8 +1,9 @@
 package cn.zhku.zhkulife.po.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private String userId;
 
     private String userPassword;
@@ -13,13 +14,15 @@ public class User {
 
     private Integer userZone;
 
-    private String userYibanid;
+    private String yibanInfo;
 
     private Integer userFlag;
 
     private Date loginTime;
 
     private Integer totalWater;
+
+    private static final long serialVersionUID = 1L;
 
     public String getUserId() {
         return userId;
@@ -61,12 +64,12 @@ public class User {
         this.userZone = userZone;
     }
 
-    public String getUserYibanid() {
-        return userYibanid;
+    public String getYibanInfo() {
+        return yibanInfo;
     }
 
-    public void setUserYibanid(String userYibanid) {
-        this.userYibanid = userYibanid == null ? null : userYibanid.trim();
+    public void setYibanInfo(String yibanInfo) {
+        this.yibanInfo = yibanInfo == null ? null : yibanInfo.trim();
     }
 
     public Integer getUserFlag() {
@@ -91,5 +94,25 @@ public class User {
 
     public void setTotalWater(Integer totalWater) {
         this.totalWater = totalWater;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", userId=").append(userId);
+        sb.append(", userPassword=").append(userPassword);
+        sb.append(", userRoom=").append(userRoom);
+        sb.append(", userPhone=").append(userPhone);
+        sb.append(", userZone=").append(userZone);
+        sb.append(", yibanInfo=").append(yibanInfo);
+        sb.append(", userFlag=").append(userFlag);
+        sb.append(", loginTime=").append(loginTime);
+        sb.append(", totalWater=").append(totalWater);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

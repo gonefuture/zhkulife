@@ -9,7 +9,6 @@
 function login(){
     var user_id= $("input[name='user_id']").val();
     var user_password= $("input[name='user_password']").val();
-    console.log(user_id+"   "+user_password);
     if(user_id==null||user_id==""){
         ////清空提示模态框里面的内容
         $("#alert-info").empty();

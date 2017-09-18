@@ -126,15 +126,15 @@ public class AdminController {
         PageHelper.startPage(query.getPageNum(),query.getPageSize());
         Subject subject = SecurityUtils.getSubject();
         Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
-        Admin adminQo = new Admin ();
-        adminQo.setAdminRole(adminCache.getAdminRole());
-        if (adminQo.getAdminRole().equals("6"))
+        Admin adminQo = new Admin();
+
+        if (adminCache.getAdminRole().equals("6"))
             return new PageInfo<Admin>(adminService.findAll(null));
         else{
-            if (adminQo.getAdminRole().equals("4")){
+            if (adminCache.getAdminRole().equals("4")){
                 adminQo.setAdminRole("2");
                 return new PageInfo<Admin>(adminService.getList(adminQo));
-            } else{
+            } else {
                 adminQo.setAdminRole("3");
                 return new PageInfo<Admin>(adminService.getList(adminQo));
             }
@@ -172,105 +172,59 @@ public class AdminController {
         }
     }
 
-
     /**
-     * 2017-9-14 dragonjack修改
-     * '管理员进行密码修改,角色6管理员可以对角色4和5的登录密码进行修改
-     * 当adminId属性为空的时候,则默认为角色6对自己的登录密码进行修改
+     * 修改用户密码
+     * 管理员进行密码修改,角色6管理员可以对角色4和5的密码进行修改
+     * 当adminId属性为空的时候,则默认为角色6对自己的密码进行修改
      * 当adminId属性不为空的时候,则认为是角色6对角色4或者5的密码进行修改
-     * @param form
-     * @return
+     * @param form  必须要参数adminPassword, adminId可选
+     * @return Message信息类
      * @throws Exception
-
+     */
     @RequestMapping("admin/updatePassword")
     @ResponseBody
     public Message updatePassword(Admin form) throws Exception {
-        ////当传进来没有AdminId的时候,就默认为当前登录用户,即角色6的管理人员进行自身的密码修改
-        if(form.getAdminId()==null){
-            Subject subject = SecurityUtils.getSubject();
-            Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
-            form.setAdminId(adminCache.getAdminId());
+        Admin admin = new Admin(); //创建一个接受参数的对象，这样用户只能修改密码，而不能修改其他东西。
+        if(form.getAdminId() == null) {     //如果请求中没有提交adminid，从session中获取
+            Admin adminCache  = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin"); //获取session中的admin
+            admin.setAdminId(adminCache.getAdminId());
+            admin.setAdminPassword(adminCache.getAdminPassword());
+        } else {
+            //如果请求中提交了adminid
+            admin.setAdminId(form.getAdminId());
+            admin.setAdminPassword(form.getAdminPassword());
         }
-        if (adminService.update(form) != 1)
+
+        if (adminService.update(admin) != 1)
             return new Message("2","修改密码失败，请检查参数");
         else
             return new Message("1","修改密码成功");
 
     }
 
-
-
-     ** 2017-9-14 dragonjack修改
-     * '管理员进行手机修改,角色6管理员可以对角色4和5的手机进行修改
+    /**修改手机
+     * 管理员进行手机修改,角色6管理员可以对角色4和5的手机进行修改
      * 当adminId属性为空的时候,则默认为角色6对自己的手机进行修改
      * 当adminId属性不为空的时候,则认为是角色6对角色4或者5的手机进行修改
-     * @param form
-     * @return
-     * @throws Exception
-
-    @RequestMapping("admin/updatePhone")
-    @ResponseBody
-    public Message updatePhone(Admin form) throws Exception {
-        ////当传进来没有AdminId的时候,就默认为当前登录用户,即角色6的管理人员进行自身的手机修改
-        if(form.getAdminId()==null){
-            Subject subject = SecurityUtils.getSubject();
-            Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
-            form.setAdminId(adminCache.getAdminId());
-        }
-        if (adminService.update(form) != 1)
-            return new Message("2","修改手机号码失败");
-        else
-            return new Message("1","修改手机号码成功");
-    }
-*/
-
-    /**
-     * 2017-9-14 dragonjack修改
-     * '管理员进行密码修改,角色6管理员可以对角色4和5的登录密码进行修改
-     * 当adminId属性为空的时候,则默认为角色6对自己的登录密码进行修改
-     * 当adminId属性不为空的时候,则认为是角色6对角色4或者5的密码进行修改
-     * @param form
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("admin/updatePassword")
-    @ResponseBody
-    public Message updatePassword(Admin form) throws Exception {
-        ////当传进来没有AdminId的时候,就默认为当前登录用户,即角色6的管理人员进行自身的密码修改
-        if(form.getAdminId()==null){
-            Subject subject = SecurityUtils.getSubject();
-            Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
-            form.setAdminId(adminCache.getAdminId());
-        }
-        if (adminService.update(form) != 1)
-            return new Message("2","修改密码失败，请检查参数");
-        else
-            return new Message("1","修改密码成功");
-
-    }
-
-
-    /**
-     ** 2017-9-14 dragonjack修改
-     * '管理员进行手机修改,角色6管理员可以对角色4和5的手机进行修改
-     * 当adminId属性为空的时候,则默认为角色6对自己的手机进行修改
-     * 当adminId属性不为空的时候,则认为是角色6对角色4或者5的手机进行修改
-     * @param form
-     * @return
+     * @param form 必须要参数adminPhone, adminId可选
+     * @return  Message信息类
      * @throws Exception
      */
     @RequestMapping("admin/updatePhone")
     @ResponseBody
     public Message updatePhone(Admin form) throws Exception {
-        ////当传进来没有AdminId的时候,就默认为当前登录用户,即角色6的管理人员进行自身的手机修改
-        if(form.getAdminId()==null){
-            Subject subject = SecurityUtils.getSubject();
-            Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
-            form.setAdminId(adminCache.getAdminId());
+        Admin admin = new Admin();
+        if (form.getAdminId() == null){
+            Admin adminCache  = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin"); //获取session中的admin
+            admin.setAdminId(adminCache.getAdminId()); admin.setAdminPhone(adminCache.getAdminPhone());
+        } else {
+            admin.setAdminId(form.getAdminId());
+            admin.setAdminPassword(form.getAdminPhone());
         }
-        if (adminService.update(form) != 1)
+        if (adminService.update(admin) != 1)
             return new Message("2","修改手机号码失败");
         else
             return new Message("1","修改手机号码成功");
     }
+
 }

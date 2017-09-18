@@ -37,20 +37,9 @@
 	<!-- mapper扫描器 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
-		<property name="basePackage" value="cn.zhku.zhkulife.po.mapper"/>
+		<property name="basePackage" value="cn.zhku.zhkulife.po.mapper,cn.zhku.zhkulife.po.dao"/>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
-
-	<!--<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">-->
-		<!--<property name="basePackage" value="cn.zhku.zhkulife.po.mapper" />-->
-		<!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
-        <!--<property name="properties">-->
-				<!--<value>-->
-					<!--ORDER=BEFORE-->
-					<!--mappers=tk.mybatis.mapper.common.Mapper-->
-				<!--</value>-->
-        <!--</property>-->
-	<!--</bean>-->
 
 
 

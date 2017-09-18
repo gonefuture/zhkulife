@@ -68,6 +68,10 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+  <session-config>
+    <session-timeout>144000</session-timeout>
+  </session-config>
+
 
   <session-config>
     <!--<session-timeout>14400</session-timeout>-->

@@ -91,33 +91,6 @@ public class WaterController {
         }
     }
 
-    @RequestMapping("water/takeWater")
-    @ResponseBody
-    public Message takeWater(Water water) throws Exception {
-        Subject subject = SecurityUtils.getSubject();
-        Admin admin = (Admin) subject.getSession().getAttribute("admin");
-        System.out.println(admin);
-        water.setWaterId(water.getWaterId()); water.setAdminId(admin.getAdminId()); water.setWaterState(2);
-        water.setAdminPhone(admin.getAdminPhone());
-        if (waterService.update(water) != 1)
-            return new Message("2","接单失败，请核实订单数据");
-        else
-            return new Message("1","接单成功，请尽快配送");
-    }
-
-
-    @RequestMapping("water/delivery")
-    @ResponseBody
-    public Message deliveryWater(String waterId) throws Exception {
-        Water water = new Water();
-        water.setWaterId(waterId); water.setWaterState(3);
-        if (waterService.update(water) != 1)
-            return new Message("2","订单未完成");
-        else
-            return new Message("1","确认配送成功");
-    }
-
-
     /**
      * 普通用户完成订水订单
      * @param waterId   水的订单号
@@ -135,6 +108,32 @@ public class WaterController {
             return new Message("1","确认成功");
     }
 
+
+    @RequestMapping("water/takeWater")
+    @ResponseBody
+    public Message takeWater(Water water) throws Exception {
+
+        Subject subject = SecurityUtils.getSubject();
+        Admin admin = (Admin) subject.getSession().getAttribute("admin");
+        System.out.println(admin);
+        water.setWaterId(water.getWaterId()); water.setAdminId(admin.getAdminId()); water.setWaterState(2);
+        water.setAdminPhone(admin.getAdminPhone());
+        if (waterService.update(water) != 1)
+            return new Message("2","接单失败，请核实订单数据");
+        else
+            return new Message("1","接单成功，请尽快配送");
+    }
+
+    @RequestMapping("water/delivery")
+    @ResponseBody
+    public Message deliveryWater(String waterId) throws Exception {
+        Water water = new Water();
+        water.setWaterId(waterId); water.setWaterState(3);
+        if (waterService.update(water) != 1)
+            return new Message("2","订单未完成");
+        else
+            return new Message("1","确认配送成功");
+    }
 
 
 

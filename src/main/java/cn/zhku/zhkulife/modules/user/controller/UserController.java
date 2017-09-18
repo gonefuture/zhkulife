@@ -6,6 +6,7 @@ import cn.zhku.zhkulife.po.mapper.UserMapper;
 import cn.zhku.zhkulife.utils.Beans.Message;
 
 import cn.zhku.zhkulife.utils.yiBanUtils.YiBanAuth;
+import cn.zhku.zhkulife.utils.yiBanUtils.YiBanUserUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -32,10 +33,16 @@ public class UserController {
     UserService userService;
 
 
-
+    /**
+     *    普通用户登录
+     * @param form   必须参数 userId userPassword
+     * @param httpSession
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("user/login")
     @ResponseBody
-    public Message login(User form,HttpSession httpSession) throws Exception {
+    public Message login(User form,HttpSession httpSession,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws Exception {
 
         User user =  userService.login(form);
 
@@ -45,19 +52,16 @@ public class UserController {
         else if (user.getUserPassword().equals("123456")){
             user.setUserPassword(null);
             httpSession.setAttribute("user",user);
-           // model.addAttribute("",user);
             return new Message("3", "登录成功，密码过于简单，不能为123456", user.getUserId());
         }
-        else if ( user.getUserPhone() ==null || user.getUserPhone().equals(0) ){
+        else if ( user.getUserPhone() ==null || user.getUserPhone().equals("0")){
             user.setUserPassword(null);
             httpSession.setAttribute("user",user);
-            // model.addAttribute("",user);
             return new Message("3", "登录成功，手机号不能为空", user.getUserId());
         }
         else {
             user.setUserPassword(null);
             httpSession.setAttribute("user",user);
-            // model.addAttribute("",user);
             return new Message("1", "登录成功", user.getUserId());
         }
     }
@@ -91,13 +95,17 @@ public class UserController {
             return new Message("1","删除普通用户失败");
     }
 
+
+
+
+
     @RequestMapping("user/updatePassword")
     @ResponseBody
     public Message updatePassword(HttpSession httpSession,String password) throws Exception {
         User userCache = (User) httpSession.getAttribute("user");
         User user = new User();
         user.setUserId(userCache.getUserId()); user.setUserPassword(password);
-        if (userCache == null)
+        if (userCache == null )
             return new Message("2","请先登录");
         else if (userService.update(user) != 1)
             return new Message("2","修改密码失败，请检查参数");
@@ -118,7 +126,7 @@ public class UserController {
             return new Message("1","修改手机号码成功");
     }
 
-    @RequestMapping("user/getIt")
+    @RequestMapping("user/get")
     @ResponseBody
     public  User getUserIt(HttpSession httpSession) throws Exception {
         User userCache = (User) httpSession.getAttribute("user");
