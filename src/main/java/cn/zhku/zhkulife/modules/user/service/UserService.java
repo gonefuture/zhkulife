@@ -61,13 +61,19 @@ public class UserService implements IService<User>{
 
 
     @Override
-    public List<User> findAll(User enty) throws Exception {
+    public List<User> findAll(User entity) throws Exception {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
-        if (enty.getUserZone() != null)
-            criteria.andUserZoneEqualTo(enty.getUserZone());
-        if (enty.getTotalWater() != null)
-            criteria.andTotalWaterGreaterThanOrEqualTo(enty.getTotalWater());
+        if (entity.getUserZone() != null)
+            criteria.andUserZoneEqualTo(entity.getUserZone());
+        if (entity.getTotalWater() != null)
+            criteria.andTotalWaterGreaterThanOrEqualTo(entity.getTotalWater());
+        if(entity.getUserPhone() != null) {
+            criteria.andUserPhoneEqualTo(entity.getUserPhone());
+        }
+        if (entity.getUserId()!= null) {
+            criteria.andUserIdEqualTo(entity.getUserId());
+        }
         return userMapper.selectByExample(null);
     }
 }
