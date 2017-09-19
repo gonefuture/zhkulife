@@ -91,9 +91,9 @@ public class WaterService implements IService<Water>{
         if(water.getZone() != null)
             criteria.andZoneEqualTo(water.getZone());
         if (commonQo.getSince()!= null )
-            criteria.andOperateTimeGreaterThanOrEqualTo(commonQo.getSince());
+            criteria.andWaterTimeGreaterThanOrEqualTo(commonQo.getSince());
         if (commonQo.getEnd() != null)
-            criteria.andOperateTimeLessThan(commonQo.getEnd());
+            criteria.andWaterTimeLessThan(commonQo.getEnd());
 
         return waterMapper.selectByExample(waterExample);
     }
@@ -104,11 +104,15 @@ public class WaterService implements IService<Water>{
         return waterList.size() > 0;
     }
 
-    public List<Water> waterRepined() {
+    public List<Water> waterRepined(CommonQo commonQo) {
         WaterExample waterExample = new WaterExample();
         WaterExample.Criteria criteria = waterExample.createCriteria();
         criteria.andWaterFeedbackNotEqualTo(5);
         criteria.andWaterFeedbackIsNotNull();
+        if (commonQo.getSince()!= null )
+            criteria.andWaterTimeGreaterThanOrEqualTo(commonQo.getSince());
+        if (commonQo.getEnd() != null)
+            criteria.andWaterTimeLessThan(commonQo.getEnd());
         return waterMapper.selectByExample(waterExample);
     }
 }

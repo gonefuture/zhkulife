@@ -228,8 +228,9 @@ public class RepairController  {
 
     @RequestMapping("repair/repined")
     @ResponseBody
-    public PageInfo<Repair> waterRepined() {
-        return new PageInfo<Repair>(repairService.repined());
+    public PageInfo<Repair> waterRepined(CommonQo commonQo) {
+        PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"repair_time desc");
+        return new PageInfo<Repair>(repairService.repined(commonQo));
     }
 
 

@@ -199,8 +199,9 @@ public class WaterController {
 
     @RequestMapping("water/repined")
     @ResponseBody
-    public PageInfo<Water> waterRepined() {
-        return new PageInfo<Water>(waterService.waterRepined());
+    public PageInfo<Water> waterRepined(CommonQo commonQo) {
+        PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageNum(),"water_time desc");
+        return new PageInfo<Water>(waterService.waterRepined(commonQo));
     }
 
 
