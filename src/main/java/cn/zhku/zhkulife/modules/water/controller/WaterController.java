@@ -7,11 +7,11 @@ import cn.zhku.zhkulife.modules.water.service.WaterService;
 import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.User;
 import cn.zhku.zhkulife.po.entity.Water;
-import cn.zhku.zhkulife.po.mapper.UserMapper;
+
 import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.Beans.Message;
-import cn.zhku.zhkulife.utils.Beans.UserMe;
-import com.alibaba.fastjson.JSONObject;
+
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
@@ -21,11 +21,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.Time;
-import java.sql.Timestamp;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -84,10 +81,12 @@ public class WaterController {
     public Message bookWater(HttpSession httpSession,Water water) throws Exception {
        User sessionUser = (User) httpSession.getAttribute("user");
        User DBUser =userService.get(sessionUser.getUserId());
-        if ("0".equals(DBUser.getUserPhone())) {    //在订水前获取获取其手机号
-           return new Message("2","你的手机号未设置");
+        if ("0".equals(DBUser.getUserPhone())  && "0".equals(DBUser.getUserPhone())) {    //在订水前获取获取其手机号
+           return new Message("3","你的手机号未设置并且密码过于简单不能为123456");
         }else if ("123456".equals(DBUser.getUserPassword())){
             return new Message("2","你的密码过于简单，不能为123456，前立刻更改密码");
+        }else if("0".equals(DBUser.getUserPhone())){
+            return new Message("2","你的手机号未设置");
         }
         water.setYibanInfo(httpSession.getAttribute("yibanInfo").toString());
         water.setUserPhone(sessionUser.getUserPhone());
@@ -197,5 +196,12 @@ public class WaterController {
             return new Message("1", "修改手机号码成功");
         }
     }
+
+    @RequestMapping("water/repined")
+    @ResponseBody
+    public PageInfo<Water> waterRepined() {
+        return new PageInfo<Water>(waterService.waterRepined());
+    }
+
 
 }

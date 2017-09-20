@@ -3,9 +3,11 @@ package cn.zhku.zhkulife.modules.admin.service;
 
 import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.AdminExample;
+import cn.zhku.zhkulife.po.entity.Water;
 import cn.zhku.zhkulife.po.mapper.AdminMapper;
 
 
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.interfaceUtils.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

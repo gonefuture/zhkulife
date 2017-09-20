@@ -11,7 +11,7 @@
     <title>仲园订水报修</title>
 </head>
 <body>
-<h1><a href="https://oauth.yiban.cn/code/html?client_id=300cc66769689ae2&redirect_uri=http://localhost/zhkulife/auth&uffff=nnn">用户订水报修登录</a></h1>
+<h1><a href="https://oauth.yiban.cn/code/html?client_id=3002f750eae1c39f&redirect_uri=http://gonefuture.xin/zhkulife/auth&state=RELOAD">用户订水报修登录</a></h1>
 </body>
 </body>
 </html>

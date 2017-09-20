@@ -2,8 +2,9 @@ package cn.zhku.zhkulife.modules.role.service;
 
 import cn.zhku.zhkulife.po.entity.AdminRole;
 import cn.zhku.zhkulife.po.entity.AdminRoleExample;
+import cn.zhku.zhkulife.po.entity.Water;
 import cn.zhku.zhkulife.po.mapper.AdminRoleMapper;
-import cn.zhku.zhkulife.utils.interfaceUtils.IBaseService;
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.interfaceUtils.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

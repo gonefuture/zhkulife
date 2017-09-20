@@ -5,7 +5,7 @@ import cn.zhku.zhkulife.modules.role.service.AdminRoleService;
 import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.AdminRole;
 import cn.zhku.zhkulife.utils.Beans.Message;
-import cn.zhku.zhkulife.utils.Beans.Query;
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
@@ -122,14 +122,14 @@ public class AdminController {
 
     @RequestMapping("admin/findRole")
     @ResponseBody
-    public PageInfo<Admin> findRole(Query query) throws Exception {
+    public PageInfo<Admin> findRole(CommonQo query) throws Exception {
         PageHelper.startPage(query.getPageNum(),query.getPageSize());
         Subject subject = SecurityUtils.getSubject();
         Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
         Admin adminQo = new Admin();
 
         if (adminCache.getAdminRole().equals("6"))
-            return new PageInfo<Admin>(adminService.findAll(null));
+            return new PageInfo<Admin>(adminService.findAll( null));
         else{
             if (adminCache.getAdminRole().equals("4")){
                 adminQo.setAdminRole("2");

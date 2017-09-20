@@ -7,9 +7,9 @@ import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.Repair;
 
 import cn.zhku.zhkulife.po.entity.User;
+
 import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.Beans.Message;
-import cn.zhku.zhkulife.utils.Beans.UserMe;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.SecurityUtils;
@@ -91,10 +91,12 @@ public class RepairController  {
     public Message bookRepair(HttpSession httpSession , HttpServletRequest request,Repair repair, MultipartFile Pic) throws Exception {
         User sessionUser = (User) httpSession.getAttribute("user");
         User DBUser =userService.get(sessionUser.getUserId());
-        if ("0".equals(DBUser.getUserPhone())) {    //在订水前获取获取其手机号
-            return new Message("2","你的手机号未设置");
+        if ("0".equals(DBUser.getUserPhone())  && "0".equals(DBUser.getUserPhone())) {    //在订水前获取获取其手机号
+            return new Message("3","你的手机号未设置并且密码过于简单不能为123456 ");
         }else if ("123456".equals(DBUser.getUserPassword())){
-            return new Message("2","你的密码过于简单，不能为123456，前立刻更改密码");
+            return new Message("2","你的密码过于简单，不能为123456，前立刻更改密码 ");
+        }else if("0".equals(DBUser.getUserPhone())){
+            return new Message("2","你的手机号未设置 ");
         }
         repair.setYibanInfo(httpSession.getAttribute("yibanInfo").toString());
         repair.setUserId(sessionUser.getUserId());
@@ -110,7 +112,7 @@ public class RepairController  {
             //新的的图片名称
             String newFileName = UUID.randomUUID().toString().replace("-","").toUpperCase()+originalFileName.substring(originalFileName.lastIndexOf("."));
             //新图片文件
-            File newFile = new File(realPath+newFileName);
+            File newFile = new java.io.File(realPath+newFileName);
             //将内存中的数据写入磁盘
             Pic.transferTo(newFile);
             //将新图片名称写到repair中
@@ -222,6 +224,12 @@ public class RepairController  {
             admin.setAdminPhone(phone);
             return new Message("1", "修改手机号码成功");
         }
+    }
+
+    @RequestMapping("repair/repined")
+    @ResponseBody
+    public PageInfo<Repair> waterRepined() {
+        return new PageInfo<Repair>(repairService.repined());
     }
 
 
