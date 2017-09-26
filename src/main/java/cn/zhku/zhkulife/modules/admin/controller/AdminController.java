@@ -13,6 +13,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,29 +31,48 @@ public class AdminController {
     @Autowired
     AdminRoleService adminRoleService;
 
+    /**     添加管理员并添加其权限
+     * @param form
+     * @return
+     */
     @RequestMapping("admin/addRole")
     @ResponseBody
-    public Message addRole(Admin form) throws Exception {
+    public Message addRole(Admin form)  {
+        try {
+            if (addAdmin(form,"4","2")) {    //角色为4的管理员只能添加角色为2的管理员
+                return new Message("1","添加送水师傅成功");
+            }
+            if ( addAdmin(form,"5","3"))    //角色为5的管理员只能添加角色为3的管理员
+                return new Message("1","添加维修师傅成功");
+            if (addAdmin(form,"6",null))
+                return new Message("1","添加管理员成功");  //角色为5的管理员只能添加任何角色的管理员
+            else
+                return new Message("2","添加管理员失败,你的权限不足");
 
-        if (addAdmin(form,"4","2")) {
-            return new Message("1","添加送水师傅成功");
+        }catch (DuplicateKeyException duplicateKeyException) {
+            return new Message("2","管理员已存在，请不要重复添加");
+        } catch (Exception e) {
+            return new Message("2","出现其他错误了。请联系开发者");
         }
-        if ( addAdmin(form,"5","3"))
-            return new Message("1","添加维修师傅成功");
-        if (addAdmin(form,"6",null))
-            return new Message("1","添加管理员成功");
-        else
-            return new Message("2","添加管理员失败,你的权限不足");
     }
 
+    /** 根据当前管理员的角色决定他可添加的权限
+     *
+     * @param form    接受的参数
+     * @param adminRole   匹配的角色
+     * @param changeRole  所能赋予的角色
+     * @return
+     * @throws Exception
+     */
     public boolean addAdmin (Admin form,String adminRole,String changeRole) throws Exception {
-        Subject subject = SecurityUtils.getSubject();
-        Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
-        AdminRole adminRoleEntity = new AdminRole();
+        Admin adminCache = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin");  //获取缓存的管理员信息
+        AdminRole adminRoleEntity = new AdminRole();                          //创建管理员-权限关系实体
         adminRoleEntity.setAdminId(form.getAdminId()); adminRoleEntity.setRoleId(changeRole);
         if (changeRole != null)
             form.setAdminRole(changeRole);
-        if ( adminCache.getAdminRole().equals(adminRole) && adminService.add(form) == 1 ){
+        else
+            adminRoleEntity.setRoleId(form.getAdminRole());
+        if ( adminCache.getAdminRole().equals(adminRole) && adminService.add(form) == 1 ){   //判断角色是否对应
             adminRoleService.add(adminRoleEntity);
             return true;
         }
@@ -61,28 +81,28 @@ public class AdminController {
     }
 
 
-
+    /**     根据adminId删除管理员并连同其所有角色删除
+     *
+     * @param adminId   需要删除的管理员
+     * @return  Message实体
+     * @throws Exception   sql
+     */
     @RequestMapping("admin/removeRole")
     @ResponseBody
-    public Message delete(Admin form) throws Exception {
-        if (removeAdmin(form,"4","2")) {
-            return new Message("1","删除送水师傅成功");
-        }
-        if ( removeAdmin(form,"5","3"))
-            return new Message("1","删除维修师傅成功");
-        if (removeAdmin(form,"6",null))
+    public Message delete(String adminId) throws Exception {
+
+        if (removeAdmin(adminId))
             return new Message("1","删除管理员成功");
         else
             return new Message("2","删除管理员失败,你的权限不足");
     }
 
-    public boolean removeAdmin(Admin form,String adminRole,String changeRole) throws Exception {
-        Subject subject = SecurityUtils.getSubject();
-        Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
-        AdminRole adminRoleEntity = new AdminRole();
-        adminRoleEntity.setAdminId(form.getAdminId()); adminRoleEntity.setRoleId(changeRole);
+    public boolean removeAdmin(String adminId) throws Exception {
+        Admin admin = new Admin(); admin.setAdminId(adminId);
 
-        if ( adminCache.getAdminRole().equals(adminRole) &&adminService.delete(form) == 1) {
+        AdminRole adminRoleEntity = new AdminRole();
+        adminRoleEntity.setAdminId(adminId);
+        if (adminService.delete(admin) == 1) {
                 adminRoleService.delete(adminRoleEntity);
                 return true;
         }
@@ -90,7 +110,12 @@ public class AdminController {
             return false;
     }
 
-
+    /**     根据adminId修改删除管理员
+     *
+     * @param form  必须：adminId ，注意：不可带上adminRole
+     * @return  Message实体
+     * @throws Exception  sql
+     */
     @RequestMapping("admin/modifyRole")
     @ResponseBody
     public Message modifyRole(Admin form) throws Exception {
@@ -116,10 +141,12 @@ public class AdminController {
     }
 
 
-
-
-
-
+    /**     根据自身寻找权限
+     *
+     * @param query  公共查询类
+     * @return  PageInfo 类
+     * @throws Exception  sql
+     */
     @RequestMapping("admin/findRole")
     @ResponseBody
     public PageInfo<Admin> findRole(CommonQo query) throws Exception {

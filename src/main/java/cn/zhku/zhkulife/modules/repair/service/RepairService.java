@@ -56,11 +56,11 @@ public class RepairService implements IService<Repair> {
         if (repair.getRepairState() != null)
             criteria.andRepairStateEqualTo(repair.getRepairState());
         criteria.andUserIdEqualTo(repair.getUserId());
-        return repairMapper.selectByExample(repairExample);
+        return repairMapper.selectByExampleWithBLOBs(repairExample);
     }
 
     @Override
-    public List<Repair> findAll(Repair enty) throws Exception {
+    public List<Repair> findAll(Repair entity) throws Exception {
         return null;
     }
 
@@ -87,19 +87,23 @@ public class RepairService implements IService<Repair> {
         if (repair.getRepairFeedback() != null)
             criteria.andRepairStateEqualTo(repair.getRepairState());
         if (commonQo.getSince() != null)
-            criteria.andOperateTimeGreaterThanOrEqualTo(commonQo.getSince());  //按时间查询
+            criteria.andRepairTimeGreaterThanOrEqualTo(commonQo.getSince());  //按时间查询
         if (commonQo.getEnd() != null)
-            criteria.andOperateTimeLessThanOrEqualTo(commonQo.getEnd());
+            criteria.andRepairTimeLessThanOrEqualTo(commonQo.getEnd());
 
         return repairMapper.selectByExampleWithBLOBs(repairExample);
     }
 
 
-    public List<Repair> repined() {
+    public List<Repair> repined(CommonQo commonQo) {
         RepairExample repairExample = new RepairExample();
         RepairExample.Criteria criteria = repairExample.createCriteria();
         criteria.andRepairFeedbackNotEqualTo(5);
         criteria.andRepairFeedbackIsNotNull();
+        if (commonQo.getSince() != null)
+            criteria.andRepairTimeGreaterThanOrEqualTo(commonQo.getSince());  //按时间查询
+        if (commonQo.getEnd() != null)
+            criteria.andRepairTimeLessThanOrEqualTo(commonQo.getEnd());
         return  repairMapper.selectByExampleWithBLOBs(repairExample);
     }
 }

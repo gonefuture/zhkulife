@@ -64,7 +64,7 @@ public class RepairController  {
      * @param commonQo 参数： pageNum 页码,pageSize 单页记录数 ，since 开始时间， end 结束时间
      * @param repair       参数：repairState 订单状态码
      * @param httpSession
-     * @return
+     * @return pageInfo
      * @throws Exception
      */
     @RequestMapping("user/repairList")
@@ -112,7 +112,7 @@ public class RepairController  {
             //新的的图片名称
             String newFileName = UUID.randomUUID().toString().replace("-","").toUpperCase()+originalFileName.substring(originalFileName.lastIndexOf("."));
             //新图片文件
-            File newFile = new java.io.File(realPath+newFileName);
+            File newFile = new File(realPath+newFileName);
             //将内存中的数据写入磁盘
             Pic.transferTo(newFile);
             //将新图片名称写到repair中
@@ -228,8 +228,9 @@ public class RepairController  {
 
     @RequestMapping("repair/repined")
     @ResponseBody
-    public PageInfo<Repair> waterRepined() {
-        return new PageInfo<Repair>(repairService.repined());
+    public PageInfo<Repair> waterRepined(CommonQo commonQo) {
+        PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"repair_time desc");
+        return new PageInfo<Repair>(repairService.repined(commonQo));
     }
 
 

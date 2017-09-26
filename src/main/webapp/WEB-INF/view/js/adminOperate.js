@@ -20,28 +20,34 @@ function login(){
                 alert(info);///登录失败
             }else {
                 if(key==2){
-                    ////设置cookie,保存当期送水工作人员的ID,三天过期
-                    setCookie("waterMan",adminId,3);
-                    ///设置cookie,保存当前工作人员所处的校区,三天过期
-                    setCookie("waterZone",zone,3);
+                    ////设置cookie,保存当期送水工作人员的ID,七天过期
+                    setCookie("waterMan",adminId,7);
+                    ///设置cookie,保存当前工作人员所处的校区,七天过期
+                    setCookie("waterZone",zone,7);
                     window.location.href="water/index.html";
                 }else if(key==3){
-                    ////设置cookie,保存当期维修工作人员的ID,三天过期
-                    setCookie("repairMan",adminId,3);
-                    ///设置cookie,保存当前工作人员所处的校区,三天过期
-                    setCookie("repairZone",zone,3);
+                    ////设置cookie,保存当期送水工作人员的ID,七天过期
+                    setCookie("repairMan",adminId,7);
+                    ///设置cookie,保存当前工作人员所处的校区,七天过期
+                    setCookie("repairZone",zone,7);
                     window.location.href="repair/index.html";
                 }else if(key==4){
-                    ////设置cookie,保存当前桶装水办公人员的ID,三天过期
-                    setCookie("waterAdm",adminId,3);
+                    ////设置cookie,保存当期送水工作人员的ID,七天过期
+                    setCookie("waterAdm",adminId,7);
+                    ///设置cookie,保存当前工作人员所处的校区,七天过期
+                    setCookie("waterAdmZone",zone,7);
                     window.location.href="wateradm/index.html";
                 }else if(key==5){
-                    ////设置cookie,保存当前维修办公人员的ID,三天过期
-                    setCookie("repairAdm",adminId,3);
+                    ////设置cookie,保存当期送水工作人员的ID,七天过期
+                    setCookie("repairAdm",adminId,7);
+                    ///设置cookie,保存当前工作人员所处的校区,七天过期
+                    setCookie("repairAdmZone",zone,7);
                     window.location.href="repairadm/index.html";
                 }else if(key==6){
-                    //////设置cookie,保存当前工作人员的ID,三天过期
-                    setCookie("officeAdm",adminId,3);
+                    ////设置cookie,保存当期送水工作人员的ID,七天过期
+                    setCookie("officeAdm",adminId,7);
+                    ///设置cookie,保存当前工作人员所处的校区,七天过期
+                    setCookie("officeAdmZone",zone,7);
                     window.location.href="office/index.html";
                 }
 

@@ -2,6 +2,7 @@ package cn.zhku.zhkulife.modules.user.controller;
 
 import cn.zhku.zhkulife.modules.user.service.UserService;
 import cn.zhku.zhkulife.po.entity.User;
+import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.Beans.Message;
 
 import com.github.pagehelper.PageHelper;
@@ -52,25 +53,28 @@ public class UserController {
 //            return new Message("3", "登录成功，手机号不能为空", user.getUserId());
 //        }
         else {
-            httpSession.setAttribute("user",user);
+            afterLogin(user,httpSession);
             return new Message("1", "登录成功", user.getUserId());
         }
     }
 
     private void afterLogin(User user,HttpSession httpSession) throws Exception {
         httpSession.setAttribute("user",user);
-        user.setYibanInfo( httpSession.getAttribute("yibanInfo").toString());
+        user.setYibanInfo((String) httpSession.getAttribute("yibanInfo"));
         userService.update(user);
     }
 
+    /**        多条件查找普通用户
+     *
+     * @param commonQo   查询通用类
+     * @param user  参数：userZone  ,userId   , userPhone   , total_water
+     * @return  用户列表
+     * @throws Exception   sqlException
+     */
     @RequestMapping("office/user/list")
     @ResponseBody
-    public PageInfo<User> list(String pageNum,String pageSize,User user) throws Exception {
-        if (pageNum == null)
-            pageNum = "1";
-        if (pageSize == null)
-            pageSize = "10";
-        PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+    public PageInfo<User> list(CommonQo commonQo, User user) throws Exception {
+        PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"user_id desc");
         return new PageInfo<User>(userService.findAll(user));
     }
 
@@ -92,6 +96,14 @@ public class UserController {
             return new Message("1","删除普通用户失败");
     }
 
+    @RequestMapping("office/user/add")
+    @ResponseBody
+    public Message addUser(User user) throws Exception {
+        if (userService.add(user)  == 1)
+            return new Message("2","增加普通用户成功");
+        else
+            return new Message("1","删除普通用户失败");
+    }
 
 
 
@@ -147,8 +159,8 @@ public class UserController {
     /**         获取用户信息
      *
      * @param httpSession   当前会话
-     * @return
-     * @throws Exception
+     * @return  User实体
+     * @throws Exception  SQLException
      */
     @RequestMapping("user/get")
     @ResponseBody
@@ -156,5 +168,11 @@ public class UserController {
         User userCache = (User) httpSession.getAttribute("user");
         return  userService.get(userCache.getUserId());
     }
+
+
+
+
+
+
 
 }

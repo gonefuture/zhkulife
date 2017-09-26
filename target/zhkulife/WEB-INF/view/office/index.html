@@ -15,9 +15,10 @@
     <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/showOrder.css" />
     <link rel="stylesheet" href="../css/amazeui.min.css" />
 </head>
-<body style="padding-top: 70px;" >
+<body style="padding-top: 70px;" onload="loading();" >
 <!----======================导航栏部分============================-------->
 <div class="container">
     <!-- Static navbar -->
@@ -51,7 +52,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">工作人员管理 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="addworker.html">增加工作人员</a></li>
-                            <li ><a href="searchworker.html">查找工作人员</a></li>
+                            <li ><a href="searchworker.html">查看工作人员</a></li>
                         </ul>
                     </li>
                     <li><a href="modifyself.html">修改信息</a></li>
@@ -65,35 +66,120 @@
         <ul class="nav nav-tabs nav-pills nav-tabs-justified container">
             <li class="active">
                 <a href="#tab1" data-toggle="tab">
-                    <h4>饮用水投诉</h4> <span class="badge">42</span></a>
+                    <h4>饮用水投诉</h4> <span class="badge" id="waterNum">0</span></a>
             </li>
             <li>
-                <a href="#tab2" data-toggle="tab">
-                    <h4>维修投诉</h4> <span class="badge">42</span></a>
+                <a href="#tab2" data-toggle="tab" >
+                    <h4>维修投诉</h4> <span class="badge" id="repairNum">0</span></a>
             </li>
         </ul><br />
         <div class="tab-content active">
             <!----------------------显示饮用水投诉--------------开始-------------->
             <div id="tab1" class="tab-pane fade in active">
+                <!----------------折叠框-----输入时间范围--------------开始-------------->
+                <div >
+                    <div class="am-panel-group" id="accordion1">
+                        <div class="am-panel am-panel-default">
+                            <div class="am-panel-hd">
+                                <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion1', target: '#do-not-say-1'}">
+                                    默认查找七天内投诉订单,如需选择具体时间范围,请点击选择
+                                </h4>
+                            </div>
+                            <div id="do-not-say-1" class="am-panel-collapse am-collapse">
+                                <div class="am-panel-bd">
+                                    <!-------------输入时间范围--------------开始------------>
+                                    <form>
+                                        <div class="container img-rounded">
+                                            <p>请选择时间范围:</p>
+                                            <div class="am-alert am-alert-danger" id="water-alert" style="display: none">
+                                                <p>开始日期应小于结束日期！</p>
+                                            </div>
+                                            <div class="am-g">
+                                                <div class="am-u-sm-6">
+                                                    <button type="button" class="am-btn am-btn-default am-margin-right" id="water-start">开始日期</button><span id="water-startDate"></span>
+                                                </div>
+                                                <div class="am-u-sm-6">
+                                                    <button type="button" class="am-btn am-btn-default am-margin-right" id="water-end">结束日期</button><span id="water-endDate"></span>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <input type="button"class="btn btn-default"  onclick="waterOfComplain(2,1);" value="查找"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!----------------折叠框-----输入时间范围--------------结束-------------->
+                <!----------------------显示饮用水投诉--------------开始-------------->
                 <div id="showWaterOrder">
+                    <div class="container"id="waterOrderList">
 
+                    </div>
+                    <div id="waterOrderpageNav">
+
+                    </div>
                 </div>
             </div>
-            <!----------------------显示饮用水投诉--------------开始-------------->
+            <!----------------------显示饮用水投诉--------------结束-------------->
 
             <!----------------------显示维修投诉----------------开始-------------->
             <div id="tab2"class="tab-pane fade">
-                <div id="showRepairOrder">
-
+                <!----------------折叠框-----输入时间范围--------------开始-------------->
+                <div>
+                    <div class="am-panel-group" id="accordion2">
+                        <div class="am-panel am-panel-default">
+                            <div class="am-panel-hd">
+                                <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion2', target: '#do-not-say-2'}">
+                                    默认查找七天内投诉订单,如需选择具体时间范围,请点击选择
+                                </h4>
+                            </div>
+                            <div id="do-not-say-2" class="am-panel-collapse am-collapse">
+                                <div class="am-panel-bd">
+                                    <!-------------输入时间范围--------------开始------------>
+                                    <form>
+                                        <div class="container img-rounded" >
+                                            <p>请选择时间范围:</p>
+                                            <div class="am-alert am-alert-danger" id="repair-alert" style="display: none">
+                                                <p>开始日期应小于结束日期！</p>
+                                            </div>
+                                            <div class="am-g">
+                                                <div class="am-u-sm-6">
+                                                    <button type="button" class="am-btn am-btn-default am-margin-right" id="repair-start">开始日期</button><span id="repair-startDate"></span>
+                                                </div>
+                                                <div class="am-u-sm-6">
+                                                    <button type="button" class="am-btn am-btn-default am-margin-right" id="repair-end">结束日期</button><span id="repair-endDate"></span>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <input type="button"class="btn btn-default"  onclick="repairOfComplain(2,1);" value="查找"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!----------------折叠框-----输入时间范围--------------结束-------------->
+                <!----------------------显示维修投诉----------------开始-------------->
+                <div id="showRepairOrder">
+                    <div class="container"id="repairOrderList">
+
+                    </div>
+                    <div id="repairOrderpageNav">
+
+                    </div>   
+                </div>
+                <!----------------------显示维修投诉----------------结束-------------->
             </div>
-            <!----------------------显示维修投诉----------------结束-------------->
+
         </div>
 
     </div>
     <!--============================== 网页主体内容 ==========结束==================-->
     <!-----用于显示服务器返回到到客户端的信息----->
-    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+    <div class="am-modal am-modal-alert" tabindex="-1" id="alert">
         <div class="am-modal-dialog">
             <div class="am-modal-hd">仲园订水报修平台</div>
             <div class="am-modal-bd">
@@ -117,6 +203,72 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
 <script type="text/javascript" src="../js/amazeui.min.js" ></script>
+<script type="text/javascript" src="../js/office.js" ></script>
+<script>
+    $(function() {
+        var today=new Date();
+        var since=new Date(today.getTime()-24*60*60*7*1000);////创建一个七天之前的时间
+        var startDate = new Date(since.getFullYear(),since.getMonth()+1,since.getDate());
+        var endDate = new Date(today.getFullYear(),today.getMonth()+1,today.getDate());
+        var $waterAlert = $('#water-alert');
+        var $repairAlert = $('#repair-alert');
+        //////订水订单选项卡里的起始日期组件被触发
+        $('#water-start').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (event.date.valueOf() > endDate.valueOf()) {
+                $waterAlert.find('p').text('开始日期应小于结束日期！').end().show();
+            } else {
+                $waterAlert.hide();
+                startDate = new Date(event.date);
+                $('#water-startDate').text($('#water-start').data('date'));
+            }
+            $(this).datepicker('close');
+        });
+        //////订水订单选项卡里的结束日期组件被触发
+        $('#water-end').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (event.date.valueOf() < startDate.valueOf()) {
+                $waterAlert.find('p').text('结束日期应大于开始日期！').end().show();
+            } else {
+                $waterAlert.hide();
+                endDate = new Date(event.date);
+                $('#water-endDate').text($('#water-end').data('date'));
+            }
+            $(this).datepicker('close');
+        });
+        //////维修订单选项卡里的起始日期组件被触发
+        $('#repair-start').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (event.date.valueOf() > endDate.valueOf()) {
+                $repairAlert.find('p').text('开始日期应小于结束日期！').end().show();
+            } else {
+                $repairAlert.hide();
+                startDate = new Date(event.date);
+                $('#repair-startDate').text($('#repair-start').data('date'));
+            }
+            $(this).datepicker('close');
+        });
+        //////维修订单选项卡里的结束日期组件被触发
+        $('#repair-end').datepicker().
+        on('changeDate.datepicker.amui', function(event) {
+            if (event.date.valueOf() < startDate.valueOf()) {
+                $repairAlert.find('p').text('结束日期应大于开始日期！').end().show();
+            } else {
+                $repairAlert.hide();
+                endDate = new Date(event.date);
+                $('#repair-endDate').text($('#repair-end').data('date'));
+            }
+            $(this).datepicker('close');
+        });
+
+    });
+</script>
+<script type="text/javascript" >
+    function loading() {
+        waterOfComplain(1);
+        repairOfComplain(1);
+    }
+</script>
 </body>
 </html>
 

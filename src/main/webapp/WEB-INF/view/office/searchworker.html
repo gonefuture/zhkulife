@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../css/navbar.css" />
     <link rel="stylesheet" href="../css/amazeui.min.css" />
 </head>
-<body style="padding-top: 70px;" onload="loading();">
+<body style="padding-top: 70px;" onload="load();">
 <!----======================导航栏部分============================-------->
 <div class="container">
     <!-- Static navbar -->
@@ -51,7 +51,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">工作人员管理 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="addworker.html">增加工作人员</a></li>
-                            <li ><a href="searchworker.html">查找工作人员</a></li>
+                            <li ><a href="searchworker.html">查看工作人员</a></li>
                         </ul>
                     </li>
                     <li><a href="modifyself.html">修改信息</a></li>
@@ -62,34 +62,17 @@
 
     <!--============================== 网页主体内容 ==========开始==================-->
     <div id="main"><br />
-        <!----------------折叠框-----查找工作人员--------------开始-------------->
-        <div id="forSearchStu">
-            <div class="am-panel-group" id="accordion">
-                <div class="am-panel am-panel-default">
-                    <div class="am-panel-hd">
-                        <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">
-                            请输入工作人员的登录账号
-                        </h4>
-                    </div>
-                    <div id="do-not-say-1" class="am-panel-collapse am-collapse">
-                        <div class="am-panel-bd">
-                            <!-------------表单输入--------------开始------------>
-                            <form id="bookLeave" >
-                                <div class="container img-rounded" id="thumbnail">
-                                    <label for="userId">学生用户ID:</label>
-                                    <input type="text" name="userId" id="userId"  />
-                                    <br/>
-                                    <input type="button"class="btn btn-default"  onclick="" value="查找"/>
-                                </div>
-                            </form>
-                            <!-------------表单输入--------------结束------------>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!----------------折叠框-----查找工作人员--------------结束-------------->
 
+        <!---------------------展示搜索的结果-------开始------------>
+        <div id="showResult">
+
+        </div>
+        <!---------------------展示搜索的结果-------结束------------>
+        <!----------------------显示页码------------开始------------->
+        <div id="showStaffNav">
+
+        </div>
+        <!----------------------显示页码------------结束------------->
     </div>
     <!--============================== 网页主体内容 ==========结束==================-->
 
@@ -105,6 +88,11 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
 <script type="text/javascript" src="../js/amazeui.min.js" ></script>
-
+<script type="text/javascript" src="../js/office.js" ></script>
+<script type="text/javascript" >
+    function load() {
+        showStaff(1);
+    }
+</script>
 </body>
 </html>

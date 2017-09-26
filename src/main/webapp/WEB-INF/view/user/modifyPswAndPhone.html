@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>主页</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <!---为使用模态框进行引用--->
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
+</head>
+<body style="padding-top: 70px;" ><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
+
+<!----======================导航栏部分============================-------->
+<div class="container">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header home">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span>菜单</span>
+                </button>
+                <a class="navbar-brand " href="index.html">仲园后勤服务平台</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="home"><a href="index.html">主页</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的订单 <span class="caret"></span></a>
+                        <ul class="dropdown-menu" id="order">
+                            <!-- 下面两行代码是用来进行订单查找的,其中0代表查找未完成的订单(包括已受理的和正在配送的订单,这和数据库里面的订单代号不一样) -->
+                            <li class="a"><a href="showwater.html">订水订单</a></li>
+                            <li class="b"><a href="showrepair.html">维修订单</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">修改信息 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <!-- 下面两行代码是用来进行订单查找的,其中0代表查找未完成的订单(包括已受理的和正在配送的订单,这和数据库里面的订单代号不一样) -->
+                            <li class="a"><a href="modify.html?modifyType=1">修改手机号码</a></li>
+                            <li class="b"><a href="modify.html?modifyType=2">修改登录密码</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+    <!--============================== 网页主体内容 ============================-->
+    <!-- Main component for a primary marketing message or call to action -->
+    <div>
+        <div style="border-top: 1px solid black;"><br />
+            <h5>请你填写宿舍的联系手机号码和该账号的登录密码</h5>
+            <form id="detail" >
+                <div class="input-group input-group-md ">
+                    <span class="input-group-addon glyphicon glyphicon-phone" ></span>
+                    <input type="text"  class=" col-sm-9 col-xs-9 col-md-3 col-lg-3 " id="phone" name="phone"placeholder="请输入新的手机号码" >
+                </div><br/>
+                <label id="phone-error" class="error" for="phone" style="color: red"></label><br/><br/>
+
+                <div class="input-group input-group-md ">
+                    <span class="input-group-addon glyphicon glyphicon-lock" ></span>
+                    <input type="password" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="password" name="password" placeholder="请输入新的密码" >
+                </div><br/>
+                <label id="password-error" class="error" for="password" style="color: red"></label><br/><br/>
+
+                <div class="input-group input-group-md ">
+                    <span class="input-group-addon glyphicon glyphicon-lock" ></span>
+                    <input type="password" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="password_again" name="password_again"placeholder="请再次输入新的密码" >
+                </div><br/>
+                <label id="password_again-error" class="error" for="password_again" style="color: red"></label><br/><br/>
+
+                <input type="submit"class="btn btn-default" value="提交"/>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <!-----------------确认提交修改模态框--------------开始-------------------------->
+    <div class="am-modal am-modal-confirm" tabindex="-1" id="toModify">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">仲园订水报修平台</div>
+            <div class="am-modal-bd">
+                确定提交修改？
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+            </div>
+        </div>
+    </div>
+    <!-----------------确认提交修改模态框--------------结束-------------------------->
+
+
+
+    <!-----------------------用于显示服务器返回到到客户端的信息-------开始-------->
+    <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">仲园订水报修平台</div>
+            <div class="am-modal-bd">
+                <p id="alert-info"></p>
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn">确定</span>
+            </div>
+        </div>
+    </div>
+    <!-----------------------用于显示服务器返回到到客户端的信息-------结束-------->
+
+</div> <!-- /container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="../js/jquery.min.js" ></script>
+<script type="text/javascript" src="../js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js" ></script><!-- 提供验证方法 -->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
+<script type="text/javascript" src="../js/userOperate.js" ></script>
+<!---为使用模态框进行引用--->
+<script type="text/javascript" src="../js/amazeui.min.js" ></script>
+<script>
+    ////校验通过则调用该方法
+    $.validator.setDefaults({
+        submitHandler: function() {
+            pressSubmit();
+        }
+    });
+    $().ready(function() {
+        $("#detail").validate({
+            rules: {
+                phone: {
+                    required: true,
+                    minlength: 11,
+                    isMobile: true
+                },
+                password:{
+                    required:true,
+                    minlength:6
+                },
+                password_again:{
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                phone: {
+                    required: "请输入手机号码",
+                    minlength: "请输入正确的手机号码",
+                    isMobile: "请正确填写您的手机号码"
+                },
+                password:{
+                    required:"请输入密码",
+                    minlength:"请输入6位或者6位以上的密码"
+                }
+            }
+        });
+    });
+    // 手机号码验证
+    jQuery.validator.addMethod("isMobile", function(value, element) {
+        var phone = /^1[3|4|5|7|8][0-9]{9}$/;
+        return this.optional(element) || (phone.test(value));
+    }, "请正确填写您的手机号码!");
+</script>
+<script type="text/javascript" >
+    function pressSubmit() {
+        $('#toModify').modal({
+            relatedTarget: this,
+            ///用户点击确定,则调用报修函数
+            onConfirm: function (options,id) {
+                modifyPswAndPhone();
+            },
+            ///用户点击取消则不进行任何操作
+            onCancel: function () {
+
+            }
+        });
+    }
+</script>
+</body>
+</html>
