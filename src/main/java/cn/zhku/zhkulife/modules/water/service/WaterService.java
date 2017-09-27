@@ -90,10 +90,10 @@ public class WaterService implements IService<Water>{
             criteria.andWaterFeedbackEqualTo(water.getWaterFeedback());
         if(water.getZone() != null)
             criteria.andZoneEqualTo(water.getZone());
-        if (commonQo.getSince()!= null )
-            criteria.andWaterTimeGreaterThanOrEqualTo(commonQo.getSince());
-        if (commonQo.getEnd() != null)
-            criteria.andWaterTimeLessThan(commonQo.getEnd());
+        if (commonQo.getSinceTime()!= null )
+            criteria.andWaterTimeGreaterThanOrEqualTo(commonQo.getSinceTime());
+        if (commonQo.getEndTime() != null)
+            criteria.andWaterTimeLessThan(commonQo.getEndTime());
 
         return waterMapper.selectByExample(waterExample);
     }
@@ -109,10 +109,10 @@ public class WaterService implements IService<Water>{
         WaterExample.Criteria criteria = waterExample.createCriteria();
         criteria.andWaterFeedbackNotEqualTo(5);
         criteria.andWaterFeedbackIsNotNull();
-        if (commonQo.getSince()!= null )
-            criteria.andWaterTimeGreaterThanOrEqualTo(commonQo.getSince());
-        if (commonQo.getEnd() != null)
-            criteria.andWaterTimeLessThan(commonQo.getEnd());
+        if (commonQo.getSinceTime()!= null )
+            criteria.andWaterTimeGreaterThanOrEqualTo(commonQo.getSinceTime());
+        if (commonQo.getEndTime() != null)
+            criteria.andWaterTimeLessThan(commonQo.getEndTime());
         return waterMapper.selectByExample(waterExample);
     }
 }

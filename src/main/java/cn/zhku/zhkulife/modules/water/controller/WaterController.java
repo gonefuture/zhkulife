@@ -94,7 +94,7 @@ public class WaterController {
         }else if("0".equals(DBUser.getUserPhone())){
             return new Message("2","你的手机号未设置");
         }
-        water.setYibanInfo((String) httpSession.getAttribute("yibanInfo"));
+       // water.setYibanInfo((String) httpSession.getAttribute("yibanInfo"));
         water.setUserPhone(sessionUser.getUserPhone());
         water.setUserId(sessionUser.getUserId());
         water.setWaterId(UUID.randomUUID().toString().replace("-","").toUpperCase());

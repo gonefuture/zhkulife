@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <title>主页</title>
-    <meta charset="UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,9 +14,11 @@
     <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../css/navbar.css" />
-    <link rel="stylesheet" href="../css/amazeui.min.css" />
+    <!---为使用模态框进行引用--->
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
 </head>
-<body style="padding-top: 70px;" onload="loading();">
+<body style="padding-top: 70px;"  onload="load();"><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
+
 <!----======================导航栏部分============================-------->
 <div class="container">
     <!-- Static navbar -->
@@ -61,115 +62,176 @@
     </nav>
 
     <!--============================== 网页主体内容 ==========开始==================-->
-    <div id="main"><br />
-        <div>
-            <div style="border-top: 1px solid black;"><br />
-                <ul class="nav nav-tabs nav-pills nav-tabs-justified container">
-                    <li class="active">
-                        <a href="#tab1" data-toggle="tab">
-                            <h4>修改手机号码</h4></a>
-                    </li>
-                    <li>
-                        <a href="#tab2" data-toggle="tab">
-                            <h4>修改登录密码</h4></a>
-                    </li>
-                </ul><br />
-                <div class="tab-content active">
-                    <div id="tab1" class="tab-pane fade in active">
-                        <h5>手机号码将会被工作人员用于与你进行联系,请填写真实的手机号码</h5>
-                        <form id="modifyPhone" >
-                            <div class="input-group input-group-md ">
-                                <span class="input-group-addon glyphicon glyphicon-phone" ></span>
-                                <input type="text" class=" col-sm-8 col-xs-8 col-md-3 col-lg-3 " id="phone" name="phone"placeholder="请输入新的手机号码" >
-                            </div><br/>
-                            <label id="phone-error" class="error" for="phone" style="color: red"></label><br/>
-                            <input type="submit"class="btn btn-default" value="提交"/>
-                        </form>
-                    </div>
-                    <div id="tab2"class="tab-pane fade ">
-                        <h5>登录密码用来进行登录操作,请认真填写并记住它</h5>
-                        <form id="modifyPassword">
-                            <div class="input-group input-group-md ">
-                                <span class="input-group-addon glyphicon glyphicon-lock" ></span>
-                                <input type="password" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="password" name="password" placeholder="请输入新的密码" >
-                            </div><br/>
-                            <label id="password-error" class="error" for="password" style="color: red"></label><br/>
-                            <div class="input-group input-group-md ">
-                                <span class="input-group-addon glyphicon glyphicon-lock" ></span>
-                                <input type="password" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="password_again" name="password_again"placeholder="请再次输入新的密码" >
-                            </div><br/>
-                            <label id="password_again-error" class="error" for="password_again" style="color: red"></label><br/>
-                            <input type="submit"class="btn btn-default" value="提交"/>
-                        </form>
-                    </div>
+    <!-- Main component for a primary marketing message or call to action -->
+    <div>
+        <div style="border-top: 1px solid black;"><br />
+            <ul class="nav nav-tabs nav-pills nav-tabs-justified container">
+                <!--<li class="active">-->
+                <li  id="forPhone">
+                    <a href="#tab1" data-toggle="tab">
+                        <h4>修改手机号码</h4></a>
+                </li>
+                <li id="forPassword">
+                    <a href="#tab2" data-toggle="tab">
+                        <h4>修改登录密码</h4></a>
+                </li>
+            </ul><br />
+            <div class="tab-content active">
+                <!--<div id="tab1" class="tab-pane fade in active">-->
+                <div id="tab1" class="tab-pane fade">
+                    <h5>请填写你的真实的手机号码</h5>
+                    <form id="modifyPhone" >
+                        <div class="input-group input-group-md ">
+                            <span class="input-group-addon glyphicon glyphicon-phone" ></span>
+                            <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3 " id="phone" name="phone"placeholder="请输入新的手机号码" >
+                        </div><br/>
+                        <label id="phone-error" class="error" for="phone" style="color: red"></label><br/>
+                        <input type="submit"class="btn btn-default" value="提交"/>
+                    </form>
+                </div>
+                <div id="tab2"class="tab-pane fade ">
+                    <h5>登录密码用来进行登录操作,请认真填写</h5>
+                    <form id="modifyPassword">
+                        <div class="input-group input-group-md ">
+                            <span class="input-group-addon glyphicon glyphicon-lock" ></span>
+                            <input type="password" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="password" name="password" placeholder="请输入新的密码" >
+                        </div><br/>
+                        <label id="password-error" class="error" for="password" style="color: red"></label><br/>
+                        <div class="input-group input-group-md ">
+                            <span class="input-group-addon glyphicon glyphicon-lock" ></span>
+                            <input type="password" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3" id="password_again" name="password_again"placeholder="请再次输入新的密码" >
+                        </div><br/>
+                        <label id="password_again-error" class="error" for="password_again" style="color: red"></label><br/>
+                        <input type="submit"class="btn btn-default" value="提交"/>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <!--============================== 网页主体内容 ==========结束==================-->
+
+
+
+
+
+    <!-----------------确认提交修改手机模态框--------------开始-------------------------->
+    <div class="am-modal am-modal-confirm" tabindex="-1" id="toModifyPhone">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">仲园订水报修平台</div>
+            <div class="am-modal-bd">
+                确定修改预留的手机？
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+            </div>
+        </div>
+    </div>
+    <!-----------------确认提交修改手机模态框--------------结束-------------------------->
+
+
+    <!-----------------确认提交修改密码模态框--------------开始-------------------------->
+    <div class="am-modal am-modal-confirm" tabindex="-1" id="toUpdatePassword">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">仲园订水报修平台</div>
+            <div class="am-modal-bd">
+                确定修改登录密码？
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+            </div>
+        </div>
+    </div>
+    <!-----------------确认提交修改密码模态框--------------结束-------------------------->
+
+
+    <!-----------------------用于显示服务器返回到到客户端的信息-------开始-------->
+    <div class="am-modal am-modal-alert" tabindex="-1" id="alert">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">仲园订水报修平台</div>
+            <div class="am-modal-bd">
+                <p id="alert-info"></p>
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn">确定</span>
+            </div>
+        </div>
+    </div>
+    <!-----------------------用于显示服务器返回到到客户端的信息-------结束-------->
+
 </div> <!-- /container -->
-
-
-<!-----------------确认提交修改手机模态框--------------开始-------------------------->
-<div class="am-modal am-modal-confirm" tabindex="-1" id="toModifyPhone">
-    <div class="am-modal-dialog">
-        <div class="am-modal-hd">仲园订水报修平台</div>
-        <div class="am-modal-bd">
-            确定修改预留的手机？
-        </div>
-        <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
-        </div>
-    </div>
-</div>
-<!-----------------确认提交修改手机模态框--------------结束-------------------------->
-
-
-<!-----------------确认提交修改密码模态框--------------开始-------------------------->
-<div class="am-modal am-modal-confirm" tabindex="-1" id="toUpdatePassword">
-    <div class="am-modal-dialog">
-        <div class="am-modal-hd">仲园订水报修平台</div>
-        <div class="am-modal-bd">
-            确定修改登录密码？
-        </div>
-        <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
-        </div>
-    </div>
-</div>
-<!-----------------确认提交修改密码模态框--------------结束-------------------------->
-
-
-<!-----------------------用于显示服务器返回到到客户端的信息-------开始-------->
-<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
-    <div class="am-modal-dialog">
-        <div class="am-modal-hd">仲园订水报修平台</div>
-        <div class="am-modal-bd">
-            <p id="alert-info"></p>
-        </div>
-        <div class="am-modal-footer">
-            <span class="am-modal-btn">确定</span>
-        </div>
-    </div>
-</div>
-<!-----------------------用于显示服务器返回到到客户端的信息-------结束-------->
-
-
-
-
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script type="text/javascript" src="../js/jquery.min.js" ></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script type="text/javascript" src="../js/bootstrap.min.js" ></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js" ></script><!-- 提供验证方法 -->
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
+<script type="text/javascript" src="../js/office.js" ></script>
+<!---为使用模态框进行引用--->
 <script type="text/javascript" src="../js/amazeui.min.js" ></script>
+<script type="text/javascript">
+    /**
+     * 用于加载页面时确定显示哪一个选项卡
+     * 即是显示修改手机还是显示修改密码
+     */
+    function load() {
+        var modifyType=  getUrlParam("modifyType");
+        console.log("modifyType: "+modifyType);
+        if(modifyType==1){
+            $("#tab1").addClass("in active");
+            $("#forPhone").addClass("active");
+        }else if(modifyType==2){
+            $("#tab2").addClass("in active");
+            $("#forPassword").addClass("active");
+        }else {
+            $("#tab1").addClass("in active");
+            $("#forPhone").addClass("active");
+        }
+    }
+</script>
 <script>
+
+    /**
+     *"用户点击"修改"页面中的提交修改密码时调用该函数
+     */
+    function pressUpdatePassword() {
+        $('#toUpdatePassword').modal({
+            relatedTarget: this,
+            ///用户点击确定,则调用修改密码函数
+            onConfirm: function (options,id) {
+                updatePassword();
+            },
+            ///用户点击取消则不进行任何操作
+            onCancel: function () {
+
+            }
+        });
+    }
+
+
+    /**
+     *"用户点击"修改"页面中的提交修改手机时调用该函数
+     */
+    function pressModifyPhone() {
+        $('#toModifyPhone').modal({
+            relatedTarget: this,
+            ///用户点击确定,则调用修改密码函数
+            onConfirm: function (options,id) {
+                modifyPhone();
+            },
+            ///用户点击取消则不进行任何操作
+            onCancel: function () {
+
+            }
+        });
+    }
+
+
+
+
     $.validator.setDefaults({
         submitHandler: function() {
             var theHref=$(".active a").attr("href");

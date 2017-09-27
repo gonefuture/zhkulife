@@ -124,9 +124,23 @@ function  showWater(pageNum) {
                     var feedback1="";
                     var feedback2="";
                     if(waterState==1&&gap>=2) {////状态为1的订单超过两天未受理
-                        feedback1 = "<br/>该订单已经超过两天未处理,你可以进行投诉<br/>"+"<button onclick="+"pressWaterFeedback("+1+",'"+waterId+"'"+")>投诉</button>";
+                        feedback1 = "<br/>该订单已经超过两天未处理,你可以进行投诉<br/>"+"<button onclick="+"pressWaterFeedback("+1+",'"+waterId+"'"+")>投诉</button>&nbsp&nbsp";
                     }else if(waterState==2&&gap>=2){///状态为2的订单超过两天未受理
-                        feedback2= "<br/>该订单已经超过两天未处理,你可以进行投诉<br/>"+"<button onclick="+"pressWaterFeedback("+2+",'"+waterId+"'"+")>投诉</button>";
+                        feedback2= "<br/>该订单已经超过两天未处理,你可以进行投诉<br/>"+"<button onclick="+"pressWaterFeedback("+2+",'"+waterId+"'"+")>投诉</button>&nbsp&nbsp";
+                    }
+                    var waterFeedback = list[i].waterFeedback;
+                    if(waterFeedback==1){
+                        waterFeedback="反馈: 订单超过两天无人受理";
+                    }else if(waterFeedback==2){
+                        waterFeedback="反馈: 已接单超过两天,但没有进行配送";
+                    }else if(waterFeedback==3){
+                        waterFeedback="反馈: 水质有问题";
+                    }else if(waterFeedback==4){
+                        waterFeedback="反馈: 工作人员态度差";
+                    }else if(waterFeedback==5){
+                        waterFeedback="反馈: 好评";
+                    }else{
+                        waterFeedback="";
                     }
                     /////stateDescription用于描述订单的状态
                     var stateDescription="";
@@ -150,7 +164,7 @@ function  showWater(pageNum) {
                     }else if(waterState==2){
                         $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp"
                             + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone
-                            +"<br/>下单时间:&nbsp&nbsp" +waterTime+stateDescription +feedback2+"<hr/>");
+                            +"<br/>下单时间:&nbsp&nbsp" +waterTime+stateDescription +feedback2+"<br/><a ><button onclick="+"pressDetermineTheDeliveryWater("+"'"+waterId+"'"+"); >确认送达</button></a><hr/>");
                     }else if(waterState==1){
                         $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp"
                             + waterNum + "桶<br/>下单时间:&nbsp&nbsp" +waterTime +stateDescription+feedback1+"<hr/>");
@@ -402,7 +416,7 @@ function bookWater(){
                     $("#alert-info").empty();
                     ////向模态框添加服务器返回的信息
                     $("#alert-info").append("订水失败,请您先修改登录密码和预留手机号码");
-                    $("#alert-info").append("<br/><a href='modifyPswAndPhone.html'><button>前往修改页面</button></a>")
+                    $("#alert-info").append("<br/><a href='modifyPswAndPhone.html'><button>前往修改页面</button></a>");
                     /////调用函数,显示模态框
                     alertInfo();
                 }else if(msg==3){
@@ -410,7 +424,7 @@ function bookWater(){
                     $("#alert-info").empty();
                     ////向模态框添加服务器返回的信息
                     $("#alert-info").append("订水失败,请先修改登录密码");
-                    $("#alert-info").append("<br/><a href='modify.html?modifyType=2'><button>前往修改页面</button></a>")
+                    $("#alert-info").append("<br/><a href='modify.html?modifyType=2'><button>前往修改页面</button></a>");
                     /////调用函数,显示模态框
                     alertInfo();
                 }else if(msg==2){
@@ -418,7 +432,14 @@ function bookWater(){
                     $("#alert-info").empty();
                     ////向模态框添加服务器返回的信息
                     $("#alert-info").append("订水失败,请修改宿舍的联系手机号码");
-                    $("#alert-info").append("<br/><a href='modify.html?modifyType=1'><button>前往修改页面</button></a>")
+                    $("#alert-info").append("<br/><a href='modify.html?modifyType=1'><button>前往修改页面</button></a>");
+                    /////调用函数,显示模态框
+                    alertInfo();
+                }else if(msg==1){
+                    ////清空提示模态框里面的内容
+                    $("#alert-info").empty();
+                    ////向模态框添加服务器返回的信息
+                    $("#alert-info").append("订水成功");
                     /////调用函数,显示模态框
                     alertInfo();
                 }
@@ -436,55 +457,6 @@ function bookWater(){
         }
     });
 }
-
-///报修操作z
-/*
-function bookRepair(){
-    var repairDetail = $('#orderRepair textarea[name="repairDetail"] ').val();
-    console.log(repairDetail);
-    $.ajax({
-        type: "post",
-        url: "../user/bookRepair",
-        dataType: "json",
-        data: {'repairDetial': repairDetail},//此处json数据detail拼错了,但将错就错,不然要改数据库
-        success : function(data, textStatus) {
-            var msg = eval(data).msg;
-            var info = eval(data).info;
-            if(msg==1){
-                alert("提交成功!")
-            }else if(msg==2){
-                alert(info);
-            }
-        },
-        error : function(xhr, status, errMsg) {
-            alert("系统异常,请稍后再试!");
-        }
-    });
-}
-
-
-function bookRepair(){
-    var fd = new FormData(document.querySelector("form"));
-    console.log(fd);
-    $.ajax({
-        type: "post",
-        url: "../user/bookRepair",
-        data: fd,
-        processData: false,  // 不处理数据
-        contentType: false ,  // 不设置内容类型
-        success : function(data, textStatus) {
-            var msg = eval(data).msg;
-            var info = eval(data).info;
-            alert(info);
-        },
-        error : function(xhr, status, errMsg) {
-            alert("系统异常,请稍后再试!");
-        }
-    });
-}
- */
-
-
 
 
 function bookRepair(){
@@ -520,12 +492,46 @@ function bookRepair(){
                     window.location.href="../userlog.html";
                     return ;
                 }else{
-                    ////清空提示模态框里面的内容
-                    $("#alert-info").empty();
-                    ////向模态框添加服务器返回的信息
-                    $("#alert-info").append(info);
-                    /////调用函数,显示模态框
-                    alertInfo();
+                    if(msg==5){
+                        ////清空提示模态框里面的内容
+                        $("#alert-info").empty();
+                        ////向模态框添加服务器返回的信息
+                        $("#alert-info").append("报修失败,请您先修改登录密码和预留手机号码");
+                        $("#alert-info").append("<br/><a href='modifyPswAndPhone.html'><button>前往修改页面</button></a>");
+                        /////调用函数,显示模态框
+                        alertInfo();
+                    }else if(msg==4){
+                        ////清空提示模态框里面的内容
+                        $("#alert-info").empty();
+                        ////向模态框添加服务器返回的信息
+                        $("#alert-info").append("报修失败,请先修改登录密码");
+                        $("#alert-info").append("<br/><a href='modify.html?modifyType=2'><button>前往修改页面</button></a>");
+                        /////调用函数,显示模态框
+                        alertInfo();
+                    }else if(msg==3){
+                        ////清空提示模态框里面的内容
+                        $("#alert-info").empty();
+                        ////向模态框添加服务器返回的信息
+                        $("#alert-info").append("报修失败,请修改宿舍的联系手机号码");
+                        $("#alert-info").append("<br/><a href='modify.html?modifyType=1'><button>前往修改页面</button></a>");
+                        /////调用函数,显示模态框
+                        alertInfo();
+                    }else if(msg=2){
+                        ////清空提示模态框里面的内容
+                        $("#alert-info").empty();
+                        ////向模态框添加服务器返回的信息
+                        $("#alert-info").append(info);
+                        /////调用函数,显示模态框
+                        alertInfo();
+                    }else if(msg==1){
+                        ////清空提示模态框里面的内容
+                        $("#alert-info").empty();
+                        ////向模态框添加服务器返回的信息
+                        $("#alert-info").append("报修成功");
+                        /////调用函数,显示模态框
+                        alertInfo();
+                    }
+
                 }
             },
             error : function(xhr, status, errMsg) {
@@ -1069,6 +1075,45 @@ function feedbackLoading() {
 
 
 
+function myinfo(){
+    $.ajax({
+        type: "get",
+        url: "../user/get",
+        dataType: "json",
+        success : function(data, textStatus) {
+            var msg = eval(data).msg;
+            var info= eval(data).info;
+            var userId = eval(data).userId;
+            var userPhone = eval(data).userPhone;
+            var userZone = eval(data).userZone;
+            if(userZone==1){
+                userZone="海珠校区";
+            }else if(userZone==2){
+                userZone="白云校区";
+            }
+            var loginTime = eval(data).loginTime;
+            var totalWater = eval(data).totalWater;
 
+            $("#userId").empty();
+            $("#userPhone").empty();
+            $("#userZone").empty();
+            $("#loginTime").empty();
+            $("#totalWater").empty();
+            $("#userId").append("账号:  "+userId);
+            $("#userPhone").append("联系手机:  "+userPhone+"<a href='modify.html?modityType=1'><button class='btn btn-default'>修改</button></a>");
+            $("#userZone").append("所属校区:  "+userZone);
+            $("#totalWater").append("累计订水桶数:  "+totalWater+"桶<br/>(注: 该数据仅限于本平台所发生的操作)");
+
+        },
+        error : function(xhr, status, errMsg) {
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("系统异常,请稍后再试!");
+            /////调用函数,显示模态框
+            alertInfo();
+        }
+    });
+}
 
 

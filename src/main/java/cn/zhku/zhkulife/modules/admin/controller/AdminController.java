@@ -215,7 +215,7 @@ public class AdminController {
         if(form.getAdminId() == null) {     //如果请求中没有提交adminid，从session中获取
             Admin adminCache  = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin"); //获取session中的admin
             admin.setAdminId(adminCache.getAdminId());
-            admin.setAdminPassword(adminCache.getAdminPassword());
+            admin.setAdminPassword(form.getAdminPassword());
         } else {
             //如果请求中提交了adminid
             admin.setAdminId(form.getAdminId());
@@ -228,6 +228,7 @@ public class AdminController {
             return new Message("1","修改密码成功");
 
     }
+
 
     /**修改手机
      * 管理员进行手机修改,角色6管理员可以对角色4和5的手机进行修改
@@ -243,10 +244,11 @@ public class AdminController {
         Admin admin = new Admin();
         if (form.getAdminId() == null){
             Admin adminCache  = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin"); //获取session中的admin
-            admin.setAdminId(adminCache.getAdminId()); admin.setAdminPhone(adminCache.getAdminPhone());
+            admin.setAdminId(adminCache.getAdminId());
+            admin.setAdminPhone(form.getAdminPhone());
         } else {
             admin.setAdminId(form.getAdminId());
-            admin.setAdminPassword(form.getAdminPhone());
+            admin.setAdminPhone(form.getAdminPhone());
         }
         if (adminService.update(admin) != 1)
             return new Message("2","修改手机号码失败");

@@ -2,19 +2,7 @@
  * Created by Administrator on 2017/9/17 0017.
  */
 
-/**
- * 修改手机号码
- */
-function modifyPhone() {
 
-}
-
-/**
- * 修改登录密码
- */
-function modifyPassword() {
-
-}
 
 
 /**
@@ -25,7 +13,9 @@ function modifyPassword() {
  */
 function waterOfComplain(datefrom,pageNum) {
     var end =new Date();
-    var since=new Date(end.getTime()-24*60*60*5*1000);
+    var since=new Date(end.getTime()-24*60*60*7*1000);
+    end=new String(end.getFullYear()+"-"+(end.getMonth()+1)+"-"+end.getDate());
+    since=new String(since.getFullYear()+"-"+(since.getMonth()+1)+"-"+since.getDate());
     console.log(end+"     "+since);
     if(datefrom==2){
         since=$("#water-startDate").text();
@@ -54,7 +44,7 @@ function waterOfComplain(datefrom,pageNum) {
         type: "get",
         url: "../water/repined",
         dataType: "json",
-        data: {'since': since,"end":end,"pageNum":pageNum},
+        data: {'sinceTime': since,"endTime":end,"pageNum":pageNum},
         success : function(data) {
             $("#waterOrderList").empty();
             $("#waterOrderpageNav").empty();
@@ -132,7 +122,9 @@ function waterOfComplain(datefrom,pageNum) {
  */
 function repairOfComplain(datefrom,pageNum) {
     var end =new Date();
-    var since=new Date(end.getTime()-24*60*60*5*1000);
+    var since=new Date(end.getTime()-24*60*60*7*1000);
+    end=new String(end.getFullYear()+"-"+(end.getMonth()+1)+"-"+end.getDate());
+    since=new String(since.getFullYear()+"-"+(since.getMonth()+1)+"-"+since.getDate());
     console.log(end+"     "+since);
     if(datefrom==2){
         since=$("#repair-startDate").text();
@@ -161,7 +153,7 @@ function repairOfComplain(datefrom,pageNum) {
         type: "get",
         url: "../repair/repined",
         dataType: "json",
-        data: {'since': since,"end":end,"pageNum":pageNum},
+        data: {'sinceTime': since,"endTime":end,"pageNum":pageNum},
         success : function(data) {
             $("#repairOrderList").empty();
             $("#repairOrderpageNav").empty();
@@ -809,11 +801,108 @@ function getCookie(cname)
 
 
 
+///修改用户手机
+function modifyPhone(){
+    var phone= $("input[name='phone']").val();
+    $.ajax({
+        type: "get",
+        url: "../admin/updatePhone",
+        dataType: "json",
+        data: {'adminPhone': phone},
+        success : function(data, textStatus) {
+            var msg = eval(data).msg;
+            if(msg==1){
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("修改成功!");
+                /////调用函数,显示模态框
+                alertInfo();
+            }else if(msg==2){
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("修改手机失败!请稍后再试!");
+                /////调用函数,显示模态框
+                alertInfo();
+            }
+        },
+        error : function(xhr, status, errMsg) {
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("系统异常,请稍后再试!");
+            /////调用函数,显示模态框
+            alertInfo();
+        }
+    });
+}
 
 
 
+///修改密码
+function updatePassword(){
+    var password= $("input[name='password']").val();
+    if(password=="123456"||password=="654321"||password=="asdfgh"){
+        ////清空提示模态框里面的内容
+        $("#alert-info").empty();
+        ////向模态框添加服务器返回的信息
+        $("#alert-info").append("密码过于简单,请重新输入");
+        /////调用函数,显示模态框
+        alertInfo();
+        return;
+    }
+    $.ajax({
+        type: "get",
+        url: "../admin/updatePassword",
+        dataType: "json",
+        data: {'adminPassword': password},
+        success : function(data, textStatus) {
+            var msg = eval(data).msg;
+            if(msg==1){
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("修改成功!");
+                /////调用函数,显示模态框
+                alertInfo();
+            }else if(msg==2){
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("修改密码失败!请稍后再试!");
+                /////调用函数,显示模态框
+                alertInfo();
+            }
+        },
+        error : function(xhr, status, errMsg) {
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("系统异常,请稍后再试!");
+            /////调用函数,显示模态框
+            alertInfo();
+        }
+    });
+}
 
 
+/**
+ * 获取url中的参数值
+ * @param name
+ * @returns {null}
+ */
+function getUrlParam(name){
+    //构造一个含有目标参数的正则表达式对象
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    //匹配目标参数
+    var r = window.location.search.substr(1).match(reg);
+    //返回参数值
+    if (r!=null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
 /**
  * ################################################按钮触发区###################################
  */
