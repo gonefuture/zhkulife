@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="YBOpenApi">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/YBOpenApi.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/YBOpenApi.jar!/" />
+    </SOURCES>
+  </library>
+</component>
