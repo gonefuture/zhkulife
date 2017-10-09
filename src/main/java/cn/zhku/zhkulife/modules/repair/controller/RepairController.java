@@ -64,7 +64,7 @@ public class RepairController  {
      * @param commonQo 参数： pageNum 页码,pageSize 单页记录数 ，since 开始时间， end 结束时间
      * @param repair       参数：repairState 订单状态码
      * @param httpSession
-     * @return
+     * @return pageInfo
      * @throws Exception
      */
     @RequestMapping("user/repairList")
@@ -92,17 +92,18 @@ public class RepairController  {
         User sessionUser = (User) httpSession.getAttribute("user");
         User DBUser =userService.get(sessionUser.getUserId());
         if ("0".equals(DBUser.getUserPhone())  && "0".equals(DBUser.getUserPhone())) {    //在订水前获取获取其手机号
-            return new Message("3","你的手机号未设置并且密码过于简单不能为123456 ");
+            return new Message("5","你的手机号未设置并且密码过于简单不能为123456 ");
         }else if ("123456".equals(DBUser.getUserPassword())){
-            return new Message("2","你的密码过于简单，不能为123456，前立刻更改密码 ");
+            return new Message("4","你的密码过于简单，不能为123456，前立刻更改密码 ");
         }else if("0".equals(DBUser.getUserPhone())){
-            return new Message("2","你的手机号未设置 ");
+            return new Message("3","你的手机号未设置 ");
         }
-        repair.setYibanInfo(httpSession.getAttribute("yibanInfo").toString());
+        ///repair.setYibanInfo(httpSession.getAttribute("yibanInfo").toString());
         repair.setUserId(sessionUser.getUserId());
         repair.setRepairId(UUID.randomUUID().toString().replace("-","").toUpperCase());
         repair.setRepairTime(new Date());
         repair.setRepairState(1);
+        repair.setUserPhone(sessionUser.getUserPhone());
         repair.setZone(sessionUser.getUserZone());
         if(Pic !=null) {
             //储存图片的物理路径
@@ -112,7 +113,7 @@ public class RepairController  {
             //新的的图片名称
             String newFileName = UUID.randomUUID().toString().replace("-","").toUpperCase()+originalFileName.substring(originalFileName.lastIndexOf("."));
             //新图片文件
-            File newFile = new java.io.File(realPath+newFileName);
+            File newFile = new File(realPath+newFileName);
             //将内存中的数据写入磁盘
             Pic.transferTo(newFile);
             //将新图片名称写到repair中

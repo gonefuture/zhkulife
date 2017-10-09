@@ -15,10 +15,10 @@ public class CommonQo {
     private int pageSize = 10;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date since;
+    private Date sinceTime;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date end;
+    private Date endTime;
 
     public int getPageNum() {
         return pageNum;
@@ -36,20 +36,20 @@ public class CommonQo {
         this.pageSize = pageSize;
     }
 
-    public Date getSince() {
-        return since;
+    public Date getSinceTime() {
+        return sinceTime;
     }
 
-    public void setSince(Date since) {
-        this.since = since;
+    public void setSinceTime(Date sinceTime) {
+        this.sinceTime = sinceTime;
     }
 
-    public Date getEnd() {
-        return end;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     @Override
@@ -57,8 +57,8 @@ public class CommonQo {
         return "CommonQo{" +
                 "pageNum=" + pageNum +
                 ", pageSize=" + pageSize +
-                ", since=" + since +
-                ", end=" + end +
+                ", sinceTime=" + sinceTime +
+                ", endTime=" + endTime +
                 '}';
     }
 }

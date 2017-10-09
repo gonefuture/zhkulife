@@ -17,7 +17,7 @@
         <!---为使用模态框进行引用--->
         <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
  </head>
-<body style="padding-top: 70px;" ><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
+<body style="padding-top: 70px;"  onload="load();"><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
 
 <!----======================导航栏部分============================-------->
 <div class="container">
@@ -27,9 +27,7 @@
             <div class="navbar-header home">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span>菜单</span>
                 </button>
                 <a class="navbar-brand " href="index.html">仲园后勤服务平台</a>
             </div>
@@ -44,7 +42,15 @@
                             <li class="b"><a href="showrepair.html">维修订单</a></li>
                         </ul>
                     </li>
-                    <li class="modify"><a href="modify.html">修改信息</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">修改信息 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <!-- 下面两行代码是用来进行订单查找的,其中0代表查找未完成的订单(包括已受理的和正在配送的订单,这和数据库里面的订单代号不一样) -->
+                            <li class="a"><a href="modify.html?modifyType=1">修改手机号码</a></li>
+                            <li class="b"><a href="modify.html?modifyType=2">修改登录密码</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="myinfo.html">账户信息</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -55,29 +61,31 @@
     <div>
         <div style="border-top: 1px solid black;"><br />
             <ul class="nav nav-tabs nav-pills nav-tabs-justified container">
-                <li class="active">
+                <!--<li class="active">-->
+                <li  id="forPhone">
                     <a href="#tab1" data-toggle="tab">
                         <h4>修改手机号码</h4></a>
                 </li>
-                <li>
+                <li id="forPassword">
                     <a href="#tab2" data-toggle="tab">
                         <h4>修改登录密码</h4></a>
                 </li>
             </ul><br />
             <div class="tab-content active">
-                <div id="tab1" class="tab-pane fade in active">
+                <!--<div id="tab1" class="tab-pane fade in active">-->
+                <div id="tab1" class="tab-pane fade">
                     <h5>手机号码将会被工作人员用于与你进行联系,请填写真实的手机号码</h5>
                     <form id="modifyPhone" >
                         <div class="input-group input-group-md ">
                             <span class="input-group-addon glyphicon glyphicon-phone" ></span>
-                            <input type="text" class=" col-sm-8 col-xs-8 col-md-3 col-lg-3 " id="phone" name="phone"placeholder="请输入新的手机号码" >
+                            <input type="text" class=" col-sm-9 col-xs-9 col-md-3 col-lg-3 " id="phone" name="phone"placeholder="请输入新的手机号码" >
                         </div><br/>
                         <label id="phone-error" class="error" for="phone" style="color: red"></label><br/>
                         <input type="submit"class="btn btn-default" value="提交"/>
                     </form>
                 </div>
                 <div id="tab2"class="tab-pane fade ">
-                    <h5>登录密码用来进行登录操作,请认真填写并记住它</h5>
+                    <h5>登录密码用来进行登录操作,请认真填写并告知舍友</h5>
                     <form id="modifyPassword">
                         <div class="input-group input-group-md ">
                             <span class="input-group-addon glyphicon glyphicon-lock" ></span>
@@ -121,7 +129,7 @@
         <div class="am-modal-dialog">
             <div class="am-modal-hd">仲园订水报修平台</div>
             <div class="am-modal-bd">
-                确定提交登录密码？
+                确定修改登录密码？
             </div>
             <div class="am-modal-footer">
                 <span class="am-modal-btn" data-am-modal-cancel>取消</span>
@@ -158,7 +166,27 @@
 <script type="text/javascript" src="../js/ie10-viewport-bug-workaround.js" ></script>
 <script type="text/javascript" src="../js/userOperate.js" ></script>
 <!---为使用模态框进行引用--->
-<script type="text/javascript" src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" ></script>
+<script type="text/javascript" src="../js/amazeui.min.js" ></script>
+<script type="text/javascript">
+    /**
+     * 用于加载页面时确定显示哪一个选项卡
+     * 即是显示修改手机还是显示修改密码
+     */
+    function load() {
+        var modifyType=  getUrlParam("modifyType");
+        console.log("modifyType: "+modifyType);
+        if(modifyType==1){
+            $("#tab1").addClass("in active");
+            $("#forPhone").addClass("active");
+        }else if(modifyType==2){
+            $("#tab2").addClass("in active");
+            $("#forPassword").addClass("active");
+        }else {
+            $("#tab1").addClass("in active");
+            $("#forPhone").addClass("active");
+        }
+    }
+</script>
 <script>
     $.validator.setDefaults({
         submitHandler: function() {

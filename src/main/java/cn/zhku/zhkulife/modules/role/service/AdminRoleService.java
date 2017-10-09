@@ -36,8 +36,8 @@ public class AdminRoleService implements IService<AdminRole> {
     public int delete(AdminRole entity) throws Exception {
         AdminRoleExample adminRoleExample = new AdminRoleExample();
         AdminRoleExample.Criteria criteria = adminRoleExample.createCriteria();
-        criteria.andAdminIdEqualTo(entity.getAdminId());
-        criteria.andRoleIdEqualTo(entity.getRoleId());
+        criteria.andAdminIdEqualTo(entity.getAdminId());   //根据adminId删除指定的所有权限
+        //criteria.andRoleIdEqualTo(entity.getRoleId());
         return adminRoleMapper.deleteByExample(adminRoleExample);
     }
 

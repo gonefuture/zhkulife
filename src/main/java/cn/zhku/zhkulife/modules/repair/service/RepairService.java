@@ -56,11 +56,11 @@ public class RepairService implements IService<Repair> {
         if (repair.getRepairState() != null)
             criteria.andRepairStateEqualTo(repair.getRepairState());
         criteria.andUserIdEqualTo(repair.getUserId());
-        return repairMapper.selectByExample(repairExample);
+        return repairMapper.selectByExampleWithBLOBs(repairExample);
     }
 
     @Override
-    public List<Repair> findAll(Repair enty) throws Exception {
+    public List<Repair> findAll(Repair entity) throws Exception {
         return null;
     }
 
@@ -86,10 +86,10 @@ public class RepairService implements IService<Repair> {
             criteria.andAdminIdEqualTo(repair.getAdminId());
         if (repair.getRepairFeedback() != null)
             criteria.andRepairStateEqualTo(repair.getRepairState());
-        if (commonQo.getSince() != null)
-            criteria.andRepairTimeGreaterThanOrEqualTo(commonQo.getSince());  //按时间查询
-        if (commonQo.getEnd() != null)
-            criteria.andRepairTimeLessThanOrEqualTo(commonQo.getEnd());
+        if (commonQo.getSinceTime() != null)
+            criteria.andRepairTimeGreaterThanOrEqualTo(commonQo.getSinceTime());  //按时间查询
+        if (commonQo.getEndTime() != null)
+            criteria.andRepairTimeLessThanOrEqualTo(commonQo.getEndTime());
 
         return repairMapper.selectByExampleWithBLOBs(repairExample);
     }
@@ -100,10 +100,10 @@ public class RepairService implements IService<Repair> {
         RepairExample.Criteria criteria = repairExample.createCriteria();
         criteria.andRepairFeedbackNotEqualTo(5);
         criteria.andRepairFeedbackIsNotNull();
-        if (commonQo.getSince() != null)
-            criteria.andRepairTimeGreaterThanOrEqualTo(commonQo.getSince());  //按时间查询
-        if (commonQo.getEnd() != null)
-            criteria.andRepairTimeLessThanOrEqualTo(commonQo.getEnd());
+        if (commonQo.getSinceTime() != null)
+            criteria.andRepairTimeGreaterThanOrEqualTo(commonQo.getSinceTime());  //按时间查询
+        if (commonQo.getEndTime() != null)
+            criteria.andRepairTimeLessThanOrEqualTo(commonQo.getEndTime());
         return  repairMapper.selectByExampleWithBLOBs(repairExample);
     }
 }

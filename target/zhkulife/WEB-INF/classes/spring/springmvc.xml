@@ -28,6 +28,9 @@
 	<mvc:default-servlet-handler/>
 
 
+
+
+	<!--1 ， 在resourse 文件夹下的 spring-mvc.xml加上 <mvc:resources location="/static/" mapping="/static/**"/>-->
 	<mvc:resources location="/WEB-INF/view/" mapping="/**"/>
 
 	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置

@@ -215,19 +215,22 @@ function loadStafflist() {
                 $("#tableBody").append("<tr>暂时还没有工作人员哦!</tr>");
             }else{
                 ////清空内容区域,接下来进行填充数据
+                var waterAdmZone=getCookie("waterAdmZone");
                 $("#tableBody").empty();
                 for(var i in list) {
                     var adminName = list[i].adminName;
                     var adminZone = list[i].adminZone;
                     var adminId = list[i].adminId;
-                    if(adminZone==1){
-                        adminZone="海珠校区";
-                    }else if(adminZone==2){
-                        adminZone="白云校区";
+                    if(waterAdmZone==adminZone){////显示与当前工作人员相同校区的工人
+                        if(adminZone==1){
+                            adminZone="海珠校区";
+                        }else if(adminZone==2){
+                            adminZone="白云校区";
+                        }
+                        var delButton= "<button type='button' class='am-btn am-btn-warning' onclick='pressDelete("+adminId+");'>删除</button>";
+                        var modifyButton="<a href='staffModify.html'><button class='btn btn-primary' id='"+adminId+"'> 修改 </button></a>";
+                        $("#tableBody").append("<tr> <th>"+adminName+"</th><th>"+adminZone+"</th><th>"+delButton+modifyButton+"</th></tr> ");
                     }
-                    var delButton= "<button type='button' class='am-btn am-btn-warning' onclick='pressDelete("+adminId+");'>删除</button>";
-                    var modifyButton="<a href='staffModify.html'><button class='btn btn-primary' id='"+adminId+"'> 修改 </button></a>";
-                    $("#tableBody").append("<tr> <th>"+adminName+"</th><th>"+adminZone+"</th><th>"+delButton+modifyButton+"</th></tr> ");
                 }
 
             }
@@ -299,6 +302,22 @@ function staffModify() {
 
 
 
+/**
+ * 根据cookie名获取cookie的值
+ * @param cname cookie名
+ * @returns {*} cookie值
+ */
+function getCookie(cname)
+{
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++)
+    {
+        var c = ca[i].trim();
+        if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
 
 
 

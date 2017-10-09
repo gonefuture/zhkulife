@@ -4,6 +4,7 @@ import cn.zhku.zhkulife.modules.admin.service.AdminService;
 import cn.zhku.zhkulife.modules.user.service.UserService;
 import cn.zhku.zhkulife.modules.water.service.WaterService;
 
+import cn.zhku.zhkulife.po.dao.WaterDao;
 import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.User;
 import cn.zhku.zhkulife.po.entity.Water;
@@ -42,6 +43,10 @@ public class WaterController {
     @Autowired
     private AdminService adminService;
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    @Autowired
+    private WaterDao waterDao;
+
 
     /**     管理员查找订单多条件查询
      *
@@ -79,16 +84,17 @@ public class WaterController {
     @RequestMapping("user/bookWater")
     @ResponseBody
     public Message bookWater(HttpSession httpSession,Water water) throws Exception {
-       User sessionUser = (User) httpSession.getAttribute("user");
-       User DBUser =userService.get(sessionUser.getUserId());
-        if ("0".equals(DBUser.getUserPhone())  && "0".equals(DBUser.getUserPhone())) {    //在订水前获取获取其手机号
-           return new Message("3","你的手机号未设置并且密码过于简单不能为123456");
+        User sessionUser = (User) httpSession.getAttribute("user");
+        System.out.println(sessionUser);
+        User DBUser =userService.get(sessionUser.getUserId());
+        if ("123456".equals(DBUser.getUserPassword())  && "0".equals(DBUser.getUserPhone())) {    //在订水前获取获取其手机号
+            return new Message("4","你的手机号未设置并且密码过于简单不能为123456");
         }else if ("123456".equals(DBUser.getUserPassword())){
-            return new Message("2","你的密码过于简单，不能为123456，前立刻更改密码");
+            return new Message("3","你的密码过于简单，不能为123456，请立刻更改密码");
         }else if("0".equals(DBUser.getUserPhone())){
             return new Message("2","你的手机号未设置");
         }
-        water.setYibanInfo(httpSession.getAttribute("yibanInfo").toString());
+       // water.setYibanInfo((String) httpSession.getAttribute("yibanInfo"));
         water.setUserPhone(sessionUser.getUserPhone());
         water.setUserId(sessionUser.getUserId());
         water.setWaterId(UUID.randomUUID().toString().replace("-","").toUpperCase());
@@ -96,10 +102,10 @@ public class WaterController {
         water.setWaterTime(new Date());
         water.setZone(sessionUser.getUserZone());
         if (waterService.isHasBook(water)){
-            return new Message("2","你之前有一个订单未完成");
+            return new Message("5","你之前有一个订单未完成");
         }
         else if(waterService.add(water) != 1 || water.getUserId() == null || water.getWaterNum()==null )
-            return new Message("2","订水失败,请确认订水信息");
+            return new Message("6","订水失败,请确认订水信息");
         else {
             return new Message("1","订水成功");
         }
@@ -118,8 +124,10 @@ public class WaterController {
         water.setWaterId(waterId); water.setWaterState(4);
         if (waterService.update(water) != 1)
             return new Message("2","订单未完成");
-        else
+        else {
+            waterDao.updateTotalWater(waterId);
             return new Message("1","确认成功");
+        }
     }
 
     /**
@@ -137,11 +145,17 @@ public class WaterController {
         water.setWaterId(waterId); water.setAdminId(admin.getAdminId()); water.setWaterState(2);
         water.setAdminPhone(admin.getAdminPhone());
         if (waterService.get(waterId).getWaterState()!= 1 || waterService.update(water) != 1) // 若订单状态不为1，则立刻返回错误码。
-            return new Message("2","接单失败，你的订单可能已经被别人借了");
+            return new Message("2","接单失败，你的订单可能已经被别人接了");
         else
             return new Message("1","接单成功，请尽快配送");
     }
 
+    /**     送水师傅投递水
+     *
+     * @param waterId
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("water/delivery")
     @ResponseBody
     public Message deliveryWater(String waterId) throws Exception {
