@@ -154,7 +154,7 @@ public class RepairController  {
 
 
     /**
-     *      维修人员完成维修订单
+     *      维修人员确定配送订单
      * @param repairId  维修订单编号
      * @return
      * @throws Exception

@@ -130,7 +130,14 @@ public class AdminController {
             return new Message("2","修改管理员失败,你的权限不足");
     }
 
-
+    /**
+     *  修改管理员
+     * @param form
+     * @param adminRole
+     * @param changeRole
+     * @return
+     * @throws Exception
+     */
     public boolean modifyAdmin(Admin form,String adminRole,String changeRole) throws Exception {
         Subject subject = SecurityUtils.getSubject();
         Admin adminCache = (Admin) subject.getSession().getAttribute("admin");

@@ -98,10 +98,22 @@ function  showWater(pageNum) {
         dataType : "json",
         data: {'pageNum': pageNum},
         success : function(data, textStatus){
+            var msg = eval(data).msg;
+            if(msg==600) {/////当前用户登录超时
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
+                /////调用函数,显示模态框
+                alertInfo();
+                timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
+                return;
+            }
             $("#waterOrderList").empty();
             $("#waterOrderpageNav").empty();
-            list = eval(data).list;
-            total= eval(data).total;
+            var list = eval(data).list;
+            var total= eval(data).total;
             if(total==0){
                 $("#waterOrderList").append("<br/><br/>你还没有的订单哦!");
             }else {
@@ -123,9 +135,10 @@ function  showWater(pageNum) {
                     gap=gap/(24*60*60*1000);
                     var feedback1="";
                     var feedback2="";
-                    if(waterState==1&&gap>=2) {////状态为1的订单超过两天未受理
+                    /////如果订单超过4天无人处理,则用户界面提供投诉按钮
+                    if(waterState==1&&gap>=4) {////状态为1的订单超过两天未受理
                         feedback1 = "<br/>该订单已经超过两天未处理,你可以进行投诉<br/>"+"<button onclick="+"pressWaterFeedback("+1+",'"+waterId+"'"+")>投诉</button>&nbsp&nbsp";
-                    }else if(waterState==2&&gap>=2){///状态为2的订单超过两天未受理
+                    }else if(waterState==2&&gap>=4){///状态为2的订单超过两天未受理
                         feedback2= "<br/>该订单已经超过两天未处理,你可以进行投诉<br/>"+"<button onclick="+"pressWaterFeedback("+2+",'"+waterId+"'"+")>投诉</button>&nbsp&nbsp";
                     }
                     var waterFeedback = list[i].waterFeedback;
@@ -178,7 +191,7 @@ function  showWater(pageNum) {
             ////清空提示模态框里面的内容
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
-            $("#alert-info").append("查找订单失败!请稍后再试");
+            $("#alert-info").append("系统异常!数据加载失败");
             /////调用函数,显示模态框
             alertInfo();
         }
@@ -197,10 +210,22 @@ function showRepair(pageNum) {
         dataType : "json",
         data: {'pageNum': pageNum},
         success : function(data, textStatus){
+            var msg = eval(data).msg;
+            if(msg==600) {/////当前用户登录超时
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
+                /////调用函数,显示模态框
+                alertInfo();
+                timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
+                return;
+            }
             $("#repairOrderList").empty();
             $("#repairOrderpageNav").empty();
-            list = eval(data).list;
-            total= eval(data).total;
+            var list = eval(data).list;
+            var total= eval(data).total;
             if(total==0){
                 $("#repairOrderList").append("<br/><br/>你还没有相关的订单哦!");
             }else{
@@ -236,9 +261,10 @@ function showRepair(pageNum) {
                     gap=gap/(24*60*60*1000);
                     var feedback1="";
                     var feedback2="";
-                    if(repairState==1&&gap>=2) {////状态为1的订单超过两天未受理
+                    ////如果订单超过7天没有被处理,则用户界面提供投诉按钮
+                    if(repairState==1&&gap>=7) {////状态为1的订单超过两天未受理
                         feedback1 = "<p>该订单已经超过两天未处理,你可以进行投诉</p><br/>"+"<button class='btn btn-default' onclick="+"pressRepairFeedback("+1+",'"+repairId+"'"+")>投诉</button>";
-                    }else if(repairState==2&&gap>=2){///状态为2的订单超过两天未受理
+                    }else if(repairState==2&&gap>=7){///状态为2的订单超过两天未受理
                         feedback2= "<p>该订单已经超过两天未处理,你可以进行投诉</p><br/>"+"<button class='btn btn-default' onclick="+"pressRepairFeedback("+2+",'"+repairId+"'"+")>投诉</button>";
                     }
                     /////stateDescription用于描述订单的状态
@@ -338,22 +364,7 @@ function showPage(pages,pageNum,type,total){
 
 
 
-/**
- *"用户点击"首页"页面中的提交订水时调用该函数
- */
-function pressBookWater() {
-    $('#bookWater').modal({
-        relatedTarget: this,
-        ///用户点击确定,则调用订水函数
-        onConfirm: function (options,id) {
-            bookWater();
-        },
-        ///用户点击取消则不进行任何操作
-        onCancel: function () {
 
-        }
-    });
-}
 
 
 /**
@@ -387,14 +398,15 @@ function bookWater(){
         success : function(data) {
             var msg = eval(data).msg;
             var info = eval(data).info;
-            if(msg==600){
+            if(msg==600){///////客户端长时间没有操作,session失效,导致用户要进行登录
                 ////清空提示模态框里面的内容
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
-                $("#alert-info").append(info);
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
                 /////调用函数,显示模态框
                 alertInfo();
-                window.location.href="../userlog.html";
+                timingSkip(5,"../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
                 return ;
             }else{
                 if(msg==6){
@@ -482,14 +494,15 @@ function bookRepair(){
             success: function(data, status, xhr) {
                 var msg = eval(data).msg;
                 var info = eval(data).info;
-                if(msg==600){
+                if(msg==600){/////当前用户登录超时
                     ////清空提示模态框里面的内容
                     $("#alert-info").empty();
                     ////向模态框添加服务器返回的信息
-                    $("#alert-info").append(info);
+                    $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
                     /////调用函数,显示模态框
                     alertInfo();
-                    window.location.href="../userlog.html";
+                    timingSkip(5,"../userlog.html");/////5秒后跳转至登录页面
+                    //window.location.href="../userlog.html";
                     return ;
                 }else{
                     if(msg==5){
@@ -550,22 +563,7 @@ function bookRepair(){
 
 
 
-/**
- *"用户点击"修改"页面中的提交修改密码时调用该函数
- */
-function pressUpdatePassword() {
-    $('#toUpdatePassword').modal({
-        relatedTarget: this,
-        ///用户点击确定,则调用修改密码函数
-        onConfirm: function (options,id) {
-            updatePassword();
-        },
-        ///用户点击取消则不进行任何操作
-        onCancel: function () {
 
-        }
-    });
-}
 
 ///修改密码
 function updatePassword(){
@@ -591,6 +589,7 @@ function updatePassword(){
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append("修改成功!");
+                $("#alert-info").append("<br/><a href='index.html'><button>返回主页</button></a>");
                 /////调用函数,显示模态框
                 alertInfo();
             }else if(msg==2){
@@ -598,6 +597,7 @@ function updatePassword(){
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append("修改密码失败!请稍后再试!");
+                $("#alert-info").append("<br/><a href='index.html'><button>返回主页</button></a>");
                 /////调用函数,显示模态框
                 alertInfo();
             }
@@ -607,30 +607,13 @@ function updatePassword(){
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
             $("#alert-info").append("系统异常,请稍后再试!");
+            $("#alert-info").append("<br/><a href='index.html'><button>返回主页</button></a>");
             /////调用函数,显示模态框
             alertInfo();
         }
     });
 }
 
-
-
-/**
- *"用户点击"修改"页面中的提交修改手机时调用该函数
- */
-function pressModifyPhone() {
-    $('#toModifyPhone').modal({
-        relatedTarget: this,
-        ///用户点击确定,则调用修改密码函数
-        onConfirm: function (options,id) {
-            modifyPhone();
-        },
-        ///用户点击取消则不进行任何操作
-        onCancel: function () {
-
-        }
-    });
-}
 
 
 
@@ -646,11 +629,23 @@ function modifyPhone(){
         data: {'phone': phone},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
+            if(msg==600) {/////当前用户登录超时
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
+                /////调用函数,显示模态框
+                alertInfo();
+                timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
+                return;
+            }
             if(msg==1){
                 ////清空提示模态框里面的内容
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append("修改成功!");
+                $("#alert-info").append("<br/><a href='index.html'><button>返回主页</button></a>");
                 /////调用函数,显示模态框
                 alertInfo();
             }else if(msg==2){
@@ -658,6 +653,7 @@ function modifyPhone(){
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append("修改手机失败!请稍后再试!");
+                $("#alert-info").append("<br/><a href='index.html'><button>返回主页</button></a>");
                 /////调用函数,显示模态框
                 alertInfo();
             }
@@ -667,6 +663,7 @@ function modifyPhone(){
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
             $("#alert-info").append("系统异常,请稍后再试!");
+            $("#alert-info").append("<br/><a href='index.html'><button>返回主页</button></a>");
             /////调用函数,显示模态框
             alertInfo();
         }
@@ -696,11 +693,23 @@ function modifyPswAndPhone() {
         data: {'phone': phone,'password':password},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
+            if(msg==600) {/////当前用户登录超时
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
+                /////调用函数,显示模态框
+                alertInfo();
+                timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
+                return;
+            }
             var info=eval(data).info;
             ////清空提示模态框里面的内容
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
             $("#alert-info").append(info);
+            $("#alert-info").append("<br/><a href='index.html'><button>返回主页</button></a>");
             /////调用函数,显示模态框
             alertInfo();
         },
@@ -709,6 +718,7 @@ function modifyPswAndPhone() {
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
             $("#alert-info").append("系统异常,请稍后再试!");
+            $("#alert-info").append("<br/><a href='index.html'><button>返回主页</button></a>");
             /////调用函数,显示模态框
             alertInfo();
         }
@@ -772,6 +782,17 @@ function determineTheDeliveryWater() {
         data: {'waterId':orderId},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
+            if(msg==600) {/////当前用户登录超时
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
+                /////调用函数,显示模态框
+                alertInfo();
+                timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
+                return;
+            }
             var info= eval(data).info;
             ////清空提示模态框里面的内容
             $("#alert-info").empty();
@@ -815,7 +836,7 @@ function pressDetermineTheDeliveryRepair(orderId) {
 }
 
 /*
- 用户确认送水订单已经送达
+ 用户确认维修订单已经完成
  */
 function determineTheDeliveryRepair() {
     ////从模态框的<span id="orderId"></span>中获取orderId
@@ -829,6 +850,17 @@ function determineTheDeliveryRepair() {
         data: {'repairId':orderId},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
+            if(msg==600) {/////当前用户登录超时
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
+                /////调用函数,显示模态框
+                alertInfo();
+                timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
+                return;
+            }
             var info= eval(data).info;
             ////清空提示模态框里面的内容
             $("#alert-info").empty();
@@ -857,26 +889,6 @@ function determineTheDeliveryRepair() {
 
 
 
-/**
- * 用户在查看订单页面点击按钮"投诉"或在评价页面提交反馈,则调用该函数
- * @param state为订单状态
- * @param orderId 该参数的来源来自于加载订单时放在button中的onclick事件触发的pressFeeddback()函数
- */
-function pressWaterFeedback(state,orderId) {
-    $("#feedbackWaterOrderId").empty();
-    $("#feedbackWaterOrderId").append(orderId);
-    $('#toWaterFeedback').modal({
-        relatedTarget: this,
-        ///用户点击确定,则调用订水函数
-        onConfirm: function (options,id) {
-            waterFeedback(state);
-        },
-        ///用户点击取消则不进行任何操作
-        onCancel: function () {
-
-        }
-    });
-}
 
 
 /**
@@ -910,6 +922,17 @@ function waterFeedback(state) {
         data: {'id': orderId,'feedback':feedback},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
+            if(msg==600) {/////当前用户登录超时
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
+                /////调用函数,显示模态框
+                alertInfo();
+                timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
+                return;
+            }
             var info= eval(data).info;
             ////清空提示模态框里面的内容
             $("#alert-info").empty();
@@ -930,27 +953,7 @@ function waterFeedback(state) {
 }
 
 
-/**
- * 用户点击订单反馈按钮调用该函数
- * @param state  订单所处的状态
- * @param orderId   订单ID
- */
 
-function pressRepairFeedback(state,orderId) {
-    $("#feedbackRepairOrderId").empty();
-    $("#feedbackRepairOrderId").append(orderId);
-    $('#toRepairFeedback').modal({
-        relatedTarget: this,
-        ///用户点击确定,则调用订水函数
-        onConfirm: function (options,id) {
-            repairFeedback(state);
-        },
-        ///用户点击取消则不进行任何操作
-        onCancel: function () {
-
-        }
-    });
-}
 
 /**
  *
@@ -985,6 +988,17 @@ function repairFeedback(state) {
         data: {'id': orderId,'feedback':feedback},
         success : function(data, textStatus) {
             var msg = eval(data).msg;
+            if(msg==600) {/////当前用户登录超时
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
+                /////调用函数,显示模态框
+                alertInfo();
+                timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
+                return;
+            }
             var info= eval(data).info;
             ////清空提示模态框里面的内容
             $("#alert-info").empty();
@@ -1082,6 +1096,17 @@ function myinfo(){
         dataType: "json",
         success : function(data, textStatus) {
             var msg = eval(data).msg;
+            if(msg==600) {/////当前用户登录超时
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
+                /////调用函数,显示模态框
+                alertInfo();
+                timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
+                //window.location.href="../userlog.html";
+                return;
+            }
             var info= eval(data).info;
             var userId = eval(data).userId;
             var userPhone = eval(data).userPhone;
@@ -1109,7 +1134,7 @@ function myinfo(){
             ////清空提示模态框里面的内容
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
-            $("#alert-info").append("系统异常,请稍后再试!");
+            $("#alert-info").append("系统异常,加载失败");
             /////调用函数,显示模态框
             alertInfo();
         }
@@ -1117,3 +1142,17 @@ function myinfo(){
 }
 
 
+/**
+ *
+ * @param second 等待跳转的秒数
+ * @param url  将要跳转的页面的url
+ */
+function timingSkip(second ,url) {
+    document.getElementById('second').innerHTML= second;
+    if(second==0){
+        window.location.href=url;
+    }
+    second=second-1;
+    //每秒执行一次,showTime()
+    setTimeout("timingSkip("+second+","+url+")",1000);
+}

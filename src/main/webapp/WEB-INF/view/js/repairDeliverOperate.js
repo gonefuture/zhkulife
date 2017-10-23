@@ -110,7 +110,7 @@ function showRepair(state,pageNum) {
                         var clickFunc= "onclick=takeRepair("+"'"+repairId+"',"+pageNum+");";
                         operate="<br/><button type='button' class='btn btn-info'"+clickFunc+">接单</button>";
                     }else if(state==2){
-                        var clickFunc= "onclick=finishRepair("+"'"+repairId+"',"+pageNum+");";
+                        var clickFunc= "onclick=deliveryRepair("+"'"+repairId+"',"+pageNum+");";
                         operate="<br/><button type='button' class='btn btn-info'"+clickFunc+">确认完成</button>";
                     }else if(state==3){
                         operate="";
@@ -207,14 +207,14 @@ function takeRepair(repairId,pageNum) {
 
 
 /**
- * 用于维修订单的确认操作
+ * 用于维修订单的配送操作
  * @param waterId 唯一标识一个维修订单
- */
-function finishRepair(repairId,pageNum) {
+ * */
+function deliveryRepair(repairId,pageNum) {
     console.log(repairId);
     $.ajax({
         type: "get",
-        url: "../repair/finishRepair",
+        url: "../repair/delivery",
         dataType: "json",
         data: {'repairId':repairId},
         success : function(data, textStatus) {
