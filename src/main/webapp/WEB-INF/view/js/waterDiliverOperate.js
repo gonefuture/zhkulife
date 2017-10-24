@@ -120,7 +120,7 @@ function  showWater(state,pageNum) {
                         operate="<td><input type='button'class='btn btn-default' "+clickFunc+ " value='接单'/></td>";
 
                     }else if (state==2){
-                        var clickFunc="onclick=finishWater("+"'"+waterId+"',"+pageNum+");";
+                        var clickFunc="onclick=deliveryWater("+"'"+waterId+"',"+pageNum+");";
                         operate="<td><input type='button' class='btn btn-default'"+clickFunc+  "value='配送'></td>";
                     }else if(state==3){
                         operate="";

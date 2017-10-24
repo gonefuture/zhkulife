@@ -50,6 +50,8 @@ function loadWorker() {
         }
     });
 }
+
+
 /**
  * 加载某个送水工作人员所送的水的数目
  * @param adminId  唯一标识一个工作人员
