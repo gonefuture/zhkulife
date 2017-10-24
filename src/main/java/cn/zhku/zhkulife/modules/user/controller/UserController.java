@@ -5,6 +5,8 @@ import cn.zhku.zhkulife.po.entity.User;
 import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.Beans.Message;
 
+import cn.zhku.zhkulife.utils.Beans.UserMe;
+import cn.zhku.zhkulife.utils.Beans.YiBanUser;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +62,13 @@ public class UserController {
 
     private void afterLogin(User user,HttpSession httpSession) throws Exception {
         httpSession.setAttribute("user",user);
-        user.setYibanInfo((String) httpSession.getAttribute("yibanInfo"));
+        Object yibanIfo = httpSession.getAttribute("yibanInfo");
+        if (yibanIfo == null) {
+
+        } else {
+            UserMe userMe = (UserMe) yibanIfo;
+            user.setYibanInfo(userMe.toString());
+        }
         userService.update(user);
     }
 
