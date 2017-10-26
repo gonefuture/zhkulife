@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  * @author 钱伟健 gonefutre
@@ -77,6 +78,25 @@ public class UserController {
         PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"user_id desc");
         return new PageInfo<User>(userService.findAll(user));
     }
+
+    /**
+     * 修改人:李龙杰
+     * 创建时间:2017-10-24 19:43
+     * 修改时间:2017-10-24 19:43
+     *通过用户ID查找某个单一用户
+     * @param user  参数：userId
+     * @return  用户对象
+     * @throws Exception   sqlException
+     */
+    @RequestMapping("office/findUser")
+    @ResponseBody
+    public User findUser(User user) throws Exception {
+        return userService.get(user.getUserId());
+    }
+
+
+
+
 
     @RequestMapping("office/user/edit")
     @ResponseBody

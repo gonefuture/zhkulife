@@ -121,6 +121,7 @@ function  showWater(pageNum) {
                     var waterId = list[i].waterId;
                     var waterNum = list[i].waterNum;
                     var waterState = list[i].waterState;
+                    var userPhone = list[i].userPhone;
                     var adminPhone = list[i].adminPhone;
                     ///waterTime为订单的下单的时间
                     var waterTime = list[i].waterTime;
@@ -133,27 +134,27 @@ function  showWater(pageNum) {
                     var gap=now.getTime()-operateTime.getTime();
                     /////求得具体的间隔天数
                     gap=gap/(24*60*60*1000);
-                    var feedback1="";
-                    var feedback2="";
+                    var feedback="";
                     /////如果订单超过4天无人处理,则用户界面提供投诉按钮
-                    if(waterState==1&&gap>=4) {////状态为1的订单超过两天未受理
-                        feedback1 = "<br/>该订单已经超过两天未处理,你可以进行投诉<br/>"+"<button onclick="+"pressWaterFeedback("+1+",'"+waterId+"'"+")>投诉</button>&nbsp&nbsp";
-                    }else if(waterState==2&&gap>=4){///状态为2的订单超过两天未受理
-                        feedback2= "<br/>该订单已经超过两天未处理,你可以进行投诉<br/>"+"<button onclick="+"pressWaterFeedback("+2+",'"+waterId+"'"+")>投诉</button>&nbsp&nbsp";
+                    if(waterState==1&&gap>=4) {////状态为1的订单超过4天未受理
+                        feedback = "<br/>该订单已经超过四天未处理,如果您还未收到桶装水,您可以进行投诉<br/>"+"<button class='am-btn am-btn-danger'onclick="+"pressWaterFeedback("+1+",'"+waterId+"'"+")>投诉</button>&nbsp&nbsp";
+                    }else if(waterState==2&&gap>=4){///状态为2的订单超过4天未受理
+                        feedback = "<br/>该订单已经超过四天未处理,如果您还未收到桶装水,您可以进行投诉<br/>"+"<button class='am-btn am-btn-danger'onclick="+"pressWaterFeedback("+2+",'"+waterId+"'"+")>投诉</button>&nbsp&nbsp";
                     }
                     var waterFeedback = list[i].waterFeedback;
+                    var feedbackDescription;//显示在页面时使用的变量
                     if(waterFeedback==1){
-                        waterFeedback="反馈: 订单超过两天无人受理";
+                        feedbackDescription="反馈信息:&nbsp&nbsp订单超过四天无人受理";
                     }else if(waterFeedback==2){
-                        waterFeedback="反馈: 已接单超过两天,但没有进行配送";
+                        feedbackDescription="反馈信息:&nbsp&nbsp已接单超过四天,但没有进行配送";
                     }else if(waterFeedback==3){
-                        waterFeedback="反馈: 水质有问题";
+                        feedbackDescription="反馈信息:&nbsp&nbsp水质有问题";
                     }else if(waterFeedback==4){
-                        waterFeedback="反馈: 工作人员态度差";
+                        feedbackDescription="反馈信息:&nbsp&nbsp工作人员态度差";
                     }else if(waterFeedback==5){
-                        waterFeedback="反馈: 好评";
+                        feedbackDescription="反馈信息:&nbsp&nbsp好评";
                     }else{
-                        waterFeedback="";
+                        feedbackDescription="反馈信息:&nbsp&nbsp暂无";
                     }
                     /////stateDescription用于描述订单的状态
                     var stateDescription="";
@@ -166,22 +167,55 @@ function  showWater(pageNum) {
                     }else if(waterState==4){
                         stateDescription="<br/>订单状态:&nbsp&nbsp已完成";
                     }
-                    if(waterState==4){///如果订单状态为4,则添加一个评价按钮
-                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp"
-                            + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp"
-                            + waterTime + stateDescription+"<br/><a href='feedback.html?id="+waterId+"&type=2"+"'><button>评价</button></a><hr/>");
-                    }else if(waterState==3){///如果订单状态为3,则添加一个确认送达按钮
-                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp"
-                            + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp"
-                            + waterTime + stateDescription+"<br/><a ><button onclick="+"pressDetermineTheDeliveryWater("+"'"+waterId+"'"+"); >确认送达</button></a><hr/>");
-                    }else if(waterState==2){
-                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp"
-                            + waterNum + "桶<br/>工作人员手机:&nbsp&nbsp"+adminPhone
-                            +"<br/>下单时间:&nbsp&nbsp" +waterTime+stateDescription +feedback2+"<br/><a ><button onclick="+"pressDetermineTheDeliveryWater("+"'"+waterId+"'"+"); >确认送达</button></a><hr/>");
-                    }else if(waterState==1){
-                        $("#waterOrderList").append("订单号:&nbsp&nbsp" + waterId + "<br/>数量:&nbsp&nbsp"
-                            + waterNum + "桶<br/>下单时间:&nbsp&nbsp" +waterTime +stateDescription+feedback1+"<hr/>");
+
+
+                    $("#waterOrderList").append(
+                        "订单编号:&nbsp&nbsp" + waterId +
+                        "<br/>数&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp量:&nbsp&nbsp"+ waterNum + "桶"+
+                        "<br/>用户手机:&nbsp&nbsp"+userPhone);
+                    if(waterState!=1){
+                        $("#waterOrderList").append("<br/>工作人员手机:&nbsp&nbsp"+adminPhone);
                     }
+                    $("#waterOrderList").append(
+                        "<br/>下单时间:&nbsp&nbsp"+
+                        waterTime +
+                        stateDescription+
+                        "<br>"+feedbackDescription);
+                    if(waterState==1||waterState==2||waterState==3){
+                        $("#waterOrderList").append(
+                        "<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a ><button class='am-btn am-btn-primary 'onclick="+
+                        "pressDetermineTheDeliveryWater("+"'"+waterId+"'"+"); >确认送达</button></a>"
+                        );
+                    }
+                    if(waterState==4&&waterFeedback!=3&&waterFeedback!=4&&waterFeedback!=5){
+                        $("#waterOrderList").append("<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a href='feedback.html?id="+waterId+"&type=2"+
+                            "'><button class='am-btn am-btn-primary '>去评价</button></a>");
+                    }
+                    $("#waterOrderList").append(feedback+"<hr/>");
+
+
+
+                    /*
+                    if(waterState==4){///如果订单状态为4,则添加一个评价按钮
+                        $("#waterOrderList").append("订单编号:&nbsp&nbsp" + waterId + "<br/>数&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp量:&nbsp&nbsp"
+                            + waterNum + "桶"+"</br>用户手机:&nbsp&nbsp"+userPhone+"<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp"
+                            + waterTime + stateDescription+"<br>"+feedbackDescription);
+                        if(waterFeedback!=3&&waterFeedback!=4&&waterFeedback!=5){
+                            $("#waterOrderList").append("<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a href='feedback.html?id="+waterId+"&type=2"+"'><button class='am-btn am-btn-primary '>去评价</button></a><hr/>");
+                        }
+                    }else if(waterState==3){///如果订单状态为3,则添加一个确认送达按钮
+                        $("#waterOrderList").append("订单编号:&nbsp&nbsp" + waterId + "<br/>数&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp量:&nbsp&nbsp"
+                            + waterNum + "桶"+"</br>用户手机:&nbsp&nbsp"+userPhone+"<br/>工作人员手机:&nbsp&nbsp"+adminPhone+"<br/>下单时间:&nbsp&nbsp"
+                            + waterTime + stateDescription+"<br>"+feedbackDescription+"<br/><a >操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<button class='am-btn am-btn-primary 'onclick="+"pressDetermineTheDeliveryWater("+"'"+waterId+"'"+"); >确认送达</button></a><hr/>");
+                    }else if(waterState==2){
+                        $("#waterOrderList").append("订单编号:&nbsp&nbsp" + waterId + "<br/>数&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp量:&nbsp&nbsp"
+                            + waterNum + "桶"+"</br>用户手机:&nbsp&nbsp"+userPhone+"<br/>工作人员手机:&nbsp&nbsp"+adminPhone
+                            +"<br/>下单时间:&nbsp&nbsp" +waterTime+stateDescription +"<br>"+feedbackDescription+"<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a ><button class='am-btn am-btn-primary 'onclick="+"pressDetermineTheDeliveryWater("+"'"+waterId+"'"+"); >确认送达</button></a>"+feedback+"<hr/>");
+                    }else if(waterState==1){
+                        $("#waterOrderList").append("订单编号:&nbsp&nbsp" + waterId + "<br/>数&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp量:&nbsp&nbsp"
+                            + waterNum + "桶"+"</br>用户手机:&nbsp&nbsp"+userPhone+"<br/>下单时间:&nbsp&nbsp" +waterTime +stateDescription+"<br>"+feedbackDescription+"<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a ><button class='am-btn am-btn-primary 'onclick="+"pressDetermineTheDeliveryWater("+"'"+waterId+"'"+"); >确认送达</button></a>"+feedback+"<hr/>");
+                    }
+                    */
 
                 }
                 showPage(eval(data).pages,eval(data).pageNum,2,total);
@@ -232,6 +266,8 @@ function showRepair(pageNum) {
                 for(var i in list){
                     var repairId=list[i].repairId;
                     var adminPhone=list[i].adminPhone;
+                    var userphone=list[i].userPhone;
+                    var repairFeedback=list[i].repairFeedback;
                     var repairDetail=list[i].repairDetial;///此处的单词有误!但不想改!!!!
                     console.log("repairDetail:  "+list[i].repairDetial);
                     var repairState = list[i].repairState;
@@ -259,13 +295,12 @@ function showRepair(pageNum) {
                     var gap=now.getTime()-operateTime.getTime();
                     /////求得具体的间隔天数
                     gap=gap/(24*60*60*1000);
-                    var feedback1="";
-                    var feedback2="";
+                    var feedback="";
                     ////如果订单超过7天没有被处理,则用户界面提供投诉按钮
-                    if(repairState==1&&gap>=7) {////状态为1的订单超过两天未受理
-                        feedback1 = "<p>该订单已经超过两天未处理,你可以进行投诉</p><br/>"+"<button class='btn btn-default' onclick="+"pressRepairFeedback("+1+",'"+repairId+"'"+")>投诉</button>";
-                    }else if(repairState==2&&gap>=7){///状态为2的订单超过两天未受理
-                        feedback2= "<p>该订单已经超过两天未处理,你可以进行投诉</p><br/>"+"<button class='btn btn-default' onclick="+"pressRepairFeedback("+2+",'"+repairId+"'"+")>投诉</button>";
+                    if(repairState==1&&gap>=7) {////状态为1的订单超过7天未受理
+                        feedback = "该订单已经超过7天未处理，如果还未完成维修，您可以进行投诉"+"<button class='btn btn-danger' onclick="+"pressRepairFeedback("+1+",'"+repairId+"'"+")>投诉</button>";
+                    }else if(repairState==2&&gap>=7){///状态为2的订单超过7天未受理
+                        feedback= "该订单已经超过7天未处理，如果还未完成维修，您可以进行投诉"+"<button class='btn btn-danger' onclick="+"pressRepairFeedback("+2+",'"+repairId+"'"+")>投诉</button>";
                     }
                     /////stateDescription用于描述订单的状态
                     var stateDescription="";
@@ -278,21 +313,72 @@ function showRepair(pageNum) {
                     }else if(repairState==4){
                         stateDescription="<br/>订单状态:&nbsp&nbsp已完成";
                     }
+                    var repairFeedback = list[i].repairFeedback;
+                    var feedbackDescription;//显示在页面时使用的变量
+                    if(repairFeedback==1){
+                        feedbackDescription="反馈信息:&nbsp&nbsp订单超过七天无人受理";
+                    }else if(repairFeedback==2){
+                        feedbackDescription="反馈信息:&nbsp&nbsp已接单超过七天,但没有进行维修";
+                    }else if(repairFeedback==3){
+                        feedbackDescription="反馈信息:&nbsp&nbsp维修质量不好";
+                    }else if(repairFeedback==4){
+                        feedbackDescription="反馈信息:&nbsp&nbsp工作人员态度差";
+                    }else if(repairFeedback==5){
+                        feedbackDescription="反馈信息:&nbsp&nbsp好评";
+                    }else{
+                        feedbackDescription="反馈信息:&nbsp&nbsp暂无";
+                    }
+
+
+                    $("#repairOrderList").append(
+                        "订单编号:&nbsp&nbsp"+repairId+
+                        "<br/>订单时间:&nbsp&nbsp"+repairTime+stateDescription+
+                        "<br/>用户手机:&nbsp&nbsp"+userphone);
+                    if(repairState!=1){
+                        $("#repairOrderList").append(
+                            "<br/>工作人员手机:&nbsp&nbsp"+adminPhone
+                        );
+                    }
+                    $("#repairOrderList").append(
+                        "<br/>故障信息:&nbsp&nbsp"+repairDetail+
+                        "<br/>图片详情:"+img+
+                        "<br/>"+feedbackDescription);
+                    if(repairState==1||repairState==2||repairState==3){
+                            $("#repairOrderList").append( "<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a ><button class='btn btn-primary'onclick="+
+                                "pressDetermineTheDeliveryRepair("+"'"+repairId+"'"+"); >确认完成维修</button></a>");
+                    }
+                    if(repairState==4&&repairFeedback!=3&&repairFeedback!=4&&repairFeedback!=5){
+                        $("#repairOrderList").append("<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a href='feedback.html?id="+repairId+"&type=3"+
+                            "'><button class='am-btn am-btn-primary '>去评价</button></a>");
+                    }
+                    $("#repairOrderList").append(
+                        "<br/>"+feedback+"<hr/>");
+
+
+
+
+                    /*
                     if(repairState==1){
                         $("#repairOrderList").append("订单号:"+repairId+"<br/>订单时间:"+repairTime+stateDescription
-                            +"<br/>故障信息:"+repairDetail+"<br/>图片详情:"+img+"<br/>"+feedback1+"<hr/>");
+                            +"<br/>故障信息:"+repairDetail+"<br/>图片详情:"+img+"<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a ><button class='btn btn-primary'onclick="+"pressDetermineTheDeliveryRepair("+"'"+repairId+"'"+"); >确认完成维修</button></a>"
+                            +"</br>"+feedbackDescription+feedback+"<hr/>");
                     }else if(repairState==2){
                         $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"+adminPhone
-                            +"<br/>订单时间:"+repairTime+stateDescription+"<br/>故障信息:"+repairDetail+"<br/>图片详情:"+img+"<br/>"+feedback2+"<hr/>");
+                            +"<br/>订单时间:"+repairTime+stateDescription+"<br/>故障信息:"+repairDetail+"<br/>图片详情:"+img+"<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a><button class='btn btn-primary'onclick="+"pressDetermineTheDeliveryRepair("+"'"+repairId+"'"+"); >确认完成维修</button></a>"+"<br/>"
+                            +"</br>"+feedbackDescription+feedback+"<hr/>");
                     }else if(repairState==3){
                         $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"
                             +adminPhone+"<br/>订单时间:"+repairTime+stateDescription+"<br/>故障信息:"+repairDetail
-                            +"<br/>图片详情:"+img+"<br/><a ><button class='btn btn-default'onclick="+"pressDetermineTheDeliveryRepair("+"'"+repairId+"'"+"); >确认送达</button></a><hr/>");
+                            +"<br/>图片详情:"+img+"<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:<a >操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<button class='btn btn-primary'onclick="+"pressDetermineTheDeliveryRepair("+"'"+repairId+"'"+"); >确认完成维修</button></a>"+"</br>"+feedbackDescription+"<hr/>");
                     }else if(repairState==4){
                         $("#repairOrderList").append("订单号:"+repairId+"<br/>工作人员手机:"
                             +adminPhone+"<br/>订单时间:"+repairTime+stateDescription+"<br/>故障信息:"+repairDetail
-                            +"<br/>图片详情:"+img+"<br/><a href='feedback.html?id="+repairId+"&type=3"+"'><button class='btn btn-default'>评价</button></a><hr/>");
+                            +"<br/>图片详情:"+img);
+                        if(repairFeedback!=3&&repairFeedback!=4&&repairFeedback!=5){
+                            $("#repairOrderList").append("<br/>操&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp作:&nbsp&nbsp<a href='feedback.html?id="+repairId+"&type=3"+"'><button class='am-btn am-btn-primary '>去评价</button></a><hr/>");
+                        }
                     }
+                    */
                 }
                 showPage(eval(data).pages,eval(data).pageNum,3,total);
             }
@@ -483,6 +569,7 @@ function bookRepair(){
         /////调用函数,显示模态框
         alertInfo();
     }else{
+
         var options = {
             // 规定把请求发送到那个URL
             url: "../user/bookRepair",
@@ -556,6 +643,7 @@ function bookRepair(){
                 alertInfo();
             }
         };
+
         $("#fileinfo").ajaxSubmit(options);
     }
 }
@@ -1006,6 +1094,7 @@ function repairFeedback(state) {
             $("#alert-info").append(info);
             /////调用函数,显示模态框
             alertInfo();
+            showRepair(1);
         },
         error : function(xhr, status, errMsg) {
             ////清空提示模态框里面的内容
@@ -1077,13 +1166,13 @@ function feedbackLoading() {
             "<input type='radio' name='feedbackId' value='3'>&nbsp;桶装水水质有问题<br /><br />" +
             "<input type='radio' name='feedbackId' value='4'>&nbsp;配送人员服务态度极差<br/><br />" +
             "<input type='radio' name='feedbackId' value='5'>&nbsp;好评<br/><br />" +
-            "<button onclick="+"pressWaterFeedback("+3+",'"+id+"'"+")>提交反馈</button>");
+            "<button class='btn btn-primary' onclick="+"pressWaterFeedback("+3+",'"+id+"'"+")>提交反馈</button>");
     }else if(type==3){//3表示为维修订单
         $("#content").append(
             "<input type='radio' name='feedbackId' value='3'>&nbsp;维修质量不好<br /><br /> "+
             "<input type='radio' name='feedbackId' value='4'>&nbsp;工作人员服务态度极差<br/><br /> " +
             "<input type='radio' name='feedbackId' value='5'>&nbsp;好评<br/><br /> "+
-            "<button onclick="+"pressRepairFeedback("+3+",'"+id+"'"+")>提交反馈</button>");
+            "<button class='btn btn-primary' onclick="+"pressRepairFeedback("+3+",'"+id+"'"+")>提交反馈</button>");
     }
 }
 
@@ -1109,6 +1198,7 @@ function myinfo(){
             }
             var info= eval(data).info;
             var userId = eval(data).userId;
+            var userRoom = eval(data).userRoom;
             var userPhone = eval(data).userPhone;
             var userZone = eval(data).userZone;
             if(userZone==1){
@@ -1120,14 +1210,16 @@ function myinfo(){
             var totalWater = eval(data).totalWater;
 
             $("#userId").empty();
+            $("#userRoom").empty();
             $("#userPhone").empty();
             $("#userZone").empty();
             $("#loginTime").empty();
             $("#totalWater").empty();
             $("#userId").append("账号:  "+userId);
+            $("#userRoom").append("宿舍:  "+userRoom);
             $("#userPhone").append("联系手机:  "+userPhone+"<a href='modify.html?modityType=1'><button class='btn btn-default'>修改</button></a>");
             $("#userZone").append("所属校区:  "+userZone);
-            $("#totalWater").append("累计订水桶数:  "+totalWater+"桶<br/>(注: 该数据仅限于本平台所发生的操作)");
+            $("#totalWater").append("累计完成订水桶数:  "+totalWater+"桶<br/>(注: 该数据仅限于本平台所发生的操作)");
 
         },
         error : function(xhr, status, errMsg) {
@@ -1142,8 +1234,20 @@ function myinfo(){
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /**
- *
+ *实现自动跳转页面
  * @param second 等待跳转的秒数
  * @param url  将要跳转的页面的url
  */
@@ -1156,3 +1260,5 @@ function timingSkip(second ,url) {
     //每秒执行一次,showTime()
     setTimeout("timingSkip("+second+","+url+")",1000);
 }
+
+

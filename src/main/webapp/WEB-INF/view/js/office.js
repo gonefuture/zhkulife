@@ -314,6 +314,7 @@ function alertInfo() {
 function addStu(){
     var zone= $("select[name='zone']").val();
     var room= $("input[name='room']").val();
+    room=room.toUpperCase();
     var password= $("input[name='password']").val();
     var phone= $("input[name='phone']").val();
     console.log("zone: "+zone+"room: "+room+"password:  "+password+"phone: "+phone);
@@ -327,14 +328,19 @@ function addStu(){
     }else{
         $.ajax({
             type: "get",
-            url: "../admin/addRole",
+            url: "../office/user/add",
             dataType: "json",
-            data: {'adminZone': adminZone,"adminId":adminId,"adminName":adminName,"adminPassword":adminPassword,"adminPhone":adminPhone},
+            data: {'userZone': zone,"userId":room,"userRoom":room,"userPassword":password,"userPhone":phone,"totalWater":0},
             success : function(data, textStatus) {
                 var msg = eval(data).msg;
                 console.log(msg);///查看后台返回的信息
                 var info = eval(data).info;
-                alert(info);
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append(info);
+                /////调用函数,显示模态框
+                alertInfo();
             },
             error : function(xhr, status, errMsg) {
                 alert("系统异常,请稍后再试!");
@@ -393,23 +399,10 @@ function addWorker(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
- *查找普通用户的信息
+ *通过用户输入的学生用户ID来查找某个单一用户
 */
-function showUser(){
+function searchStu(){
     var userId= $("input[name='userId']").val();
     if(userId==""||userId=="null"||userId==undefined){
         ////清空提示模态框里面的内容
@@ -423,36 +416,32 @@ function showUser(){
     console.log(userId);
     $.ajax({
         type: "get",
-        url: "../office/user/list",
+        url: "../office/findUser",
         dataType: "json",
         data: {'userId': userId},
         success : function(data, textStatus) {
             $("#showResult").empty();
-            $("#repairOrderpageNav").empty();
-            total= eval(data).total;
-            list = eval(data).list;
-            if(total==0){
+            var user= eval(data);
+            if(user==0||user==""||user==null){
                 $("#showResult").append("不存在符合条件的账号");
             }else{
-                for(var i in list) {
-                    var userId = list[i].userId;
-                    var userPassword = list[i].userPassword;
-                    var userRoom = list[i].userRoom;
-                    var userZone = list[i].userZone;
+                    var userId = user.userId;
+                    var userPassword = user.userPassword;
+                    var userRoom = user.userRoom;
+                    var userZone = user.userZone;
                     if (userZone == 1) {
                         userZone = "海珠校区";
                     } else if (userZone == 2) {
                         userZone = "白云校区";
                     }
-                    var userPhone = list[i].userPhone;
-                    var yibanInfo = list[i].yibanInfo;
-                    var loginTime = list[i].loginTime;
-                    var totalWater = list[i].totalWater;
+                    var userPhone = user.userPhone;
+                    //var yibanInfo = list[i].yibanInfo;
+                    var loginTime = user.loginTime;
+                    var totalWater = user.totalWater;
                     $("#showResult").append("用户账号:&nbsp&nbsp"+userId+"<br/>用户密码:&nbsp&nbsp"+userPassword+
                         "<br/>校区:&nbsp&nbsp"+userZone+"<br/>房间编号:&nbsp&nbsp"+userRoom+"<br/>宿舍联系手机:&nbsp&nbsp"+userPhone+
-                        "<br/>上次登录时间:&nbsp&nbsp"+loginTime+"<br/>上次登录用户实名:&nbsp&nbsp"+yibanInfo+
-                        "<br/>房间订水总数:&nbsp&nbsp"+totalWater+"桶<hr>" );
-                }
+                        "<br/>上次登录时间:&nbsp&nbsp"+loginTime+ "<br/>房间订水总数:&nbsp&nbsp"+totalWater+"桶<hr>" );
+
             }
         },
         error : function(xhr, status, errMsg) {
@@ -483,10 +472,10 @@ function showStaff(pageNum){
         data: {'pageNum': pageNum},
         success : function(data, textStatus) {
             $("#showResult").empty();
-            total= eval(data).total;
-            list = eval(data).list;
+            $("#showStaffNav").empty();
+            var total= eval(data).total;
+            var list = eval(data).list;
             if(total==0){
-                $("#showStaffNav").empty();
                 $("#showResult").append("不存在符合条件的账号");
             }else{
                 /////获取当前登录人员用cookie保存的ID
@@ -518,16 +507,15 @@ function showStaff(pageNum){
                     if(adminName==""){
                         adminName="无";
                     }
-                    ////当前工作人员与查找到的工作人员的ID不一样,则将其打印到页面上
-                    if(officeAdm!=adminId){
+                    ////只显示不属于学校领导的账号
+                    if(adminRole!=6){
                         //////只显示当前工作人员的直接下属
-                        if(adminRole==4||adminRole==5){
-                            $("#showResult").append("用户账号:&nbsp&nbsp"+"<span id='"+adminId+"'>"+adminId+"</span>"+"<br/>姓名:&nbsp&nbsp"+adminName+
+                            $("#showResult").append("用户账号:&nbsp&nbsp"+"<span id='"+adminId+"'>"+adminId+"</span>"+"<br/>姓&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp名:&nbsp&nbsp"+adminName+
                              "<br/>用户密码:&nbsp&nbsp"+adminPassword+ "<br/>工作类型:&nbsp&nbsp"+job+"<br/>工作校区:&nbsp&nbsp"+
                              adminZone+"<br/>联系号码:&nbsp&nbsp"+adminPhone+"<hr/>");
-                        }
                     }
                 }
+                showPageOfStaff(eval(data).pages,eval(data).pageNum,total-1);
             }
         },
         error : function(xhr, status, errMsg) {
@@ -544,7 +532,45 @@ function showStaff(pageNum){
 
 
 
-
+function showPageOfStaff(pages,pageNum,total){
+    var pageNav;
+    var functionName;
+    pageNav="#showStaffNav";
+    functionName="showStaff";
+    var begin;
+    var end;
+    var next=pageNum+1;
+    var pre=pageNum-1;
+    if(pages<=10){
+        begin=1;
+        end=pages;
+    }else{
+        begin=pageNum-4;
+        end=pageNum+5;
+        if(begin<1){
+            begin=1;
+            end=10;
+        }
+        if(end>pages){
+            begin=pages-9;
+            end=pages;
+        }
+    }
+    if(pageNum!=1){
+        $(pageNav).append("<button type='button' class='btn btn-info' onclick='"+functionName+"("+pre+")"+"'>上一页</button>");
+    }
+    for(var i=begin;i<=end;++i){
+        if(i===pageNum){
+            $(pageNav).append("<button type='button' class='btn btn-success' ><b>"+i+"</b></button>");
+        }else{
+            $(pageNav).append("<button type='button' class='btn btn-info' onclick='"+functionName+"("+i+")"+"'>"+i+"</button>");
+        }
+    }
+    if(pageNum!=pages){
+        $(pageNav).append("<button type='button' class='btn btn-info' onclick='"+functionName+"("+next+")"+"'>下一页</button>");
+    }
+    $(pageNav).append("<br/>共"+total+"条记录");
+}
 
 
 
