@@ -101,7 +101,7 @@
     <!-----------------确认提交订水订单模态框--------------开始-------------------------->
     <div class="am-modal am-modal-confirm" tabindex="-1" id="bookWater">
         <div class="am-modal-dialog">
-            <div class="am-modal-hd">仲园订水报修平台</div>
+            <div class="am-modal-hd">仲园叫水•报修平台</div>
             <div class="am-modal-bd">
                 确定提交订单？
             </div>
@@ -117,7 +117,7 @@
     <!-----------------确认提交报修订单模态框--------------开始-------------------------->
     <div class="am-modal am-modal-confirm" tabindex="-1" id="bookRepair">
         <div class="am-modal-dialog">
-            <div class="am-modal-hd">仲园订水报修平台</div>
+            <div class="am-modal-hd">仲园叫水•报修平台</div>
             <div class="am-modal-bd">
                 确定提交订单？
             </div>
@@ -173,38 +173,50 @@
 <script src="../js/jquery.form.min.js"></script>
 <!---为使用模态框进行引用--->
 <script type="text/javascript" src="../js/amazeui.min.js" ></script>
+<script type="text/javascript" src="../js/utils.js" ></script>
 <script type="text/javascript">
     /**
      *"用户点击"首页"页面中的提交报修时调用该函数
      */
     function pressBookRepair() {
-        var flag=check();
-        if(flag==1){
+        var isFre=isFrequent("pressBookRepair");////该函数文件放置于utils.js文件中
+        if(isFre==1){///返回值为1表示该次点击为超频点击
             ////清空提示模态框里面的内容
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
-            $("#alert-info").append("仅支持jpg，jpeg，png，bmp格式的图片");
+            $("#alert-info").append("您的操作过于频繁");
             /////调用函数,显示模态框
             alertInfo();
-        }else if(flag==2){
-            ////清空提示模态框里面的内容
-            $("#alert-info").empty();
-            ////向模态框添加服务器返回的信息
-            $("#alert-info").append("上传的图片不能大于10M");
-            /////调用函数,显示模态框
-            alertInfo();
-        }else if(flag==3){////当上传的图片合法时,则放行
-            $('#bookRepair').modal({
-                relatedTarget: this,
-                ///用户点击确定,则调用报修函数
-                onConfirm: function (options,id) {
-                    bookRepair();
-                },
-                ///用户点击取消则不进行任何操作
-                onCancel: function () {
+            return;
+        }else {///此次点击不是超频点击,则可以进行下面的其它操作
+            var flag = check();
+            if (flag == 1) {
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("仅支持jpg，jpeg，png，bmp格式的图片");
+                /////调用函数,显示模态框
+                alertInfo();
+            } else if (flag == 2) {
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("上传的图片不能大于10M");
+                /////调用函数,显示模态框
+                alertInfo();
+            } else if (flag == 3) {////当上传的图片合法时,则放行
+                $('#bookRepair').modal({
+                    relatedTarget: this,
+                    ///用户点击确定,则调用报修函数
+                    onConfirm: function (options, id) {
+                        bookRepair();
+                    },
+                    ///用户点击取消则不进行任何操作
+                    onCancel: function () {
 
-                }
-            });
+                    }
+                });
+            }
         }
     }
 
@@ -234,6 +246,38 @@
             return 1;
         }
     }
+
+
+    /**
+     *"用户点击"首页"页面中的提交订水时调用该函数
+     */
+    function pressBookWater() {
+        var isFre=isFrequent("pressBookWater");////该函数文件放置于utils.js文件中
+        if(isFre==1){///返回值为1表示该次点击为超频点击
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("您的操作过于频繁");
+            /////调用函数,显示模态框
+            alertInfo();
+            return;
+        }else {///此次点击不是超频点击,则可以进行下面的其它操作
+            $('#bookWater').modal({
+                relatedTarget: this,
+                ///用户点击确定,则调用订水函数
+                onConfirm: function (options, id) {
+                    bookWater();
+                },
+                ///用户点击取消则不进行任何操作
+                onCancel: function () {
+
+                }
+            });
+        }
+    }
+
+
+
 </script>
 </body>
 </html>

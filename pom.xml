@@ -430,7 +430,7 @@
       <resource>
         <directory>src/main/java</directory>
         <excludes>
-          <exclude>**/*.xml</exclude>
+          <exclude>**/*.java</exclude>
         </excludes>
       </resource>
       <resource>

@@ -30,7 +30,7 @@ public class ShiroService {
     AdminRoleMapper adminRoleMapper;
 
     public Set<String> findRoleIds(String adminId) {
-        System.out.println("aaaaa");
+
 
         Set<String> roleIdsSet = new HashSet<String>();
         AdminRoleExample adminRoleExample = new AdminRoleExample();
@@ -52,8 +52,6 @@ public class ShiroService {
             List<RoleAuthority> roleAuthorities = roleAuthorityMapper.selectByExample(roleAuthorityExample);
             for (RoleAuthority roleAuthority: roleAuthorities ) {
                 authorities.add(roleAuthority.getAuthorityId());
-                System.out.println("角色"+roleAuthority.getRoleId());
-                System.out.println("权限"+roleAuthority.getAuthorityId());
             }
 
         }

@@ -38,16 +38,14 @@ public class AdminController {
     @RequestMapping("admin/addRole")
     @ResponseBody
     public Message addRole(Admin form)  {
+        Admin adminCache = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin");  //获取缓存的管理员信息         //创建管理员-权限关系实体
         try {
-            if (addAdmin(form,"4","2")) {    //角色为4的管理员只能添加角色为2的管理员
-                return new Message("1","添加送水师傅成功");
+            if(adminService.addRole(form,adminCache)){
+                return new Message("2","添加管理员成功");
             }
-            if ( addAdmin(form,"5","3"))    //角色为5的管理员只能添加角色为3的管理员
-                return new Message("1","添加维修师傅成功");
-            if (addAdmin(form,"6",null))
-                return new Message("1","添加管理员成功");  //角色为5的管理员只能添加任何角色的管理员
-            else
+            else {
                 return new Message("2","添加管理员失败,你的权限不足");
+            }
 
         }catch (DuplicateKeyException duplicateKeyException) {
             return new Message("2","管理员已存在，请不要重复添加");

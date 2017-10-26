@@ -38,7 +38,7 @@ public class UserController {
      */
     @RequestMapping("user/login")
     @ResponseBody
-    public Message login(User form,HttpSession httpSession,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws Exception {
+    public Message login(User form,HttpSession httpSession) throws Exception {
 
         User user =  userService.login(form);
 
@@ -60,6 +60,12 @@ public class UserController {
         }
     }
 
+    /**
+     *  登录后的事务
+     * @param user
+     * @param httpSession
+     * @throws Exception
+     */
     private void afterLogin(User user,HttpSession httpSession) throws Exception {
         httpSession.setAttribute("user",user);
         Object yibanIfo = httpSession.getAttribute("yibanInfo");
@@ -86,6 +92,12 @@ public class UserController {
         return new PageInfo<User>(userService.findAll(user));
     }
 
+    /**
+     *  修改普通用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("office/user/edit")
     @ResponseBody
     public Message updateUser(User user) throws Exception {
@@ -95,6 +107,12 @@ public class UserController {
             return new Message("1","修改普通用户失败");
     }
 
+    /**
+     *  删除普通用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("office/user/delete")
     @ResponseBody
     public Message deleteUser(User user) throws Exception {
@@ -104,6 +122,12 @@ public class UserController {
             return new Message("1","删除普通用户失败");
     }
 
+    /**
+     *  添加普通用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("office/user/add")
     @ResponseBody
     public Message addUser(User user) throws Exception {
@@ -210,6 +234,23 @@ public class UserController {
         User userCache = (User) httpSession.getAttribute("user");
         return  userService.get(userCache.getUserId());
     }
+
+
+    /**usercontroller.java
+      * 修改人:李龙杰
+      * 创建时间:2017-10-24 19:43
+      * 修改时间:2017-10-24 19:43
+      *通过用户ID查找某个单一用户
+      * @param user  参数：userId
+      * @return  用户对象
+      * @throws Exception   sqlException
+      */
+    @RequestMapping("office/findUser")
+    @ResponseBody
+    public User findUser(User user) throws Exception {
+    return userService.get(user.getUserId());
+    }
+
 
 
 

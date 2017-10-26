@@ -104,6 +104,11 @@ public class WaterService implements IService<Water>{
         return waterList.size() > 0;
     }
 
+    /**
+     *  查询评价
+     * @param commonQo 通用查询类
+     * @return  water List
+     */
     public List<Water> waterRepined(CommonQo commonQo) {
         WaterExample waterExample = new WaterExample();
         WaterExample.Criteria criteria = waterExample.createCriteria();
