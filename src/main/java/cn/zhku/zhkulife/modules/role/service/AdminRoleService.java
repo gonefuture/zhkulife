@@ -38,25 +38,34 @@ public class AdminRoleService implements IService<AdminRole> {
         return 0;
     }
 
+    /**
+     *  根据adminId删除指定管理员的所有权限
+     * @param adminRole 用户权限
+     *
+     * @return 影响的记录数
+     * @throws Exception  sqlException
+     */
     @Override
-    public int delete(AdminRole entity) throws Exception {
+    public int delete(AdminRole adminRole) throws Exception {
         AdminRoleExample adminRoleExample = new AdminRoleExample();
         AdminRoleExample.Criteria criteria = adminRoleExample.createCriteria();
-        criteria.andAdminIdEqualTo(entity.getAdminId());   //根据adminId删除指定的所有权限
-        //criteria.andRoleIdEqualTo(entity.getRoleId());
+        criteria.andAdminIdEqualTo(adminRole.getAdminId());   //根据adminId删除指定的所有权限
         return adminRoleMapper.deleteByExample(adminRoleExample);
     }
 
+    //未启用
     @Override
     public AdminRole get(String id) throws Exception {
         return null;
     }
 
+    //未启用
     @Override
     public List<AdminRole> getList(AdminRole entity) throws Exception {
         return null;
     }
 
+    //未启用
     @Override
     public List<AdminRole> findAll(AdminRole entity) throws Exception {
         return null;

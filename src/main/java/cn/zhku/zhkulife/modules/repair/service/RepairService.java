@@ -43,11 +43,11 @@ public class RepairService implements IService<Repair> {
         return repairMapper.selectByPrimaryKey(id);
     }
 
-    /**     user查找订单
+    /**     普通用户查找订单
      *
-     * @param repair
-     * @return
-     * @throws Exception
+     * @param repair  参数: repairState
+     * @return   repair列表
+     * @throws Exception    sqlException
      */
     @Override
     public List<Repair> getList(Repair repair) throws Exception {
@@ -94,7 +94,11 @@ public class RepairService implements IService<Repair> {
         return repairMapper.selectByExampleWithBLOBs(repairExample);
     }
 
-
+    /**
+     *  查找维修评价
+     * @param commonQo  分页和时间查询
+     * @return  订单列表
+     */
     public List<Repair> repined(CommonQo commonQo) {
         RepairExample repairExample = new RepairExample();
         RepairExample.Criteria criteria = repairExample.createCriteria();

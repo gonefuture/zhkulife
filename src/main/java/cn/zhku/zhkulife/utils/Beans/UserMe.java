@@ -4,6 +4,8 @@ package cn.zhku.zhkulife.utils.Beans;
  * @author 钱伟健 gonefutre
  * @date 2017/9/16 11:18.
  * @E-mail gonefuture@qq.com
+ *
+ *  说明：用于捕获易班的认证信息
  */
 public class UserMe {
     String yb_userid;
