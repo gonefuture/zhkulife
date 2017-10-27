@@ -81,6 +81,13 @@ public class AdminService implements IService<Admin>{
            return  null;
     }
 
+    /**
+     *  增加一个管理员并添加其对应的权限
+     * @param form
+     * @param adminCache
+     * @return
+     * @throws Exception
+     */
     public boolean addRole(Admin form, Admin adminCache) throws Exception {
         int operatorRole = Integer.valueOf(adminCache.getAdminRole());
         AdminRole adminRole = new AdminRole();
@@ -89,23 +96,56 @@ public class AdminService implements IService<Admin>{
             case 4:
                 form.setAdminRole("2"); adminRole.setAdminId(form.getAdminId()); adminRole.setRoleId("2");
                 this.add(form);
-                adminRoleService.add(adminRole);
-                return true;
+                return adminRoleService.addRoleByRole6(form);
+
             case 5:
                 form.setAdminRole("3"); adminRole.setAdminId(form.getAdminId()); adminRole.setRoleId("3");
                 this.add(form);
-                adminRoleService.add(adminRole);
-                return true;
+                return adminRoleService.addRoleByRole6(form);
 
             case 6:
-                adminRole.setAdminId(form.getAdminId()); adminRole.setRoleId(form.getAdminRole());
                 this.add(form);
-                adminRoleService.add(adminRole);
-                return true;
-
+                return adminRoleService.addRoleByRole6(form);
             default:
                 return false;
         }
 
+    }
+
+
+
+
+    /**
+     *  移除管理员及其权限
+     * @param adminId
+     * @return
+     * @throws Exception
+     */
+    public boolean removeAdmin(String adminId) throws Exception {
+        Admin admin = new Admin(); admin.setAdminId(adminId);
+
+        AdminRole adminRoleEntity = new AdminRole();
+        adminRoleEntity.setAdminId(adminId);
+        if (this.delete(admin) == 1) {
+            adminRoleService.delete(adminRoleEntity);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    /**
+     *  修改管理员信息，无法修改权限
+     * @param form
+     * @param adminCache
+     * @return
+     * @throws Exception
+     */
+    public boolean modifyRole(Admin form, Admin adminCache) throws Exception {
+        form.setAdminRole(null);    //  使得管理员的权限无法修改
+        if(this.update(form) == 1)
+            return true;
+        else
+            return false;
     }
 }

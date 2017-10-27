@@ -10,6 +10,7 @@ import cn.zhku.zhkulife.utils.Beans.YiBanUser;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,13 +63,13 @@ public class UserController {
 
     /**
      *  登录后的事务
-     * @param user
-     * @param httpSession
-     * @throws Exception
+     * @param user  用户信息
+     * @param httpSession   当前session
+     * @throws Exception    sqlException
      */
     private void afterLogin(User user,HttpSession httpSession) throws Exception {
         httpSession.setAttribute("user",user);
-        Object yibanIfo = httpSession.getAttribute("yibanInfo");
+        Object yibanIfo = httpSession.getAttribute("yibanInfo");    //  获取用户信息
         if (yibanIfo == null) {
 
         } else {
@@ -130,11 +131,19 @@ public class UserController {
      */
     @RequestMapping("office/user/add")
     @ResponseBody
-    public Message addUser(User user) throws Exception {
-        if (userService.add(user)  == 1)
-            return new Message("2","增加普通用户成功");
-        else
-            return new Message("1","删除普通用户失败");
+    public Message addUser(User user) {
+        try {
+            if (userService.add(user) == 1)
+                return new Message("2", "增加普通用户成功");
+            else {
+                return new Message("2","添加普通用户失败,请确认填写的信息是否都正确");
+            }
+        } catch (DuplicateKeyException duplicateKeyException) {
+            return new Message("2", "用户已经存在，请不要重复添加");
+        } catch (Exception e) {
+            return new Message("2", "出现其他错误了。请联系开发者");
+        }
+
     }
 
 

@@ -1,5 +1,7 @@
 package cn.zhku.zhkulife.modules.role.service;
 
+import cn.zhku.zhkulife.modules.role.dao.RoleDao;
+import cn.zhku.zhkulife.po.entity.Admin;
 import cn.zhku.zhkulife.po.entity.AdminRole;
 import cn.zhku.zhkulife.po.entity.AdminRoleExample;
 import cn.zhku.zhkulife.po.entity.Water;
@@ -21,6 +23,10 @@ public class AdminRoleService implements IService<AdminRole> {
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     AdminRoleMapper adminRoleMapper;
+
+    @SuppressWarnings("SpringJavaAutowiringInspection")
+    @Autowired
+    RoleDao roleDao;
 
     @Override
     public int add(AdminRole entity) throws Exception {
@@ -54,5 +60,33 @@ public class AdminRoleService implements IService<AdminRole> {
     @Override
     public List<AdminRole> findAll(AdminRole entity) throws Exception {
         return null;
+    }
+
+    /**
+     *  通过权限6来给其他管理员添加权限
+     * @param form 需要添加权限的管理员。
+     */
+    public boolean addRoleByRole6(Admin form) {
+        int wantRole = Integer.valueOf(form.getAdminRole());
+        switch (wantRole) {
+            case 4:
+                if(roleDao.addRole4(form.getAdminId()) == 2)
+                    return true;
+                else
+                    return false;
+            case 5:
+                if(roleDao.addRole5(form.getAdminId()) == 2)
+                    return true;
+                else
+                    return false;
+            case 6:
+                if(roleDao.addRole6(form.getAdminId()) == 5)
+                    return true;
+                else
+                    return false;
+            default:
+                return false;
+        }
+
     }
 }

@@ -40,6 +40,7 @@ public class ShiroService {
             roleIdsSet.add(adminRole.getRoleId());
 
         }
+        System.out.println("============ 权限集合: "+roleIdsSet+"    ==========");
         return roleIdsSet;
     }
 
