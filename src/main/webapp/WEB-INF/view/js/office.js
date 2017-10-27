@@ -326,6 +326,12 @@ function addStu(){
         /////调用函数,显示模态框
         alertInfo();
     }else{
+        ////清空提示模态框里面的内容
+        $("#alert-info").empty();
+        ////向模态框添加服务器返回的信息
+        $("#alert-info").append("信息正在提交,请勿关闭页面");
+        /////调用函数,显示模态框
+        alertInfo();
         $.ajax({
             type: "get",
             url: "../office/user/add",
@@ -339,11 +345,11 @@ function addStu(){
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append(info);
-                /////调用函数,显示模态框
-                alertInfo();
             },
             error : function(xhr, status, errMsg) {
-                alert("系统异常,请稍后再试!");
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("系统异常,请稍后再试!");
             }
         });
     }

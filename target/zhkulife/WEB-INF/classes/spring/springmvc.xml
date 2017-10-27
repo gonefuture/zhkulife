@@ -73,8 +73,6 @@
 	</bean>
 
 
-    <!--默认静态资源映射-->
-	<mvc:default-servlet-handler/>
 
 	<!-- jsp视图 -->
 	<bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver">

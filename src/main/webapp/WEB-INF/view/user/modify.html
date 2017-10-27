@@ -228,77 +228,12 @@
             }
         });
     });
-
-
-    /**
-     *"用户点击"修改"页面中的提交修改手机时调用该函数
-     */
-    function pressModifyPhone() {
-        var isFre=isFrequent("pressModifyPhone");////该函数文件放置于utils.js文件中
-        if(isFre==1){///返回值为1表示该次点击为超频点击
-            ////清空提示模态框里面的内容
-            $("#alert-info").empty();
-            ////向模态框添加服务器返回的信息
-            $("#alert-info").append("您的操作过于频繁");
-            /////调用函数,显示模态框
-            alertInfo();
-            return;
-        }else {///此次点击不是超频点击,则可以进行下面的其它操作
-            $('#toModifyPhone').modal({
-                relatedTarget: this,
-                ///用户点击确定,则调用修改密码函数
-                onConfirm: function (options,id) {
-                    modifyPhone();
-                },
-                ///用户点击取消则不进行任何操作
-                onCancel: function () {
-
-                }
-            });
-        }
-    }
-
-    /**
-     *"用户点击"修改"页面中的提交修改密码时调用该函数
-     */
-    function pressUpdatePassword() {
-        var isFre=isFrequent("pressUpdatePassword");////该函数文件放置于utils.js文件中
-        if(isFre==1){///返回值为1表示该次点击为超频点击
-            ////清空提示模态框里面的内容
-            $("#alert-info").empty();
-            ////向模态框添加服务器返回的信息
-            $("#alert-info").append("您的操作过于频繁");
-            /////调用函数,显示模态框
-            alertInfo();
-            return;
-        }else {///此次点击不是超频点击,则可以进行下面的其它操作
-            $('#toUpdatePassword').modal({
-                relatedTarget: this,
-                ///用户点击确定,则调用修改密码函数
-                onConfirm: function (options,id) {
-                    updatePassword();
-                },
-                ///用户点击取消则不进行任何操作
-                onCancel: function () {
-
-                }
-            });
-        }
-    }
-
-
-
-
-
-
     // 手机号码验证
     jQuery.validator.addMethod("isMobile", function(value, element) {
         var phone = /^1[3|4|5|7|8][0-9]{9}$/;
         return this.optional(element) || (phone.test(value));
     }, "请正确填写您的手机号码!");
 
-
-
     /**
      *"用户点击"修改"页面中的提交修改手机时调用该函数
      */
@@ -354,10 +289,6 @@
             });
         }
     }
-
-
-
-
 
 </script>
 </body>

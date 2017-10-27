@@ -144,6 +144,42 @@
     }
 
     /**
+     *用于用户点击确认订单完成配送时调用该函数
+     * @param orderId 订单ID
+     */
+
+    function pressDetermineTheDeliveryRepair(orderId) {
+        var isFre=isFrequent("pressDetermineTheDeliveryRepair");////该函数文件放置于utils.js文件中
+        if(isFre==1) {///返回值为1表示该次点击为超频点击
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("您的操作过于频繁");
+            /////调用函数,显示模态框
+            alertInfo();
+            return;
+        }
+        $("#completeRepairOrderid").empty();
+        $("#completeRepairOrderid").append(orderId);
+        $('#pressDetermineTheDeliveryRepair').modal({
+            relatedTarget: this,
+            ///用户点击确定,则调用函数,确认订单已经完成
+            onConfirm: function (options,id) {
+                determineTheDeliveryRepair();
+            },
+            ///用户点击取消则不进行任何操作
+            onCancel: function () {
+
+            }
+        });
+    }
+
+
+
+
+
+
+    /**
      * 用户点击订单投诉按钮调用该函数
      * @param state  订单所处的状态
      * @param orderId   订单ID

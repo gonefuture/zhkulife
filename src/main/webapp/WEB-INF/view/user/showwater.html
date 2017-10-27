@@ -141,6 +141,39 @@
 
 
     /**
+     * 用户在查看订水订单页面点击按钮"确认送达",则调用该函数
+     * @param orderId 订单ID
+     */
+    function pressDetermineTheDeliveryWater(orderId) {
+        var isFre=isFrequent("pressDetermineTheDeliveryWater");
+        if(isFre==1) {///返回值为1表示该次点击为超频点击
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("您的操作过于频繁");
+            /////调用函数,显示模态框
+            alertInfo();
+            return;
+        }
+        $("#completeWaterId").empty();
+        $("#completeWaterId").append(orderId);
+        $('#pressDetermineTheDeliveryWater').modal({
+            relatedTarget: this,
+            ///用户点击确定,则调用订水函数
+            onConfirm: function (options,id) {
+                determineTheDeliveryWater();
+            },
+            ///用户点击取消则不进行任何操作
+            onCancel: function () {
+
+            }
+        });
+    }
+
+
+
+
+    /**
      * 用户在查看订单页面点击按钮"投诉"或在评价页面提交反馈,则调用该函数
      * @param state为订单状态
      * @param orderId 该参数的来源来自于加载订单时放在button中的onclick事件触发的pressFeeddback()函数
