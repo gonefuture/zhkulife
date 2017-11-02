@@ -38,17 +38,14 @@ public class AdminController {
     @RequestMapping("admin/addRole")
     @ResponseBody
     public Message addRole(Admin form)  {
+        Admin adminCache = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin");  //获取缓存的管理员信息         //创建管理员-权限关系实体
         try {
-            if (addAdmin(form,"4","2")) {    //角色为4的管理员只能添加角色为2的管理员
-                return new Message("1","添加送水师傅成功");
+            if(adminService.addRole(form,adminCache)){
+                return new Message("2","添加管理员成功");
             }
-            if ( addAdmin(form,"5","3"))    //角色为5的管理员只能添加角色为3的管理员
-                return new Message("1","添加维修师傅成功");
-            if (addAdmin(form,"6",null))
-                return new Message("1","添加管理员成功");  //角色为5的管理员只能添加任何角色的管理员
-            else
+            else {
                 return new Message("2","添加管理员失败,你的权限不足");
-
+            }
         }catch (DuplicateKeyException duplicateKeyException) {
             return new Message("2","管理员已存在，请不要重复添加");
         } catch (Exception e) {
@@ -56,29 +53,6 @@ public class AdminController {
         }
     }
 
-    /** 根据当前管理员的角色决定他可添加的权限
-     *
-     * @param form    接受的参数
-     * @param adminRole   匹配的角色
-     * @param changeRole  所能赋予的角色
-     * @return
-     * @throws Exception
-     */
-    public boolean addAdmin (Admin form,String adminRole,String changeRole) throws Exception {
-        Admin adminCache = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin");  //获取缓存的管理员信息
-        AdminRole adminRoleEntity = new AdminRole();                          //创建管理员-权限关系实体
-        adminRoleEntity.setAdminId(form.getAdminId()); adminRoleEntity.setRoleId(changeRole);
-        if (changeRole != null)
-            form.setAdminRole(changeRole);
-        else
-            adminRoleEntity.setRoleId(form.getAdminRole());
-        if ( adminCache.getAdminRole().equals(adminRole) && adminService.add(form) == 1 ){   //判断角色是否对应
-            adminRoleService.add(adminRoleEntity);
-            return true;
-        }
-        else
-            return false;
-    }
 
 
     /**     根据adminId删除管理员并连同其所有角色删除
@@ -91,24 +65,13 @@ public class AdminController {
     @ResponseBody
     public Message delete(String adminId) throws Exception {
 
-        if (removeAdmin(adminId))
+        if (adminService.removeAdmin(adminId))
             return new Message("1","删除管理员成功");
         else
             return new Message("2","删除管理员失败,你的权限不足");
     }
 
-    public boolean removeAdmin(String adminId) throws Exception {
-        Admin admin = new Admin(); admin.setAdminId(adminId);
 
-        AdminRole adminRoleEntity = new AdminRole();
-        adminRoleEntity.setAdminId(adminId);
-        if (adminService.delete(admin) == 1) {
-                adminRoleService.delete(adminRoleEntity);
-                return true;
-        }
-        else
-            return false;
-    }
 
     /**     根据adminId修改删除管理员
      *
@@ -119,33 +82,18 @@ public class AdminController {
     @RequestMapping("admin/modifyRole")
     @ResponseBody
     public Message modifyRole(Admin form) throws Exception {
-        if (modifyAdmin(form,"4","2")) {
-            return new Message("1","修改送水师傅信息成功");
+        Admin adminCache = (Admin) SecurityUtils.getSubject().getSession().getAttribute("admin");
+        if(adminService.modifyRole(form,adminCache)){
+            return new Message("2","修改管理员成功");
         }
-        if ( modifyAdmin(form,"5","3"))
-            return new Message("1","修改维修师傅信息成功");
-        if (modifyAdmin(form,"6",null))
-            return new Message("1","修改管理员成功");
-        else
+        else {
             return new Message("2","修改管理员失败,你的权限不足");
+        }
+
     }
 
-    /**
-     *  修改管理员
-     * @param form
-     * @param adminRole
-     * @param changeRole
-     * @return
-     * @throws Exception
-     */
-    public boolean modifyAdmin(Admin form,String adminRole,String changeRole) throws Exception {
-        Subject subject = SecurityUtils.getSubject();
-        Admin adminCache = (Admin) subject.getSession().getAttribute("admin");
-        if ( adminCache.getAdminRole().equals(adminRole) &&adminService.update(form) == 1)
-            return true;
-        else
-            return false;
-    }
+
+
 
 
     /**     根据自身寻找权限

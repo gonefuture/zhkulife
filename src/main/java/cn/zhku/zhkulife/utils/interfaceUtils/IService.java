@@ -20,7 +20,7 @@ public interface IService<T> {
      * @throws Exception
      *             抛出参数错误、SQL操作等异常
      */
-    public int add(T entity) throws Exception;
+    int add(T entity) throws Exception;
 
     /**
      * 对某个实体对象（相对应的表）修改操作
@@ -31,7 +31,7 @@ public interface IService<T> {
      * @throws Exception
      *             抛出参数错误、SQL操作等异常
      */
-    public int update(T entity) throws Exception;
+    int update(T entity) throws Exception;
 
     /**
      * 对某个实体对象（相对应的表）删除操作
@@ -42,7 +42,7 @@ public interface IService<T> {
      * @throws Exception
      *             抛出参数错误、SQL操作等异常
      */
-    public int delete(T entity) throws Exception;
+    int delete(T entity) throws Exception;
 
     /**
      * 通过ID获取某个对象实体
@@ -52,7 +52,7 @@ public interface IService<T> {
      * @return
      * @throws Exception
      */
-    public T get(String id) throws Exception;
+      T get(String id) throws Exception;
 
     /**
      * 通过设置实体某些字获取个实体对象列表（相对应的表）
@@ -60,7 +60,7 @@ public interface IService<T> {
      * @throws Exception
      *             抛出参数错误、SQL操作等异常
      */
-    public List<T> getList(T entity) throws Exception;
+     List<T> getList(T entity) throws Exception;
 
 
 //    /**

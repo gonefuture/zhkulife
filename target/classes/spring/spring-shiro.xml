@@ -37,8 +37,8 @@
         <property name="realm" ref="adminRealm" />
     </bean>
 
-    <bean id="permissionFilter" class="cn.zhku.zhkulife.shiro.filter.PermissionFilter">
-    </bean>
+    <!--<bean id="permissionFilter" class="cn.zhku.zhkulife.shiro.filter.PermissionFilter">-->
+    <!--</bean>-->
 
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

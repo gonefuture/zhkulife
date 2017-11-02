@@ -29,9 +29,13 @@ public class ShiroService {
     @Autowired
     AdminRoleMapper adminRoleMapper;
 
-    public Set<String> findRoleIds(String adminId) {
-        System.out.println("aaaaa");
 
+    /**
+     *  查找登录管理员的角色
+     * @param adminId   管理员id
+     *  @return 角色集合
+     */
+    public Set<String> findRoleIds(String adminId) {
         Set<String> roleIdsSet = new HashSet<String>();
         AdminRoleExample adminRoleExample = new AdminRoleExample();
         adminRoleExample.or().andAdminIdEqualTo(adminId);
@@ -40,10 +44,16 @@ public class ShiroService {
             roleIdsSet.add(adminRole.getRoleId());
 
         }
+        System.out.println("============ 权限集合: "+roleIdsSet+"    ==========");
         return roleIdsSet;
     }
 
 
+    /**
+     *  查找登录管理员的所有权限
+     * @param roleIds   管理员的角色集合
+     * @return  权限集合
+     */
     public Set<String> findAuthorities(Set<String> roleIds) {
         Set<String> authorities = new HashSet<String>();
         for (String roleId : roleIds) {
@@ -52,15 +62,18 @@ public class ShiroService {
             List<RoleAuthority> roleAuthorities = roleAuthorityMapper.selectByExample(roleAuthorityExample);
             for (RoleAuthority roleAuthority: roleAuthorities ) {
                 authorities.add(roleAuthority.getAuthorityId());
-                System.out.println("角色"+roleAuthority.getRoleId());
-                System.out.println("权限"+roleAuthority.getAuthorityId());
             }
 
         }
         return authorities;
     }
 
-    public Admin findByAdminId(String adminId) {
+    /**
+     *  通过管理呀员查找管理员
+     * @param adminId   管理员id
+     * @return
+     */
+     public Admin findByAdminId(String adminId) {
         return adminMapper.selectByPrimaryKey(adminId);
     }
 }
