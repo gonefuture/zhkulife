@@ -79,20 +79,22 @@ public class UserController {
         userService.update(user);
     }
 
-    /**        多条件查找普通用户
-     *
+    /**管理员角色通过多条件查找普通用户
+     * 创建人:钱伟健
+     * 修改人:李龙杰
+     * 修改时间:2017-10-28 11:51
+     * 修改内容:@RequestMapping("office/user/list")改为@RequestMapping("admin/user/list")
      * @param commonQo   查询通用类
      * @param user  参数：userZone  ,userId   , userPhone   , total_water
      * @return  用户列表
      * @throws Exception   sqlException
      */
-    @RequestMapping("office/user/list")
+    @RequestMapping("admin/user/list")
     @ResponseBody
     public PageInfo<User> list(CommonQo commonQo, User user) throws Exception {
         PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"user_id desc");
         return new PageInfo<User>(userService.findAll(user));
     }
-
     /**
      *  修改普通用户
      * @param user
@@ -248,18 +250,18 @@ public class UserController {
     /**usercontroller.java
       * 修改人:李龙杰
       * 创建时间:2017-10-24 19:43
-      * 修改时间:2017-10-24 19:43
+      * 修改时间:2017-10-28 19:43
+     *修改内容:@RequestMapping("office/findUser")改为@RequestMapping("admin/findUser")
       *通过用户ID查找某个单一用户
       * @param user  参数：userId
       * @return  用户对象
       * @throws Exception   sqlException
       */
-    @RequestMapping("office/findUser")
+    @RequestMapping("admin/findUser")
     @ResponseBody
     public User findUser(User user) throws Exception {
-    return userService.get(user.getUserId());
+        return userService.get(user.getUserId());
     }
-
 
 
 }

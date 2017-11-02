@@ -127,11 +127,7 @@ public class AdminController {
 
 
 
-//    @RequestMapping("admin/get")
-//    @ResponseBody
-//    public Admin get( Admin admin) throws Exception {
-//        return  adminService.get(admin.getAdminId());
-//    }
+
 
     @RequestMapping("/login/admin")
     @ResponseBody
