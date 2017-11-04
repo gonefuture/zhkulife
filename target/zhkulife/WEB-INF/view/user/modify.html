@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>主页</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-        <meta name="description" content="">
-        <meta name="author" content="">
-        <!-- Bootstrap core CSS -->
-        <link rel="stylesheet" href="../css/bootstrap.min.css" />
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
-        <link rel="stylesheet" href="../css/navbar.css" />
-        <!---为使用模态框进行引用--->
-        <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
- </head>
+    <title>主页</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <!---为使用模态框进行引用--->
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
+</head>
 <body style="padding-top: 70px;"  onload="load();"><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
 
 <!----======================导航栏部分============================-------->
@@ -167,6 +167,7 @@
 <script type="text/javascript" src="../js/userOperate.js" ></script>
 <!---为使用模态框进行引用--->
 <script type="text/javascript" src="../js/amazeui.min.js" ></script>
+<script type="text/javascript" src="../js/utils.js" ></script>
 <script type="text/javascript">
     /**
      * 用于加载页面时确定显示哪一个选项卡
@@ -233,8 +234,6 @@
         return this.optional(element) || (phone.test(value));
     }, "请正确填写您的手机号码!");
 
-
-
     /**
      *"用户点击"修改"页面中的提交修改手机时调用该函数
      */
@@ -290,10 +289,6 @@
             });
         }
     }
-
-
-
-
 
 </script>
 </body>

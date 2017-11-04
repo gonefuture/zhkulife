@@ -98,7 +98,7 @@ public class RepairController  {
         }else if("0".equals(DBUser.getUserPhone())){
             return new Message("3","你的手机号未设置 ");
         }
-        ///repair.setYibanInfo(httpSession.getAttribute("yibanInfo").toString());
+
         repair.setUserId(sessionUser.getUserId());
         repair.setRepairId(UUID.randomUUID().toString().replace("-","").toUpperCase());
         repair.setRepairTime(new Date());

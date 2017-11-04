@@ -97,9 +97,10 @@
     <div class="am-modal-dialog">
         <div class="am-modal-hd">仲园叫水•报修平台</div>
         <div class="am-modal-bd">
+            您将对订单
             <!---orderId用于展示当前用户选中进行投诉的订单ID--->
-            确定对订单:<span id="feedbackRepairOrderId"></span>
-            进行反馈？
+            <span id="feedbackRepairOrderId"></span>
+            进行投诉,我们在收到您的投诉之后将会进行处理。如果发现恶意投诉的情况，我们将追究其相关责任。确定进行投诉？
         </div>
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-cancel>取消</span>
@@ -136,10 +137,83 @@
 <script type="text/javascript" src="../js/userOperate.js" ></script>
 <!--使用模态框加入该文件-->
 <script type="text/javascript" src="../js/amazeui.min.js" ></script>
+<script type="text/javascript" src="../js/utils.js" ></script>
 <script type="text/javascript">
     function loading() {
         showRepair(1);//加载报修订单第一页
     }
+
+    /**
+     *用于用户点击确认订单完成配送时调用该函数
+     * @param orderId 订单ID
+     */
+
+    function pressDetermineTheDeliveryRepair(orderId) {
+        var isFre=isFrequent("pressDetermineTheDeliveryRepair");////该函数文件放置于utils.js文件中
+        if(isFre==1) {///返回值为1表示该次点击为超频点击
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("您的操作过于频繁");
+            /////调用函数,显示模态框
+            alertInfo();
+            return;
+        }
+        $("#completeRepairOrderid").empty();
+        $("#completeRepairOrderid").append(orderId);
+        $('#pressDetermineTheDeliveryRepair').modal({
+            relatedTarget: this,
+            ///用户点击确定,则调用函数,确认订单已经完成
+            onConfirm: function (options,id) {
+                determineTheDeliveryRepair();
+            },
+            ///用户点击取消则不进行任何操作
+            onCancel: function () {
+
+            }
+        });
+    }
+
+
+
+
+
+
+    /**
+     * 用户点击订单投诉按钮调用该函数
+     * @param state  订单所处的状态
+     * @param orderId   订单ID
+     */
+
+    function pressRepairFeedback(state,orderId) {
+        var isFre=isFrequent("pressRepairFeedback");////该函数文件放置于utils.js文件中
+        if(isFre==1){///返回值为1表示该次点击为超频点击
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("您的操作过于频繁");
+            /////调用函数,显示模态框
+            alertInfo();
+            return;
+        }else {///此次点击不是超频点击,则可以进行下面的其它操作
+            $("#feedbackRepairOrderId").empty();
+            $("#feedbackRepairOrderId").append(orderId);
+            $('#toRepairFeedback').modal({
+                relatedTarget: this,
+                ///用户点击确定,则调用订水函数
+                onConfirm: function (options,id) {
+                    repairFeedback(state);
+                },
+                ///用户点击取消则不进行任何操作
+                onCancel: function () {
+
+                }
+            });
+        }
+    }
+
+
+
 </script>
 </body>
 </html>

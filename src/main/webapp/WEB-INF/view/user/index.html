@@ -16,9 +16,9 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="../css/navbar.css" />
     <!---为使用模态框进行引用--->
-    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
+    <link rel="stylesheet" href="../css/amazeui.min.css" />
 </head>
-<body style="padding-top: 70px;" >
+<body style="padding-top: 70px; background: url(../img/background/17.jpg);background-repeat:no-repeat;background-size: cover;-webkit-background-size: cover;background-attachment: fixed;" >
 <!----======================导航栏部分============================-------->
 <div class="container">
     <!-- Static navbar -->
@@ -179,7 +179,7 @@
      *"用户点击"首页"页面中的提交报修时调用该函数
      */
     function pressBookRepair() {
-        var isFre=isFrequent("pressBookRepair");////该函数文件放置于utils.js文件中
+        var isFre=pds("pressBookRepair");//监测用户是否有在15秒内重复提交报修信息
         if(isFre==1){///返回值为1表示该次点击为超频点击
             ////清空提示模态框里面的内容
             $("#alert-info").empty();
@@ -221,7 +221,9 @@
     }
 
 
-
+    /*
+    *检查用户提交的维修信息是否合法
+    */
     function check() {
         var fileName=$("#Pic").val();
         if(fileName==""){/////当用户没有上传图片时,也予以放行
@@ -273,6 +275,32 @@
 
                 }
             });
+        }
+    }
+
+
+
+    /**阻止重复提交Prevent duplicate submission
+     * 提交报修订单时可能存在网络延迟的情况,这就需要提交表单的按钮的时间不仅仅限制在3秒钟
+     * 将其限制时间设置为15秒钟,给服务器后台提供充分的时间进行反应
+     * @param btnName 提交维修信息表单的按钮
+     * @returns {number} 返回标志符
+     */
+    function pds(btnName) {
+        var lastPress=getCookie(btnName);
+        if(lastPress==""){///如果还未存在该cookie值,则表明此次点击为非超频点击
+            setCookie(btnName, new Date(),7);////刷新该cookie的值
+            return 0;
+        }
+        var nowPress=new Date();
+        lastPress=new Date(lastPress);
+        var gap=(nowPress.getTime()-lastPress.getTime())/1000;///获取此次点击和上次点击的时间间隔(单位:秒)
+        if(gap<15) {///////前后两次点击时间小于15秒钟,则返回1,表示为超频点击
+            setCookie(btnName, new Date(),7);////刷新该cookie的值
+            return 1;
+        }else{
+            setCookie(btnName, new Date(),7);////刷新该cookie的值
+            return 0;
         }
     }
 

@@ -17,8 +17,7 @@
     <!---为使用模态框进行引用--->
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
 </head>
-<body style="padding-top: 70px;" ><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
-
+<body style="padding-top: 70px; background: url(../img/background/17.jpg);background-repeat:no-repeat;background-size: cover;-webkit-background-size: cover;background-attachment: fixed;" ><!-- 添加padding-top参数是确保body内容不会被导航栏遮盖 -->
 <!----======================导航栏部分============================-------->
 <div class="container">
     <!-- Static navbar -->
@@ -138,7 +137,7 @@
     ////校验通过则调用该方法
     $.validator.setDefaults({
         submitHandler: function() {
-            pressSubmit();
+            pressModifyPswAndPhone();
         }
     });
     $().ready(function() {
