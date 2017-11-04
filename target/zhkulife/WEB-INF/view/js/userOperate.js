@@ -43,6 +43,7 @@ function login(){
             if(msg==1){//登录成功
                 setCookie("userId",user_id,14);///保存账号
                 setCookie("userPassword",user_password,14);//保存密码
+                setCookie("isLogout","false",14);///设置标志,标明当前为非登出状态
                 window.location.href="user/index.html";
             }else if(msg==2){
                 ////清空提示模态框里面的内容
@@ -1467,4 +1468,46 @@ function setCookie(cname,cvalue,exdays)
     d.setTime(d.getTime()+(exdays*24*60*60*1000));
     var expires = "expires="+d.toGMTString();
     document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function logout() {
+    $.ajax({
+        type: "get",
+        url: "../user/logout",
+        dataType: "json",
+        success : function(data, textStatus) {
+            var msg = eval(data).msg;
+            if(msg==1){
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("退出成功");
+                /////如果提示模态框被关闭,则调用函数,显示模态框
+                if(isAlertClose()==1){
+                    alertInfo();
+                }
+                setCookie("isLogout","true",14);///设置标志,标明当前为登出状态
+                window.location.href="../userlog.html";
+            }else{
+                ////清空提示模态框里面的内容
+                $("#alert-info").empty();
+                ////向模态框添加服务器返回的信息
+                $("#alert-info").append("系统异常,请稍后再试");
+                /////如果提示模态框被关闭,则调用函数,显示模态框
+                if(isAlertClose()==1){
+                    alertInfo();
+                }
+            }
+        },
+        error : function(xhr, status, errMsg) {
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("系统异常,加载失败");
+            /////如果提示模态框被关闭,则调用函数,显示模态框
+            if(isAlertClose()==1){
+                alertInfo();
+            }
+        }
+    });
 }

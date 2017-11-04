@@ -51,6 +51,7 @@
                         </ul>
                     </li>
                     <li><a href="myinfo.html">账户信息</a></li>
+                    <li><a onclick="pressLogout()"> 退出账号</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -105,7 +106,20 @@
 </div>
 <!-----------------确认提交订水反馈时弹出该模态框--------------结束-------------------------->
 
-
+<!-----------------确认提交登出时弹出该模态框--------------开始-------------------------->
+<div class="am-modal am-modal-confirm" tabindex="-1" id="toLogout">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">仲园叫水•报修平台</div>
+        <div class="am-modal-bd">
+            您将退出本账号吗?
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+            <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+        </div>
+    </div>
+</div>
+<!-----------------确认提交维修反馈时弹出该模态框--------------结束-------------------------->
 
 
 <!-----用于显示服务器返回到到客户端的信息----->
@@ -205,6 +219,23 @@
         }
     }
 
+
+    /**
+     * 用于用户登出操作
+     */
+    function pressLogout() {
+        $('#toLogout').modal({
+            relatedTarget: this,
+            ///用户点击确定,则调用反馈函数
+            onConfirm: function (options,id) {
+                logout();
+            },
+            ///用户点击取消则不进行任何操作
+            onCancel: function () {
+
+            }
+        });
+    }
 
 </script>
 </body>

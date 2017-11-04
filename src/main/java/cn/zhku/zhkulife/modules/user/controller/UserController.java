@@ -264,6 +264,20 @@ public class UserController {
      return userService.get(user.getUserId());
     }
 
-
+    /**普通用户退出
+     *
+     * @param httpSession 当前Session
+     * @return message
+     */
+    @ResponseBody
+    @RequestMapping("user/logout")
+    public Message userLogout(HttpSession httpSession) {
+        try{
+            httpSession.removeAttribute("user");
+            return new Message("1","普通用户退出成功");
+        }catch(Exception e){
+            return new Message("2","服务器异常");
+        }
+    }
 
 }

@@ -76,7 +76,10 @@ function autoLogin() {
         $(".am-btn-block").val("登录中 . . .");
         $("input[name='user_id']").val(userId);
         $("input[name='user_password']").val(userPassword);
-        login();
+        var isLogout=new String(getCookie("isLogout"));
+        if(isLogout=="false"){
+            login();
+        }
         $(".am-btn-block").attr('disabled',false);
         $(".am-btn-block").val("登录");
     }
