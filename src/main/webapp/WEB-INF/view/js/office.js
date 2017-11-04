@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by Administrator on 2017/9/17 0017.
  */
 
@@ -422,7 +422,7 @@ function searchStu(){
     console.log(userId);
     $.ajax({
         type: "get",
-        url: "../office/findUser",
+        url: "../admin/findUser",
         dataType: "json",
         data: {'userId': userId},
         success : function(data, textStatus) {
@@ -468,7 +468,7 @@ function searchStu(){
 
 /**
  *显示当前管理人员管理权限范围的工作人员的信息
- * * @param pageNum 显示的当期的页码
+ * * @param pageNum 显示的当前的页码
  */
 function showStaff(pageNum){
     $.ajax({
@@ -537,12 +537,16 @@ function showStaff(pageNum){
 
 
 
-
+/**
+pages:表示总页数
+pageNum:表示当前页数
+total:表示总共查询到的记录总数
+**/
 function showPageOfStaff(pages,pageNum,total){
     var pageNav;
     var functionName;
-    pageNav="#showStaffNav";
-    functionName="showStaff";
+    pageNav="#showStaffNav";/////在html页面中将页码显示栏放到该Id的元素里
+    functionName="showStaff";/////用户点击页码或者下一页时将要触发的函数名
     var begin;
     var end;
     var next=pageNum+1;

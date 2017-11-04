@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css" />
 
 </head>
-<body >
+<body onload="autoLogin()">
 <div class="container" style="padding-top:0px">
     <div class="login-wrap">
         <div class="login-box">
@@ -67,6 +67,22 @@
 <script type="text/javascript" src="js/userOperate.js" ></script>
 <!--使用模态框加入该文件-->
 <script type="text/javascript" src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js" ></script>
+<script type="text/javascript">
+function autoLogin() {
+    var userId= new String(getCookie("userId"));
+    var userPassword=new String(getCookie("userPassword"));
+    if(userId!=""&&userPassword!=""){
+        $(".am-btn-block").attr('disabled',true);
+        $(".am-btn-block").val("登录中 . . .");
+        $("input[name='user_id']").val(userId);
+        $("input[name='user_password']").val(userPassword);
+        login();
+        $(".am-btn-block").attr('disabled',false);
+        $(".am-btn-block").val("登录");
+    }
+}
+
+</script>
 
 </body>
 </html>

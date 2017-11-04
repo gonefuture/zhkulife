@@ -14,8 +14,10 @@ function login(){
         $("#alert-info").empty();
         ////向模态框添加服务器返回的信息
         $("#alert-info").append("请先输入账号!");
-        /////调用函数,显示模态框
-        alertInfo();
+        /////如果提示模态框被关闭,则调用函数,显示模态框
+        if(isAlertClose()==1){
+            alertInfo();
+        }
         return;
     }
     if(user_password==null||user_password==""){
@@ -23,8 +25,10 @@ function login(){
         $("#alert-info").empty();
         ////向模态框添加服务器返回的信息
         $("#alert-info").append("请先输入密码!");
-        /////调用函数,显示模态框
-        alertInfo();
+        /////如果提示模态框被关闭,则调用函数,显示模态框
+        if(isAlertClose()==1){
+            alertInfo();
+        }
         return;
     }
     console.log(user_id+" "+user_password);
@@ -36,23 +40,29 @@ function login(){
         success: function (data, textStatus) {
             var msg = eval(data).msg;
             var info=eval(data).info;
-            if(msg==1){
+            if(msg==1){//登录成功
+                setCookie("userId",user_id,14);///保存账号
+                setCookie("userPassword",user_password,14);//保存密码
                 window.location.href="user/index.html";
             }else if(msg==2){
                 ////清空提示模态框里面的内容
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append(info);
-                /////调用函数,显示模态框
-                alertInfo();
+                /////如果提示模态框被关闭,则调用函数,显示模态框
+                if(isAlertClose()==1){
+                    alertInfo();
+                }
             }else if(msg==3){
                 window.location.href="user/modify.html";
                 ////清空提示模态框里面的内容
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append(info+"请先进行修改！");
-                /////调用函数,显示模态框
-                alertInfo();
+                /////如果提示模态框被关闭,则调用函数,显示模态框
+                if(isAlertClose()==1){
+                    alertInfo();
+                }
             }
         },
         error : function(xhr, status, errMsg) {
@@ -60,8 +70,10 @@ function login(){
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
             $("#alert-info").append("系统异常，请稍候再试!");
-            /////调用函数,显示模态框
-            alertInfo();
+            /////如果提示模态框被关闭,则调用函数,显示模态框
+            if(isAlertClose()==1){
+                alertInfo();
+            }
         }
     })
 }
@@ -104,8 +116,10 @@ function  showWater(pageNum) {
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
-                /////调用函数,显示模态框
-                alertInfo();
+                /////如果提示模态框被关闭,则调用函数,显示模态框
+                if(isAlertClose()==1){
+                    alertInfo();
+                }
                 timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
                 //window.location.href="../userlog.html";
                 return;
@@ -226,8 +240,10 @@ function  showWater(pageNum) {
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
             $("#alert-info").append("系统异常!数据加载失败");
-            /////调用函数,显示模态框
-            alertInfo();
+            /////如果提示模态框被关闭,则调用函数,显示模态框
+            if(isAlertClose()==1){
+                alertInfo();
+            }
         }
     });
 }
@@ -250,8 +266,10 @@ function showRepair(pageNum) {
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
-                /////调用函数,显示模态框
-                alertInfo();
+                /////如果提示模态框被关闭,则调用函数,显示模态框
+                if(isAlertClose()==1){
+                    alertInfo();
+                }
                 timingSkip(5, "../userlog.html");/////5秒后跳转至登录页面
                 //window.location.href="../userlog.html";
                 return;
@@ -388,8 +406,10 @@ function showRepair(pageNum) {
             $("#alert-info").empty();
             ////向模态框添加服务器返回的信息
             $("#alert-info").append("查找订单失败!请稍后再试");
-            /////调用函数,显示模态框
-            alertInfo();
+            /////如果提示模态框被关闭,则调用函数,显示模态框
+            if(isAlertClose()==1){
+                alertInfo();
+            }
         }
     });
 }
@@ -472,16 +492,20 @@ function bookWater(){
         $("#alert-info").empty();
         ////向模态框添加服务器返回的信息
         $("#alert-info").append("请先选择订水的桶数!");
-        /////调用函数,显示模态框
-        alertInfo();
+        /////如果提示模态框被关闭,则调用函数,显示模态框
+        if(isAlertClose()==1){
+            alertInfo();
+        }
         return;
     }
     ////清空提示模态框里面的内容
     $("#alert-info").empty();
     ////向模态框添加服务器返回的信息
     $("#alert-info").append("信息正在提交,请勿关闭页面");
-    /////调用函数,显示模态框
-    alertInfo();
+    /////如果提示模态框被关闭,则调用函数,显示模态框
+    if(isAlertClose()==1){
+        alertInfo();
+    }
     $.ajax({
         type: "get",
         url: "../user/bookWater",
@@ -589,15 +613,19 @@ function bookRepair(){
         $("#alert-info").empty();
         ////向模态框添加服务器返回的信息
         $("#alert-info").append("请先您输入描述再进行提交");
-        /////调用函数,显示模态框
-        alertInfo();
+        /////如果提示模态框被关闭,则调用函数,显示模态框
+        if(isAlertClose()==1){
+            alertInfo();
+        }
     }else{
         ////清空提示模态框里面的内容
         $("#alert-info").empty();
         ////向模态框添加服务器返回的信息
         $("#alert-info").append("信息正在提交,请勿关闭页面");
-        /////调用函数,显示模态框
-        alertInfo();
+        /////如果提示模态框被关闭,则调用函数,显示模态框
+        if(isAlertClose()==1){
+            alertInfo();
+        }
         var options = {
             // 规定把请求发送到那个URL
             url: "../user/bookRepair",
@@ -614,8 +642,10 @@ function bookRepair(){
                     $("#alert-info").empty();
                     ////向模态框添加服务器返回的信息
                     $("#alert-info").append("<p>登录超时,请重新登录</p></br><span id='second'> </span>秒后跳转至登录页</br><a href='..userlog.html'><button>点击此处直接跳转</button></a>");
-                    /////调用函数,显示模态框
-                    alertInfo();
+                    /////如果提示模态框被关闭,则调用函数,显示模态框
+                    if(isAlertClose()==1){
+                        alertInfo();
+                    }
                     timingSkip(5,"../userlog.html");/////5秒后跳转至登录页面
                     //window.location.href="../userlog.html";
                     return ;
@@ -701,8 +731,10 @@ function updatePassword(){
         $("#alert-info").empty();
         ////向模态框添加服务器返回的信息
         $("#alert-info").append("密码过于简单,请重新输入");
-        /////调用函数,显示模态框
-        alertInfo();
+        /////如果提示模态框被关闭,则调用函数,显示模态框
+        if(isAlertClose()==1){
+            alertInfo();
+        }
         return;
     }
     ////清空提示模态框里面的内容
@@ -723,6 +755,7 @@ function updatePassword(){
                 $("#alert-info").empty();
                 ////向模态框添加服务器返回的信息
                 $("#alert-info").append("修改成功!");
+                setCookie("userPassword",password,14);///改变cookie中保存的密码,以便于下次的自动登录
                 $("#alert-info").append("<br/><a href='index.html'><button>返回主页</button></a>");
                 /////如果提示模态框被关闭,则调用函数,显示模态框
                 if(isAlertClose()==1){
@@ -766,8 +799,10 @@ function modifyPhone(){
     $("#alert-info").empty();
     ////向模态框添加服务器返回的信息
     $("#alert-info").append("信息正在提交,请勿关闭页面");
-    /////调用函数,显示模态框
-    alertInfo();
+    /////如果提示模态框被关闭,则调用函数,显示模态框
+    if(isAlertClose()==1){
+        alertInfo();
+    }
     $.ajax({
         type: "get",
         url: "../user/updatePhone",
@@ -836,16 +871,20 @@ function modifyPswAndPhone() {
         $("#alert-info").empty();
         ////向模态框添加服务器返回的信息
         $("#alert-info").append("密码过于简单,请重新输入");
-        /////调用函数,显示模态框
-        alertInfo();
+        /////如果提示模态框被关闭,则调用函数,显示模态框
+        if(isAlertClose()==1){
+            alertInfo();
+        }
         return ;
     }
     ////清空提示模态框里面的内容
     $("#alert-info").empty();
     ////向模态框添加服务器返回的信息
     $("#alert-info").append("信息正在提交,请勿关闭页面");
-    /////调用函数,显示模态框
-    alertInfo();
+    /////如果提示模态框被关闭,则调用函数,显示模态框
+    if(isAlertClose()==1){
+        alertInfo();
+    }
     $.ajax({
         type: "get",
         url: "../user/updateData",
@@ -927,8 +966,10 @@ function determineTheDeliveryWater() {
     $("#alert-info").empty();
     ////向模态框添加服务器返回的信息
     $("#alert-info").append("信息正在提交,请勿关闭页面");
-    /////调用函数,显示模态框
-    alertInfo();
+    /////如果提示模态框被关闭,则调用函数,显示模态框
+    if(isAlertClose()==1){
+        alertInfo();
+    }
     $.ajax({
         type: "get",
         url: "../user/finishWater",
@@ -987,8 +1028,10 @@ function determineTheDeliveryRepair() {
     $("#alert-info").empty();
     ////向模态框添加服务器返回的信息
     $("#alert-info").append("信息正在提交,请勿关闭页面");
-    /////调用函数,显示模态框
-    alertInfo();
+    /////如果提示模态框被关闭,则调用函数,显示模态框
+    if(isAlertClose()==1){
+        alertInfo();
+    }
     $.ajax({
         type: "get",
         url: "../user/finishRepair",
@@ -1065,14 +1108,37 @@ function waterFeedback(state) {
         console.log(orderId);
         ///订单状态为3的反馈从页面的输入中获取
         feedback= $("input[name='feedbackId']:checked").val();
+        if(isNaN(feedback)){
+            ////清空提示模态框里面的内容
+            $("#alert-info").empty();
+            ////向模态框添加服务器返回的信息
+            $("#alert-info").append("请您选择评价选项");
+            /////如果提示模态框被关闭,则调用函数,显示模态框
+            if(isAlertClose()==1){
+                alertInfo();
+            }
+            return;
+        }
     }
-    console.log("orderId:   "+orderId);
+    if(""!=getCookie(orderId)){////如果条件为真,则说明该订单已经提交过一次了
+        ////清空提示模态框里面的内容
+        $("#alert-info").empty();
+        ////向模态框添加服务器返回的信息
+        $("#alert-info").append("该订单已经评价过了,请勿重复评价");
+        /////如果提示模态框被关闭,则调用函数,显示模态框
+        if(isAlertClose()==1){
+            alertInfo();
+        }
+        return ;
+    }
     ////清空提示模态框里面的内容
     $("#alert-info").empty();
     ////向模态框添加服务器返回的信息
     $("#alert-info").append("信息正在提交,请勿关闭页面");
-    /////调用函数,显示模态框
-    alertInfo();
+    /////如果提示模态框被关闭,则调用函数,显示模态框
+    if(isAlertClose()==1){
+        alertInfo();
+    }
     $.ajax({
         type: "get",
         url: "../user/feedbackWater",
@@ -1101,6 +1167,12 @@ function waterFeedback(state) {
             /////如果提示模态框被关闭,则调用函数,显示模态框
             if(isAlertClose()==1){
                 alertInfo();
+            }
+            if(state==1||state==2){///如果订单状态为1或者2进行投诉时,则当前页面是在showwater.html页面,反馈成功之后则进行页面的刷新
+                showWater(1);
+            }else if(state==3||state==4||state==5){///当用户在进行反馈的订单的状态是3或者4或者5时,则该反馈是在feedback.html页面进行评价的
+                console.log("我被调用过了")
+               setCookie(orderId,new Date(),7);///保存cookie,用于防止用户在feedback.html页面重复进行评价
             }
         },
         error : function(xhr, status, errMsg) {
@@ -1364,4 +1436,35 @@ function isAlertClose(){
         return 0;
     }
     return 1;
+}
+
+/**
+ * 根据cookie名获取cookie的值
+ * @param cname cookie名
+ * @returns {*} cookie值
+ */
+function getCookie(cname)
+{
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++)
+    {
+        var c = ca[i].trim();
+        if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+
+/**
+ * 用于创建cookie
+ * @param cname cookie名
+ * @param cvalue cookie值
+ * @param exdays 保存天数
+ */
+function setCookie(cname,cvalue,exdays)
+{
+    var d = new Date();
+    d.setTime(d.getTime()+(exdays*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
 }

@@ -95,6 +95,7 @@ public class UserController {
         PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"user_id desc");
         return new PageInfo<User>(userService.findAll(user));
     }
+
     /**
      *  修改普通用户
      * @param user
@@ -233,7 +234,7 @@ public class UserController {
     }
 
 
-    /**         获取用户信息
+    /**  用户获取获取其自身的信息
      *
      * @param httpSession   当前会话
      * @return  User实体
@@ -251,7 +252,7 @@ public class UserController {
       * 修改人:李龙杰
       * 创建时间:2017-10-24 19:43
       * 修改时间:2017-10-28 19:43
-     *修改内容:@RequestMapping("office/findUser")改为@RequestMapping("admin/findUser")
+       *修改内容:@RequestMapping("office/findUser")改为@RequestMapping("admin/findUser")
       *通过用户ID查找某个单一用户
       * @param user  参数：userId
       * @return  用户对象
@@ -260,8 +261,9 @@ public class UserController {
     @RequestMapping("admin/findUser")
     @ResponseBody
     public User findUser(User user) throws Exception {
-        return userService.get(user.getUserId());
+     return userService.get(user.getUserId());
     }
+
 
 
 }
