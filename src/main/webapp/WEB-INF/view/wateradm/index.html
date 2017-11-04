@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand " href="index.html">仲园后勤服务平台</a>
+                <a class="navbar-brand " href="index.html">仲园叫水•报修平台</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -59,7 +59,7 @@
         <div class="tab-content active">
             <div id="tab1" class="tab-pane fade in active">
                 <table border="1" width="70%" align="center"class="table table-striped table-bordered">
-                    <thead id='tableHead'>
+                    <thead id='workerTableHead'>
                         <tr>
                             <th>姓名</th>
                             <th>所在校区</th>
@@ -67,14 +67,25 @@
                             <th>已完成</th>
                         </tr>
                     </thead>
-                    <tbody id='tableBody'>
+                    <tbody id='workerTableBody'>
 
                     </tbody>
-            </table>
+                </table>
 
             </div>
             <div id="tab2"class="tab-pane fade">
-                <div id="userList">
+                <table border="1" width="70%" align="center"class="table table-striped table-bordered">
+                    <thead id='userTableHead'>
+                    <tr>
+                        <th>宿舍号</th>
+                        <th>订水桶数</th>
+                    </tr>
+                    </thead>
+                    <tbody id='userTableBody'>
+
+                    </tbody>
+                </table>
+                <div id="showUserNav">
 
                 </div>
             </div>
@@ -97,6 +108,7 @@
 <script type="text/javascript"  >
     function onloading() {
         loadWorker();
+        loadUserInfo(1);
     }
 </script>
 </body>

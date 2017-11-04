@@ -393,22 +393,39 @@
       </plugin>
 
 
-      <!--mybatis插件-->
-      <plugin>
-        <groupId>org.mybatis.generator</groupId>
-        <artifactId>mybatis-generator-maven-plugin</artifactId>
-        <version>1.3.2</version>
-        <configuration>
-            <!--允许移动生成的文件-->
-            <verbose>true</verbose>
-            <!--允许覆盖生成的文件-->
-            <overwrite>true</overwrite>
-        </configuration>
-      </plugin>
+        <!--mybatis代码自动生成器插件-->
+        <plugin>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-maven-plugin</artifactId>
+            <version>1.3.2</version>
+            <configuration>
+                <configurationFile>src\main\resources\mybatis\generatorConfig.xml</configurationFile>
+                <!--允许移动生成的文件-->
+                <verbose>true</verbose>
+                <!--允许覆盖生成的文件-->
+                <overwrite>true</overwrite>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>GenerateMyBatis Artifacts</id>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-core</artifactId>
+                    <version>1.3.2</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+
 
     </plugins>
 
-    <!--编译source folde下Mybatis的mapper的xml文件-->
+    <!--编译source fold下Mybatis的mapper的xml文件-->
     <resources>
       <resource>
         <directory>src/main/java</directory>

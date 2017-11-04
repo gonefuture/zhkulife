@@ -1,6 +1,24 @@
+/build/
 /target/
+/.externalToolBuilders/
+/.settings/
+.settings/
+/WebContent/
+/lucene/
+/.idea/
+.idea_modules/
+.idea/
+/lib/
+lib/
+*.eml
+*.iml
+*.project
+*.classpath
+*.settings
+*.classes
 
-	# Package Files #
+
+# Package Files #
 *.jar
 *.war
 *.ear

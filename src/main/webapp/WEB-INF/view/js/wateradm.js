@@ -3,7 +3,7 @@
  */
 
 /**
- * 加载属于当前登录用户所管理的送水工作人员
+ * 首页加载属于当前登录用户所管理的送水工作人员
  */
 function loadWorker() {
     $.ajax({
@@ -14,7 +14,7 @@ function loadWorker() {
             var list = eval(data).list;
             var total= eval(data).total;
             if(total==0){
-                $("#tableBody").append("<tr>暂时还没有工作人员哦!</tr>");
+                $("#workerTableBody").append("<tr>暂时还没有工作人员哦!</tr>");
             }else{
                 var ids=new Array();
                 for(var i in list) {
@@ -28,7 +28,7 @@ function loadWorker() {
                     }
                     ids[i]=adminId;
                     console.log("获取的ID: "+ids[i]);
-                    $("#tableBody").append("<tr> <th>"+adminName+"</th><th>"+adminZone+"</th><th id="+adminId+2+">加载中...</th><th id="+adminId+3+">加载中...</th></tr> ");
+                    $("#workerTableBody").append("<tr> <th>"+adminName+"</th><th>"+adminZone+"</th><th id="+adminId+2+">加载中...</th><th id="+adminId+3+">加载中...</th></tr> ");
                 }
                 ////加载当前工作人员正在配送的桶数
                 for(var i in ids){
@@ -50,6 +50,44 @@ function loadWorker() {
         }
     });
 }
+
+
+
+/**
+ * 用于在加载学生用户的信息
+ * @param pageNum 表示当前页码
+ */
+function loadUserInfo(pageNum) {
+    $.ajax({
+        type: "get",
+        url: "../admin/user/list",
+        dataType: "json",
+        data: {'pageNum': pageNum,'pageSize':50},
+        success : function(data, textStatus) {
+            var list = eval(data).list;
+            var total= eval(data).total;
+            $("#userTableBody").empty();
+            $("#showUserNav").empty();
+            if(total==0){
+                $("#userTableBody").append("<tr>暂时还没有学生的信息!</tr>");
+            }else{
+                for(var i in list) {
+                    var userRoom = list[i].userRoom;
+                    var totalWater = list[i].totalWater;
+                    $("#userTableBody").append("<tr> <th>"+userRoom+"</th><th>"+totalWater+"</th> ");
+                }
+                showPageNav(eval(data).pages,eval(data).pageNum,total,"loadUserInfo","#showUserNav")
+            }
+        },
+        error : function(xhr, status, errMsg) {
+            alert("系统异常,请稍后再试!");
+        }
+    });
+}
+
+
+
+
 /**
  * 加载某个送水工作人员所送的水的数目
  * @param adminId  唯一标识一个工作人员
@@ -319,5 +357,48 @@ function getCookie(cname)
     return "";
 }
 
+/**
+ * 用于
+ * @param pages
+ * @param pageNum
+ * @param total
+ */
 
-
+function showPageNav(pages,pageNum,total,functionName,pageNav){
+    console.log(functionName+"   "+pageNav);
+    var pageNav;
+    var functionName;
+    var begin;
+    var end;
+    var next=pageNum+1;
+    var pre=pageNum-1;
+    if(pages<=10){
+        begin=1;
+        end=pages;
+    }else{
+        begin=pageNum-4;
+        end=pageNum+5;
+        if(begin<1){
+            begin=1;
+            end=10;
+        }
+        if(end>pages){
+            begin=pages-9;
+            end=pages;
+        }
+    }
+    if(pageNum!=1){
+        $(pageNav).append("<button type='button' class='btn btn-info' onclick='"+functionName+"("+pre+")"+"'>上一页</button>");
+    }
+    for(var i=begin;i<=end;++i){
+        if(i===pageNum){
+            $(pageNav).append("<button type='button' class='btn btn-success' ><b>"+i+"</b></button>");
+        }else{
+            $(pageNav).append("<button type='button' class='btn btn-info' onclick='"+functionName+"("+i+")"+"'>"+i+"</button>");
+        }
+    }
+    if(pageNum!=pages){
+        $(pageNav).append("<button type='button' class='btn btn-info' onclick='"+functionName+"("+next+")"+"'>下一页</button>");
+    }
+    $(pageNav).append("<br/>共"+total+"条记录");
+}

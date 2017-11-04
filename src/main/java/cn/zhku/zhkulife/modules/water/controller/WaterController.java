@@ -52,8 +52,8 @@ public class WaterController {
      *
      * @param commonQo  参数：pageNum页码，pageSize 记录数量 ，since 开始时间  end 结束时间
      * @param water 除时间类外的Water类属性
-     * @return
-     * @throws Exception
+     * @return pageBean
+     * @throws Exception sql
      */
     @RequestMapping("water/list")
     @ResponseBody
@@ -64,7 +64,14 @@ public class WaterController {
     }
 
 
-
+    /**
+     *  普通用户展示属于他自己的订水单列表
+     * @param httpSession  当前session
+     * @param commonQo  通用查询类
+     * @param water 接受waterState参数，根据订单查询订单
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("user/waterList")
     @ResponseBody
     public  PageInfo<Water> userlist(HttpSession httpSession, CommonQo commonQo,Water water) throws Exception {
@@ -94,7 +101,8 @@ public class WaterController {
         }else if("0".equals(DBUser.getUserPhone())){
             return new Message("2","你的手机号未设置");
         }
-       // water.setYibanInfo((String) httpSession.getAttribute("yibanInfo"));
+        if (httpSession.getAttribute("yibanInfo") != null)
+            water.setYibanInfo( httpSession.getAttribute("yibanInfo").toString());
         water.setUserPhone(sessionUser.getUserPhone());
         water.setUserId(sessionUser.getUserId());
         water.setWaterId(UUID.randomUUID().toString().replace("-","").toUpperCase());
@@ -168,7 +176,13 @@ public class WaterController {
     }
 
 
-
+    /**
+     *  用户评价订单
+     * @param id    用户id
+     * @param feedback  用户评价
+     * @return  Message
+     * @throws Exception
+     */
     @RequestMapping("user/feedbackWater")
     @ResponseBody
     public Message feedbackWater(String id,String feedback) throws Exception {
@@ -181,9 +195,14 @@ public class WaterController {
 
     }
 
-    @RequestMapping("water/updatePassword")
+    /**
+     *  送水师傅修改密码
+     * @param password  将要修改的密码
+     * @return  Message
+     * @throws Exception
+     */
     @ResponseBody
-
+    @RequestMapping("water/updatePassword")
     public Message updatePassword(String password) throws Exception {
         Admin admin = new Admin();
         Subject subject = SecurityUtils.getSubject();
@@ -195,12 +214,17 @@ public class WaterController {
             return new Message("1","修改密码成功");
     }
 
+    /**
+     *      当前送水师傅修改自己手机号
+     * @param phone 手机号
+     * @return  Message
+     * @throws Exception
+     */
     @RequestMapping("water/updatePhone")
     @ResponseBody
     public Message updatePhone(String phone) throws Exception {
         Admin admin = new Admin();
-
-        Subject subject = SecurityUtils.getSubject();
+        Subject subject = SecurityUtils.getSubject();  //   获取当前管理员
         admin.setAdminId(subject.getPrincipal().toString());
         admin.setAdminPhone(phone);
         if (adminService.update(admin) != 1 )
@@ -211,6 +235,11 @@ public class WaterController {
         }
     }
 
+    /**
+     *  查询送水订单评价
+     * @param commonQo  通用查询类，分页，时间间隔查询 参数：since end
+     * @return  PageBean
+     */
     @RequestMapping("water/repined")
     @ResponseBody
     public PageInfo<Water> waterRepined(CommonQo commonQo) {

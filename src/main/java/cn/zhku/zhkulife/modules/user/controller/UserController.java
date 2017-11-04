@@ -5,9 +5,12 @@ import cn.zhku.zhkulife.po.entity.User;
 import cn.zhku.zhkulife.utils.Beans.CommonQo;
 import cn.zhku.zhkulife.utils.Beans.Message;
 
+import cn.zhku.zhkulife.utils.Beans.UserMe;
+import cn.zhku.zhkulife.utils.Beans.YiBanUser;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,7 +39,7 @@ public class UserController {
      */
     @RequestMapping("user/login")
     @ResponseBody
-    public Message login(User form,HttpSession httpSession,HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws Exception {
+    public Message login(User form,HttpSession httpSession) throws Exception {
 
         User user =  userService.login(form);
 
@@ -58,26 +61,46 @@ public class UserController {
         }
     }
 
+    /**
+     *  登录后的事务
+     * @param user  用户信息
+     * @param httpSession   当前session
+     * @throws Exception    sqlException
+     */
     private void afterLogin(User user,HttpSession httpSession) throws Exception {
         httpSession.setAttribute("user",user);
-        user.setYibanInfo((String) httpSession.getAttribute("yibanInfo"));
+        Object yibanIfo = httpSession.getAttribute("yibanInfo");    //  获取用户信息
+        if (yibanIfo == null) {
+
+        } else {
+            UserMe userMe = (UserMe) yibanIfo;
+            user.setYibanInfo(userMe.toString());
+        }
         userService.update(user);
     }
 
-    /**        多条件查找普通用户
-     *
+    /**管理员角色通过多条件查找普通用户
+     * 创建人:钱伟健
+     * 修改人:李龙杰
+     * 修改时间:2017-10-28 11:51
+     * 修改内容:@RequestMapping("office/user/list")改为@RequestMapping("admin/user/list")
      * @param commonQo   查询通用类
      * @param user  参数：userZone  ,userId   , userPhone   , total_water
      * @return  用户列表
      * @throws Exception   sqlException
      */
-    @RequestMapping("office/user/list")
+    @RequestMapping("admin/user/list")
     @ResponseBody
     public PageInfo<User> list(CommonQo commonQo, User user) throws Exception {
         PageHelper.startPage(commonQo.getPageNum(),commonQo.getPageSize(),"user_id desc");
         return new PageInfo<User>(userService.findAll(user));
     }
-
+    /**
+     *  修改普通用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("office/user/edit")
     @ResponseBody
     public Message updateUser(User user) throws Exception {
@@ -87,6 +110,12 @@ public class UserController {
             return new Message("1","修改普通用户失败");
     }
 
+    /**
+     *  删除普通用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("office/user/delete")
     @ResponseBody
     public Message deleteUser(User user) throws Exception {
@@ -96,13 +125,27 @@ public class UserController {
             return new Message("1","删除普通用户失败");
     }
 
+    /**
+     *  添加普通用户
+     * @param user
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("office/user/add")
     @ResponseBody
-    public Message addUser(User user) throws Exception {
-        if (userService.add(user)  == 1)
-            return new Message("2","增加普通用户成功");
-        else
-            return new Message("1","删除普通用户失败");
+    public Message addUser(User user) {
+        try {
+            if (userService.add(user) == 1)
+                return new Message("2", "增加普通用户成功");
+            else {
+                return new Message("2","添加普通用户失败,请确认填写的信息是否都正确");
+            }
+        } catch (DuplicateKeyException duplicateKeyException) {
+            return new Message("2", "用户已经存在，请不要重复添加");
+        } catch (Exception e) {
+            return new Message("2", "出现其他错误了。请联系开发者");
+        }
+
     }
 
 
@@ -204,9 +247,21 @@ public class UserController {
     }
 
 
-
-
-
+    /**usercontroller.java
+      * 修改人:李龙杰
+      * 创建时间:2017-10-24 19:43
+      * 修改时间:2017-10-28 19:43
+     *修改内容:@RequestMapping("office/findUser")改为@RequestMapping("admin/findUser")
+      *通过用户ID查找某个单一用户
+      * @param user  参数：userId
+      * @return  用户对象
+      * @throws Exception   sqlException
+      */
+    @RequestMapping("admin/findUser")
+    @ResponseBody
+    public User findUser(User user) throws Exception {
+        return userService.get(user.getUserId());
+    }
 
 
 }

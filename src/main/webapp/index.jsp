@@ -10,8 +10,13 @@
 <head>
     <title>仲园订水报修</title>
 </head>
+<script>
+    function go() {
+        window.location.href="https://oauth.yiban.cn/code/html?client_id=3002f750eae1c39f&redirect_uri=http://139.159.240.59:8081/zhkulife/auth&state=RELOAD";
+    }
+    go();
+</script>
 <body>
-<h1><a href="https://oauth.yiban.cn/code/html?client_id=3002f750eae1c39f&redirect_uri=http://gonefuture.xin/zhkulife/auth&state=RELOAD">用户订水报修登录</a></h1>
-</body>
+<h1 align="center"><a href="https://oauth.yiban.cn/code/html?client_id=3002f750eae1c39f&redirect_uri=http://139.159.240.59:8081/zhkulife/auth&state=RELOAD">正在进入易班用户订水报修系统</a></h1>
 </body>
 </html>

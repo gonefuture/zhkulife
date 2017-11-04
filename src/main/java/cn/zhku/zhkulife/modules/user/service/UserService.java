@@ -23,6 +23,12 @@ public class UserService implements IService<User>{
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     *  普通用户登录
+     * @param form 必须：userId password
+     * @return  User实体
+     * @throws Exception    sqlException
+     */
     public User login(User form) throws Exception{
         User user =this.get(form.getUserId());
 
@@ -59,7 +65,12 @@ public class UserService implements IService<User>{
     }
 
 
-
+    /**
+     *  多添加查找用户
+     * @param entity    参数：userZone ,totalWater, userPhone
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<User> findAll(User entity) throws Exception {
         UserExample userExample = new UserExample();
