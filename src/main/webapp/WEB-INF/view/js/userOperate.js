@@ -43,7 +43,6 @@ function login(){
             if(msg==1){//登录成功
                 setCookie("userId",user_id,14);///保存账号
                 setCookie("userPassword",user_password,14);//保存密码
-                setCookie("isLogout","false",14);///设置标志,标明当前为非登出状态
                 window.location.href="user/index.html";
             }else if(msg==2){
                 ////清空提示模态框里面的内容
@@ -81,7 +80,11 @@ function login(){
 
 
 /////给导航栏的超链接添加参数
-/**此方法已弃用
+/**
+ *
+ *
+
+此方法已弃用
 function addParameter() {
     var userId= getUrlParam("userId");
     var zone=getUrlParam("zone");
@@ -91,8 +94,7 @@ function addParameter() {
     $("#order .c a").attr("href",($("#order .c a").attr("href")+"&userId="+userId+"&zone="+zone));
     $(".modify a").attr("href",($(".modify a").attr("href")+"?userId="+userId+"&zone="+zone));
 }
-***/
-
+ */
 
 
 
@@ -1340,8 +1342,11 @@ function feedbackLoading() {
 }
 
 
-
-function myinfo(){
+/**
+ *
+ * @param type 页面类型: 1表示index页面    2表示myinfo页面
+ */
+function myinfo(type){
     $.ajax({
         type: "get",
         url: "../user/get",
@@ -1361,31 +1366,37 @@ function myinfo(){
                 //window.location.href="../userlog.html";
                 return;
             }
-            var info= eval(data).info;
-            var userId = eval(data).userId;
-            var userRoom = eval(data).userRoom;
-            var userPhone = eval(data).userPhone;
-            var userZone = eval(data).userZone;
-            if(userZone==1){
-                userZone="海珠校区";
-            }else if(userZone==2){
-                userZone="白云校区";
+            if(type==1){///当请求来自于首页时
+                var userRoom = eval(data).userRoom;
+                console.log("userRoom:   "+userRoom);
+                $(".navbar-brand").empty();
+                $(".navbar-brand").append(userRoom)
+            }else if(tyepe==2){///当请求来自于myinfo页面时
+                var info= eval(data).info;
+                var userId = eval(data).userId;
+                var userRoom = eval(data).userRoom;
+                var userPhone = eval(data).userPhone;
+                var userZone = eval(data).userZone;
+                if(userZone==1){
+                    userZone="海珠校区";
+                }else if(userZone==2){
+                    userZone="白云校区";
+                }
+                var loginTime = eval(data).loginTime;
+                var totalWater = eval(data).totalWater;
+                $("#userId").empty();
+                $("#userRoom").empty();
+                $("#userPhone").empty();
+                $("#userZone").empty();
+                $("#loginTime").empty();
+                $("#totalWater").empty();
+                setCookie()
+                $("#userId").append("账号:  "+userId);
+                $("#userRoom").append("宿舍:  "+userRoom);
+                $("#userPhone").append("联系手机:  "+userPhone+"<a href='modify.html?modityType=1'><button class='btn btn-default'>修改</button></a>");
+                $("#userZone").append("所属校区:  "+userZone);
+                $("#totalWater").append("累计完成订水桶数:  "+totalWater+"桶<br/>(注: 该数据仅限于本平台所发生的操作)");
             }
-            var loginTime = eval(data).loginTime;
-            var totalWater = eval(data).totalWater;
-
-            $("#userId").empty();
-            $("#userRoom").empty();
-            $("#userPhone").empty();
-            $("#userZone").empty();
-            $("#loginTime").empty();
-            $("#totalWater").empty();
-            $("#userId").append("账号:  "+userId);
-            $("#userRoom").append("宿舍:  "+userRoom);
-            $("#userPhone").append("联系手机:  "+userPhone+"<a href='modify.html?modityType=1'><button class='btn btn-default'>修改</button></a>");
-            $("#userZone").append("所属校区:  "+userZone);
-            $("#totalWater").append("累计完成订水桶数:  "+totalWater+"桶<br/>(注: 该数据仅限于本平台所发生的操作)");
-
         },
         error : function(xhr, status, errMsg) {
             ////清空提示模态框里面的内容
@@ -1467,7 +1478,7 @@ function setCookie(cname,cvalue,exdays)
     var d = new Date();
     d.setTime(d.getTime()+(exdays*24*60*60*1000));
     var expires = "expires="+d.toGMTString();
-    document.cookie = cname + "=" + cvalue + "; " + expires;
+    document.cookie = cname + "=" + cvalue + "; " + expires+";";
 }
 
 function logout() {
@@ -1486,8 +1497,7 @@ function logout() {
                 if(isAlertClose()==1){
                     alertInfo();
                 }
-                setCookie("isLogout","true",14);///设置标志,标明当前为登出状态
-                window.location.href="../userlog.html";
+                window.location.href="../userlog.html?logout=true";
             }else{
                 ////清空提示模态框里面的内容
                 $("#alert-info").empty();

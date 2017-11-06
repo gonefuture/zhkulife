@@ -18,7 +18,7 @@
     <!---为使用模态框进行引用--->
     <link rel="stylesheet" href="../css/amazeui.min.css" />
 </head>
-<body style="padding-top: 70px; background: url(../img/background/17.jpg);background-repeat:no-repeat;background-size: cover;-webkit-background-size: cover;background-attachment: fixed;" >
+<body style="padding-top: 70px; background: url(../img/background/17.jpg);background-repeat:no-repeat;background-size: cover;-webkit-background-size: cover;background-attachment: fixed;"onload="load()" >
 <!----======================导航栏部分============================-------->
 <div class="container">
     <!-- Static navbar -->
@@ -31,7 +31,7 @@
                     <span>菜单</span>
                 </button>
                 <!--<a class="navbar-brand " href="index.html">仲园叫水•报修平台</a>-->
-                <a class="navbar-brand ">海珠校区南区A1002</a>
+                <a class="navbar-brand ">仲园叫水•报修平台</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -190,6 +190,13 @@
 <script type="text/javascript" src="../js/amazeui.min.js" ></script>
 <script type="text/javascript" src="../js/utils.js" ></script>
 <script type="text/javascript">
+
+    function load() {
+        myinfo(1);
+    }
+
+
+
     /**
      *"用户点击"首页"页面中的提交报修时调用该函数
      */
@@ -336,6 +343,7 @@
             }
         });
     }
+
 
 
 </script>
